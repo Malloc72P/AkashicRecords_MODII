@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    
+<mapper namespace="aka_user">
+  
+	<select id="getUserDataByEmail" parameterType="String" resultType="UserCommand">
+		select * from aka_user_login where user_email=#{email}
+	</select>
+	
+	<select id="getCountByEmail" parameterType="String" resultType="int">
+		select count(*) from aka_user where user_email=#{user_email}
+	</select>
+	
+	<select id="getCountByNickname" parameterType="String" resultType="int">
+		select count(*) from aka_user where user_nickname=#{user_nickname}
+	</select>
+	
+	<insert id="insertUserDataInToTheCore" parameterType="UserCommand">
+		insert into aka_user(user_email , user_password , user_nickname , img_id) 
+		values(#{user_email}, #{user_password}, #{user_nickname}, #{img_id})
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
