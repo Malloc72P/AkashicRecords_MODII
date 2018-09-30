@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    
+<mapper namespace="aka_post">
+	<select id="getArticles" parameterType="SAE" resultType="PostCommand">
+		select * 
+		from (
+				select post_id, series_id, user_email, img_id, post_title,
+					   post_content, post_regdate, post_viewcount, post_contentimglist, rownum rnum
+				from aka_post
+				order by post_id desc
+			 )
+		<![CDATA[
+			where #{start} <= rnum and rnum <= #{end}
+		]]>
+	</select>	
+	
+	<select id="getArticleCount" resultType="int">
+		select count(*) from aka_post
+	</select>
+</mapper>
+
+
+
+
+
+
+

@@ -24,19 +24,19 @@
 					<div class="post-text-area">
 						<div class="post-header w3-xlarge">
 							<p class="w3-large post-title" style="padding: 5px 5px 5px 15px;">
-								<a href="<%=MainConst.PROJECT_NAME%>/content.do?num=${article.num}&pageNum=${currentPage}">
-									${article.subject}
+								<a href="<%=MainConst.PROJECT_NAME%>/content.do?num=${article.post_id}&pageNum=${currentPage}">
+									${article.post_title}
 								</a>
 							</p>
 						</div>
 						<div class="post-summary w3-small w3-opacity">
 							<p class="w3-middle post-text" style="padding: 5px 5px 5px 15px;">
-								${ article.content }
+								${ article.post_content }
 							</p>				
 						</div>
 						<div class="post-footer-wrapper w3-display-bottomleft">
-							<p class="post-text post-footer-date post-footer-text">${ article.reg_date }</p>
-							<p class="post-text post-footer-view post-footer-text">${ article.readcount } 읽음</p>
+							<p class="post-text post-footer-date post-footer-text">${ article.post_regdate }</p>
+							<p class="post-text post-footer-view post-footer-text">${ article.post_viewcount } 읽음</p>
 						</div>
 	
 					</div>
