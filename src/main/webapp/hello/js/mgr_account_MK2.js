@@ -160,7 +160,7 @@ function registerAjax(email , password ,nickname){
 				bluroff_Tag("id_div_mainContent")
 			}
 			else{//실패한 경우
-				alert("부정한 조작이 감지되었습니다 >>> 회원가입 실패")
+				alert("회원가입 실패")
 			}
 		})//done
 }//function submitAjax
