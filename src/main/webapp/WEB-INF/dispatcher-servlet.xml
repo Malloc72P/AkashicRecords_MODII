@@ -10,11 +10,12 @@
  
  <!-- 요청을 받아서 처리해줄 컨트롤러 클래스를 등록  -->
   <!-- DAO빈 생성 -->  
-  <bean class="com.aka_user.dao.Impl_UserDAO" />
+	<bean class="com.aka_user.dao.Impl_UserDAO" />
   <!-- 컨트롤러 빈 생성 -->
-  <bean  class="com.controller.main.MainController" />
-  <bean class="com.controller.mgrAccount.LoginProcController" />
-  <bean class="com.controller.mgrAccount.RegisterProcController" />
+	<bean  class="com.controller.main.MainController" />
+	<bean class="com.controller.mgrAccount.LoginProcController" />
+	<bean class="com.controller.mgrAccount.RegisterProcController" />
+	<bean class="com.controller.mgrAccount.LogoutProcController" />
   
 <!-- (4) viewResolver(tiles를 위해서 필요)-->
 <bean id="viewResolver"

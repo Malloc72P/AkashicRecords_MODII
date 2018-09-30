@@ -84,11 +84,11 @@ public class Impl_UserDAO extends SqlSessionDaoSupport implements UserDAO {
 			return false;
 		}
 				
-		int insertRES = getSqlSession().insert("insertUserDataInToTheCore", newUser);
-		
+		int insertCoreRES  = getSqlSession().insert("insertUserDataInToTheCore" , newUser);
+		int insertLoginRES = getSqlSession().insert("insertUserDataInToTheLogin", newUser); 
 		boolean insertChecker = false;
 		
-		if(insertRES != 0) {
+		if(insertCoreRES != 0 && insertLoginRES != 0) {
 			insertChecker = true;
 			System.out.println("Impl_UserDAO.insertUserData >>> DB입력 성공");
 		}
