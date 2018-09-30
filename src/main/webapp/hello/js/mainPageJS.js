@@ -181,7 +181,7 @@ function getRecentPosts(id_div_subSection , id_pageNum){
 	$.ajax(
 		{ 
 			method : "post",
-			url    : AKASHIC.URL+AKASHIC.PROJECT+"/recentPosts.do",
+			url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/recentPosts.do",
 			data   : { "pageNum":pageNum },
 			cache  : false,
 			async  : true,
@@ -250,7 +250,7 @@ function append_morePosts(id_div_subSection , id_pageNum){
 	$.ajax(
 			{ 
 				method : "post",
-				url    : AKASHIC.URL+AKASHIC.PROJECT+"/recentPosts.do",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/recentPosts.do",
 				data   : { "pageNum":pageNum },
 				cache  : false,
 				async  : true,
@@ -302,7 +302,7 @@ function getProfilePage( id_div_subSection ){
 	$.ajax(
 			{ 
 				method : "post",
-				url    : AKASHIC.URL+AKASHIC.PROJECT+"/profile.do",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/profile.do",
 				cache  : false,
 				success: function(result){
 					var htmlRES = $.parseHTML( result )
@@ -320,7 +320,7 @@ function getpostListPage( id_div_subSection ){
 	$.ajax(
 			{ 
 				method : "post",
-				url    : AKASHIC.URL+AKASHIC.PROJECT+"/postList.do",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/postList.do",
 				cache  : false,
 				success: function(result){
 					var htmlRES = $.parseHTML( result )
@@ -356,7 +356,7 @@ function getGuestBook( id_div_subSection ){
 	$.ajax(
 			{ 
 				method : "post",
-				url    : AKASHIC.URL+AKASHIC.PROJECT+"/guestBook.do",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/guestBook.do",
 				cache  : false,
 				success: function(result){
 					var htmlRES = $.parseHTML( result )
@@ -374,7 +374,7 @@ function getWebTools( id_div_subSection ){
 	$.ajax(
 			{ 
 				method : "post",
-				url    : AKASHIC.URL+AKASHIC.PROJECT+"/webTools.do",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/webTools.do",
 				cache  : false,
 				success: function(result){
 					var htmlRES = $.parseHTML( result )

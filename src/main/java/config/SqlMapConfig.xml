@@ -7,11 +7,14 @@
    <!-- 테이블의 필드에 대한 정보를 담고있는 객체(DTO) 자료형의 별칭부여  -->
 	<typeAliases>
 	    <typeAlias alias="UserCommand" type="com.aka_user.domain.UserCommand"/>
+	    <typeAlias alias="PostCommand" type="com.aka_post.domain.PostCommand"/>
+	    <typeAlias alias="SAE" type="com.aka_post.domain.StartAndEnd"/>
 	</typeAliases>
-	
+		
 	<!-- DB접속시 불러올 테이블의 정보를 담고있는 xml 리스트 목록 -->
 	<mappers>
 	    <mapper resource="com/aka_user/dao/UserMapper.xml"/>
+	    <mapper resource="com/aka_post/dao/PostMapper.xml"/>
 	</mappers>
 </configuration>
 

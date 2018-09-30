@@ -18,7 +18,7 @@
 		.postList-img{
 			position : absolute;
 			border: 1px solid #c1c1c1;
-			background-image: url(../img/akashic_small2.png);
+			background-image: url(../hello/img/akashic_small2.png);
 			width: 72px; height: 72px;
 		}
 		.postList-img1{

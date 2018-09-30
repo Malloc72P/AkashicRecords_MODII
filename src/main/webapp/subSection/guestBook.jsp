@@ -64,7 +64,7 @@
 		    clear: both;
 		}
 		.adminProfileImg{
-			background-image: url(../img/profile.jpg);
+			background-image: url(../hello/img/profile.jpg);
 		    width: 48px;
 		    height: 48px;
 		    border-radius: 50%;
@@ -119,7 +119,7 @@
 		    clear: both;
 		}
 		.userProfileImg{
-		    background-image: url(../img/profile_default.png);
+		    background-image: url(../hello/img/profile_default.png);
 		    width: 48px;
 		    height: 48px;
 		    border-radius: 50%;
@@ -140,7 +140,7 @@
 		}
 		
 		.modify-img{
-			background-image: url(../img/profile_default.png);
+			background-image: url(../hello/img/profile_default.png);
 		    width: 12px;
 		    height: 12px;
 		    border-radius: 50%;
