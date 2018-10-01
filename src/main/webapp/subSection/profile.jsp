@@ -92,7 +92,7 @@
 				<p class="w3-small">CPU : Ryzen 1600 6-core processor</p>
 				<p class="w3-small">Ram  : DDR4 8G</p>
 				<p class="w3-small">WebServer  : Apache-Tomcat</p>
-				<p class="w3-small">DB_Server  : DOCKER-MySql-5</p>
+				<p class="w3-small">DB_Server  : Oracle DataBase 11G ExpressEdition</p>
 				
 			</div><!-- cl_div_profileArticle -->
 			<div class="cl_div_serverImg imgRanderer"></div>

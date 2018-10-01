@@ -207,10 +207,12 @@
 	
 		<!-- popPannel_login -->
 			<jsp:include page="mgr_account/login.jsp"></jsp:include>
-			
 		<!-- popPannel_register -->
 			<jsp:include page="mgr_account/register.jsp"></jsp:include>
-		
+		<!-- popPannel_pwChecker -->
+			<jsp:include page="subSection/pwChecker.jsp"></jsp:include>
+		<!-- popPannel_postWrite -->
+			<jsp:include page="subSection/writePost.jsp"></jsp:include>
 			
 			
  </body>

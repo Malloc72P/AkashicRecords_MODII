@@ -51,7 +51,7 @@ function effectOn_selectedFuncSelector(id_div_funcList){
 /************************************
  * AKASHIC-RECORD-EventBinder FUNCTION
 ************************************/
-
+//패널 여는 이벤트를 바인딩하는 함수
 function bind_Open_Panel(id_trigger, id_panel , id_background){
 	$("#"+id_trigger).click(function(event){
 		event.preventDefault()
@@ -61,6 +61,7 @@ function bind_Open_Panel(id_trigger, id_panel , id_background){
 		}
 	})
 }
+//패널 닫는 이벤트를 바인딩하는 함수
 function bind_Close_Panel(id_trigger, id_panel ,id_background){
 	$("#"+id_trigger).click(function(event){
 		event.preventDefault()
@@ -71,11 +72,25 @@ function bind_Close_Panel(id_trigger, id_panel ,id_background){
 	})
 }
 
-/*
- * 	bind_Select_Function() >>> 메인페이지에서 기능을 고를 수 있게 해주는 함수
+function pwCheck_eventBinder(id_input_submitPWCHK){
+	$("#"+id_input_submitPWCHK).click(function(event){
+		alert("pwChecker.jsp >>> pwCheck_eventBinder >>> 함수 호출됨")
+		event.preventDefault()
+		var pw = $("#"+"id_input_pwchkPW").val()
+		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
+		pwCheck_AJAX( pw )	
+	})
+	
+}
+
+/******************************************************************
+ * JQUERY FUNCTION 
+ * 		SUBSECTIN SELECTING FUNCTION BINDER
+ * ###DESCRIPTION
+ * bind_Select_Function() >>> 메인페이지에서 기능을 고를 수 있게 해주는 함수
  * 각각의 function selector에 click event에 fire되는 CALL-BACK-FUNCTION이 여기에 있다
  * 	CALL-BACK-FUNCTION 안에는 if($(this).attr("id") == "sel-2") {} 조건식이 있는데, 여기에 각 기능에 대해 실행될 코드가 작성되면 된다
- * */
+ *******************************************************************/
 function bind_Select_Function(id_div_funcList , id_div_subSection , id_tempData_in_pageNum){
 				//".func-list" , "sub-section" , "id_tempData_pageNum"
 	effectOn_selectedFuncSelector( id_div_funcList )
@@ -142,27 +157,32 @@ function bind_Select_Function(id_div_funcList , id_div_subSection , id_tempData_
 		})
 	})
 }//bind_Select_Function
+//다음페이지 버튼을 눌렀을때 다음페이지에 속해있는 포스트를 불러오는 기능
 function bind_appendPost(id_btn, subSection , id_pageNum){
 	$("#"+id_btn).click(function(){
 		append_morePosts(subSection , id_pageNum)
 	})
 }//bind_appendPost
+
 function effectOff_selectedFuncSelector(id_div_funcList){
 	var $tgt = getCurrSelectedFuncObj(id_div_funcList)
 	$tgt.removeClass("w3-teal")
 }
+//현재 선택된 펑션셀렉터가 뭔지 리턴함.(태그객체 반환)
 function getCurrSelectedFuncObj(id_div_funcList){
 	console.log("getCurrSelectedFuncObjObj >>> "+id_div_funcList)
 	console.log("getCurrSelectedFuncObjObj >>>"+ $("#"+id_div_funcList).find("a[href='#sel-selected']") )
 	return $("#"+id_div_funcList).find("a[href='#sel-selected']")
 }
 
+//fader효과를 주면서 서브섹션을 등장시키는 함수
 function show_subSection(tgt){
 	// 여기서 tgt 는
 	console.log("show_subSection >>> "+tgt)
 	$(".sub-section").find($("div"+"."+tgt)).addClass("fader")
 	$(".sub-section").find($("div"+"."+tgt)).show()
 }
+//서브섹션을 감추고, 그리고 페이드 효과를 빼앗는 함수
 function  hide_subSection(tgt){
 	console.log("hide_subSection >>> "+tgt)
 	$(".sub-section").find($("div"+"."+tgt)).removeClass("fader")
@@ -201,13 +221,17 @@ function getRecentPosts(id_div_subSection , id_pageNum){
 				console.log("id_currentPage >>> "+currentPage)
 				console.log("id_pageCount >>> "  +pageCount  )
 				console.log("id_postCount >>> "  +postCount  )
-				//포스트리스트의 헤더에 이벤트를 바인딩한다
 				
-				$("#"+"id_a_writePost").click(function(){
+				//포스트리스트의 헤더에 이벤트를 바인딩한다
+				bind_Open_Panel( "id_a_writePost"     , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+				bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+				bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+				/*$("#"+"id_a_writePost").click(function(){
 					$("#"+"id_div_pwCheckerPanel").show()
 					bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
 					bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-				})
+					
+				})*/
 				pwCheck_eventBinder("id_input_submitPWCHK")
 				/*
 				 * CASE1 : 만약 현재페이지가 전체 페이지수보다 작다면, 다음 페이지가 있다는 뜻이다.
@@ -296,7 +320,10 @@ function append_morePosts(id_div_subSection , id_pageNum){
 			}
 		)
 }
-
+/******************************************************************
+ * AJAX-JQUERY FUNCTION
+ * 		GET SUBSECTION PAGE 
+ *******************************************************************/
 function getProfilePage( id_div_subSection ){
 	console.log("mainPage.js.getProfilePage >>> 함수 호출됨")
 	$.ajax(
@@ -333,24 +360,6 @@ function getpostListPage( id_div_subSection ){
 			}
 		)
 }
-/*function getPreferences( id_div_subSection ){
-	console.log("mainPage.js.getPreferences >>> 함수 호출됨")
-	$.ajax(
-			{ 
-				method : "post",
-				url    : AKASHIC.URL+AKASHIC.PROJECT+"/preferences.do",
-				cache  : false,
-				success: function(result){
-					var htmlRES = $.parseHTML( result )
-					$("#"+id_div_subSection).append(htmlRES)
-					//AJAX로 받아온 페이지엔 CURRENT_PAGE와 PAGECOUNT값을 가지고 있는 히든태그가 있고 다음과 같이 가져올 수 있다
-					//파싱된 HTML객체라서 다음과 같이 DOM을 이용해서 값을 찾을 수 있다.
-					
-					show_subSection("sel-5")
-				}
-			}
-		)
-}*/
 function getGuestBook( id_div_subSection ){
 	console.log("mainPage.js.GuestBook >>> 함수 호출됨")
 	$.ajax(
@@ -387,7 +396,6 @@ function getWritePost( id_div_subSection ){
 			}
 		)
 }
-
 function getWebTools( id_div_subSection ){
 	console.log("mainPage.js.getWebTools >>> 함수 호출됨")
 	$.ajax(
@@ -408,16 +416,6 @@ function getWebTools( id_div_subSection ){
 		)
 }
 
-function pwCheck_eventBinder(id_input_submitPWCHK){
-	$("#"+id_input_submitPWCHK).click(function(event){
-		alert("pwChecker.jsp >>> pwCheck_eventBinder >>> 함수 호출됨")
-		event.preventDefault()
-		var pw = $("#"+"id_input_pwchkPW").val()
-		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
-		pwCheck_AJAX( pw )	
-	})
-	
-}
 function pwCheck_AJAX(user_password){
 	console.log("mainPage.js >>> pwCheck_AJAX >>> password : "+user_password)
 	$.ajax(
@@ -434,7 +432,9 @@ function pwCheck_AJAX(user_password){
 			//서버로부터 받은 데이터를 json으로 파싱한다
 			if(jsonRes.validator=="true"){//로그인 성공시
 				alert("validator : "+jsonRes.validator)
-				$("#"+"id_div_pwCheckerPanel").hide()
+				//$("#"+"id_div_pwCheckerPanel").hide()
+				panel_fadeOut("id_div_pwCheckerPanel")
+				bluroff_Tag("id_div_mainContent")
 			}
 			else{//로그인 실패시
 				alert("validator : "+jsonRes.validator)

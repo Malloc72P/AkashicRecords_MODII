@@ -9,21 +9,25 @@
 <!--| ***body StarT*** |-->
 <div class="sel-2">
 
-<c:if test="${count==0}">
-	<table border="1" width="700" cellpadding="0" cellspacing="0" align="center">
-	<tr>
-	    <td align="center">게시판에 저장된 글이 없습니다.</td>
-	</tr>
-	</table>
-</c:if>
-<div id="id_div_postListHeader" class="w3-card w3-bar w3-border" >
-<div class="w3-bar-item">
-<h5>${count} 포스트</h5>
-</div>
-<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writePost" href="#">
-<h5>글쓰기</h5>
-</a>
-</div>
+	<c:if test="${count==0}">
+		<table border="1" width="700" cellpadding="0" cellspacing="0" align="center">
+		<tr>
+		    <td align="center">게시판에 저장된 글이 없습니다.</td>
+		</tr>
+		</table>
+	</c:if>
+	
+	<c:if test="${currentPage==1}">
+		<div id="id_div_postListHeader" class="w3-card w3-bar w3-border" >
+		<div class="w3-bar-item">
+		<h5>${count} 포스트</h5>
+		</div>
+		<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writePost" href="#">
+		<h5>글쓰기</h5>
+		</a>
+		</div>
+	</c:if>
+
 	<c:forEach var="article"  items="${articleList}">
 			<div class="post-wrapper w3-container post-body w3-pannel w3-leftbar <%=MainConst.THEME_COLOR_MAIN%>">
 				
@@ -60,10 +64,7 @@
 			<input type="hidden" id="id_postCount" name="postCount" value="${count}">
 		</form>
 </div>
-<!-- popPannel_pwChecker -->
-			<jsp:include page="pwChecker.jsp"></jsp:include>
-<!-- popPannel_postWrite -->
-			<jsp:include page="writePost.jsp"></jsp:include>
+
 <!--| ###body EnD### |-->
 
 
