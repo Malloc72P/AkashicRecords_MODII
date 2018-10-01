@@ -6,7 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="constSet.MainConst" %>
 <script src="../js/jsConstData.js"></script>
-
 <!--| ***body StarT*** |-->
 <div class="sel-2">
 
@@ -17,6 +16,14 @@
 	</tr>
 	</table>
 </c:if>
+<div id="id_div_postListHeader" class="w3-card w3-bar w3-border" >
+<div class="w3-bar-item">
+<h5>${count} 포스트</h5>
+</div>
+<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writePost" href="#">
+<h5>글쓰기</h5>
+</a>
+</div>
 	<c:forEach var="article"  items="${articleList}">
 			<div class="post-wrapper w3-container post-body w3-pannel w3-leftbar <%=MainConst.THEME_COLOR_MAIN%>">
 				
@@ -53,6 +60,10 @@
 			<input type="hidden" id="id_postCount" name="postCount" value="${count}">
 		</form>
 </div>
+<!-- popPannel_pwChecker -->
+			<jsp:include page="pwChecker.jsp"></jsp:include>
+<!-- popPannel_postWrite -->
+			<jsp:include page="writePost.jsp"></jsp:include>
 <!--| ###body EnD### |-->
 
 
