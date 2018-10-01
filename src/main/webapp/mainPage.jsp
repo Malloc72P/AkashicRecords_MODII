@@ -201,20 +201,7 @@
 		<div class="w3-bar <%=MainConst.THEME_COLOR_MAIN%>" style="text-align: right; width: 100%;font-weight: bold; border-top: 1px solid #cbcbcb; bottom: 0px;">
 			<h3 class="w3-bar-item w3-right">Akashic Records</h3>
 		</div>
-		<!-- AKASHIC MUSIC MODULE -->
-<%-- 			<div class="w3-container <%=MainConst.THEME_COLOR_MAIN%>" style="position: fixed; width: 100%; bottom: 0; left: 0;">
-				<!-- SCM Music Player http://scmplayer.co -->
-				<script type="text/javascript" src="<%=MainConst.PROJECT_NAME%>/SCM-Music-Player/script.js" 
-				data-config="{'skin':'skins/black/skin.css',
-							  'volume':40,
-							  'autoplay':true,
-							  'shuffle':false,'repeat':1,
-							  'placement':'bottom',
-							  'showplaylist':false,
-							  'playlist':[{'title':'Anime Piano Music','url':'http://youtu.be/OgP3_aeh0U4'}]}" >
-				</script>
-				<!-- SCM Music Player script end -->
-			</div> --%>
+
 		
 	
 	
@@ -223,5 +210,8 @@
 			
 		<!-- popPannel_register -->
 			<jsp:include page="mgr_account/register.jsp"></jsp:include>
+		
+			
+			
  </body>
 </html>

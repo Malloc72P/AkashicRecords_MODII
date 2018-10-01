@@ -201,17 +201,14 @@ function getRecentPosts(id_div_subSection , id_pageNum){
 				console.log("id_currentPage >>> "+currentPage)
 				console.log("id_pageCount >>> "  +pageCount  )
 				console.log("id_postCount >>> "  +postCount  )
-				//포스트리스트의 헤더를 그려준다
+				//포스트리스트의 헤더에 이벤트를 바인딩한다
 				
-				var postHeader = '<div id="id_div_postListHeader" class="w3-card w3-bar w3-border" >';
-				   postHeader += '	<div class="w3-bar-item">';
-				   postHeader += '		<h5>'+postCount+' 포스트</h5>';
-				   postHeader += '	</div>';
-				   postHeader += '	<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writePost" href="#">';
-				   postHeader += '		<h5>글쓰기</h5>';
-				   postHeader += '	</a>';
-				   postHeader += '</div>';
-				 $("#"+id_div_subSection).prepend(postHeader)
+				$("#"+"id_a_writePost").click(function(){
+					$("#"+"id_div_pwCheckerPanel").show()
+					bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+					bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+				})
+				pwCheck_eventBinder("id_input_submitPWCHK")
 				/*
 				 * CASE1 : 만약 현재페이지가 전체 페이지수보다 작다면, 다음 페이지가 있다는 뜻이다.
 				 * 		그러므로, 다음페이지 버튼을 출력한다
@@ -265,6 +262,9 @@ function append_morePosts(id_div_subSection , id_pageNum){
 					
 					console.log("id_currentPage >>> "+currentPage)
 					console.log("id_pageCount >>> "  +pageCount  )
+					/*
+					 * 글쓰기 버튼 누를 경우, 패스워드 확인하는 창 띄워주기
+					 * */
 					
 					/*
 					 * CASE1 : 만약 현재페이지가 전체 페이지수보다 작다면, 다음 페이지가 있다는 뜻이다.
@@ -369,6 +369,25 @@ function getGuestBook( id_div_subSection ){
 			}
 		)
 }
+function getWritePost( id_div_subSection ){
+	console.log("mainPage.js.getWritePost >>> 함수 호출됨")
+	$.ajax(
+			{ 
+				method : "post",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/writePost.do",
+				cache  : false,
+				success: function(result){
+					var htmlRES = $.parseHTML( result )
+					$("#"+id_div_subSection).append(htmlRES)
+					//AJAX로 받아온 페이지엔 CURRENT_PAGE와 PAGECOUNT값을 가지고 있는 히든태그가 있고 다음과 같이 가져올 수 있다
+					//파싱된 HTML객체라서 다음과 같이 DOM을 이용해서 값을 찾을 수 있다.
+					
+					show_subSection("sel-4")
+				}
+			}
+		)
+}
+
 function getWebTools( id_div_subSection ){
 	console.log("mainPage.js.getWebTools >>> 함수 호출됨")
 	$.ajax(
@@ -378,6 +397,7 @@ function getWebTools( id_div_subSection ){
 				cache  : false,
 				success: function(result){
 					var htmlRES = $.parseHTML( result )
+					
 					$("#"+id_div_subSection).append(htmlRES)
 					//AJAX로 받아온 페이지엔 CURRENT_PAGE와 PAGECOUNT값을 가지고 있는 히든태그가 있고 다음과 같이 가져올 수 있다
 					//파싱된 HTML객체라서 다음과 같이 DOM을 이용해서 값을 찾을 수 있다.
@@ -388,9 +408,39 @@ function getWebTools( id_div_subSection ){
 		)
 }
 
-
-
-
+function pwCheck_eventBinder(id_input_submitPWCHK){
+	$("#"+id_input_submitPWCHK).click(function(event){
+		alert("pwChecker.jsp >>> pwCheck_eventBinder >>> 함수 호출됨")
+		event.preventDefault()
+		var pw = $("#"+"id_input_pwchkPW").val()
+		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
+		pwCheck_AJAX( pw )	
+	})
+	
+}
+function pwCheck_AJAX(user_password){
+	console.log("mainPage.js >>> pwCheck_AJAX >>> password : "+user_password)
+	$.ajax(
+		{ 
+			method : "post",
+			url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/pwCheckProc.do",
+			data   : { "user_password":user_password },
+			cache  : false
+		}
+	)
+		.done(function(result){
+			console.log("mgr_account.pwCheck_AJAX >>> 수신 완료")
+			var jsonRes = JSON.parse(result)
+			//서버로부터 받은 데이터를 json으로 파싱한다
+			if(jsonRes.validator=="true"){//로그인 성공시
+				alert("validator : "+jsonRes.validator)
+				$("#"+"id_div_pwCheckerPanel").hide()
+			}
+			else{//로그인 실패시
+				alert("validator : "+jsonRes.validator)
+			}
+		})//done
+}//function submitAjax
 
 
 function getUrlParameter(sParam) {

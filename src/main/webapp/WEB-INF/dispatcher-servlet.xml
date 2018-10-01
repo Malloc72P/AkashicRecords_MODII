@@ -23,6 +23,8 @@
 		<bean class="com.controller.subSection.PostListProcController" />
 		<bean class="com.controller.subSection.ProfileProcController" />
 		<bean class="com.controller.subSection.RecentPostsProcController" />
+		<bean class="com.controller.subSection.WritePostProcController" />
+		<bean class="com.controller.subSection.pwCheckProcController" />
 		
 <!-- (4) viewResolver(tiles를 위해서 필요)-->
 <bean id="viewResolver"
