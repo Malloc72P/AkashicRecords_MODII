@@ -47,6 +47,18 @@ function effectOn_selectedFuncSelector(id_div_funcList){
 	var $tgt = getCurrSelectedFuncObj(id_div_funcList)
 	$tgt.addClass("w3-teal")
 }
+function panelOpener(id_panel , id_background){
+	panel_fadeIn(id_panel)
+	if($("#"+id_background) != null){
+		blurOn_Tag(id_background)
+	}
+}
+function panelCloser(id_panel , id_background){
+	panel_fadeOut(id_panel)
+	if($("#"+id_background) != null){
+		bluroff_Tag(id_background)
+	}
+}
 
 /************************************
  * AKASHIC-RECORD-EventBinder FUNCTION
@@ -55,20 +67,22 @@ function effectOn_selectedFuncSelector(id_div_funcList){
 function bind_Open_Panel(id_trigger, id_panel , id_background){
 	$("#"+id_trigger).click(function(event){
 		event.preventDefault()
-		panel_fadeIn(id_panel)
+		panelOpener(id_panel , id_background)
+		/*panel_fadeIn(id_panel)
 		if($("#"+id_background) != null){
 			blurOn_Tag(id_background)
-		}
+		}*/
 	})
 }
 //패널 닫는 이벤트를 바인딩하는 함수
 function bind_Close_Panel(id_trigger, id_panel ,id_background){
 	$("#"+id_trigger).click(function(event){
 		event.preventDefault()
-		panel_fadeOut(id_panel)
+		panelCloser(id_panel ,id_background)
+		/*panel_fadeOut(id_panel)
 		if($("#"+id_background) != null){
 			bluroff_Tag(id_background)
-		}
+		}*/
 	})
 }
 
@@ -427,20 +441,25 @@ function pwCheck_AJAX(user_password){
 		}
 	)
 		.done(function(result){
-			console.log("mgr_account.pwCheck_AJAX >>> 수신 완료")
+			console.log("mainPage.js >>> pwCheck_AJAX >>> AJAX수신 완료")
 			var jsonRes = JSON.parse(result)
 			//서버로부터 받은 데이터를 json으로 파싱한다
 			if(jsonRes.validator=="true"){//로그인 성공시
-				alert("validator : "+jsonRes.validator)
 				//$("#"+"id_div_pwCheckerPanel").hide()
-				panel_fadeOut("id_div_pwCheckerPanel")
-				bluroff_Tag("id_div_mainContent")
+				/*panel_fadeOut("id_div_pwCheckerPanel")
+				bluroff_Tag("id_div_mainContent")*/
+				panelCloser("id_div_pwCheckerPanel", "id_div_mainContent")
+				panelOpener("id_div_writePostPanel", "id_div_mainContent")
+				
 			}
 			else{//로그인 실패시
-				alert("validator : "+jsonRes.validator)
+				alert("패스워드가 일치하지 않습니다")
+				panelCloser("id_div_pwCheckerPanel", "id_div_mainContent")
 			}
 		})//done
 }//function submitAjax
+
+
 
 
 function getUrlParameter(sParam) {
