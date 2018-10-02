@@ -50,6 +50,10 @@
 			bind_Close_Panel("id_h2_registerCloser" , "id_div_registerPanel" ,"id_div_mainContent")
 			bind_Close_Panel("id_btn_registerGoBack" , "id_div_registerPanel" ,"id_div_mainContent")
 			
+			//포스트 작성 패널 이벤트 바인더
+			bind_Close_Panel("id_div_writePostCloser" , "id_div_writePostPanel" ,"id_div_mainContent")
+			bind_Close_Panel("id_btn_writePostGoBack" , "id_div_writePostPanel" ,"id_div_mainContent")
+			
 			//로그아웃 기능 이벤트 바인더
 			logout_eventBinder("id_a_logout")
 			
@@ -113,7 +117,7 @@
 	<!-- 아카식 네비바-->
 		<div class="main-navibar w3-bar <%=MainConst.THEME_COLOR_MAIN%>"><!-- 상단바 -->
 			<a href="#" class="w3-bar-item" style="text-decoration: none;">
-				<h3>Akashic Records Mk.25</h3>
+				<h3>Akashic Records Mk.28</h3>
 			</a>
 			
 			<div class="chk-side-on m_mgr_account">
