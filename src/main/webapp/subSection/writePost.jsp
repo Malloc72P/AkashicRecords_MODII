@@ -13,7 +13,25 @@
 	<script src="js/mgr_account_MK2.js"></script>
 	<script src="https://cloud.tinymce.com/stable/tinymce.min.js?
 				apiKey=n3qgxuzmb0qsl7vkc0n1wvbe4l2dys01jth56fio4zvc62xs"></script>
-	<script>tinymce.init({ selector:'textarea' });</script>
+	<script>
+		tinyMCE.init({
+		   selector: '#id_input_writePostContent', // This is my <textarea> class
+		   setup : function(ed) {
+		                  ed.on('change', function(e) {
+		                     // This will print out all your content in the tinyMce box
+		                     console.log('the content '+ed.getContent());
+		                     // Your text from the tinyMce box will now be passed to your  text area ... 
+		                     $(".tinymce").text(ed.getContent()); 
+		                  });
+		            },
+		   plugins: "image code fullscreen",
+		   toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | code | fullscreen",
+		   image_list: [
+		     {title: 'My image 1', value: 'https://www.tinymce.com/my1.gif'},
+		     {title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif'}
+		   ]
+		});
+	</script>
 	<StylE>
 		/*--| ***CSS-StylesheeT StarT*** |--*/
 	
@@ -24,7 +42,7 @@
 		/*--| ***JavascripT StarT*** |--*/
 		/*--| ###JavascripT EnD### |--*/
 	</ScripT>
- </head>
+ </head>   
  <body>
 	<!--| ***body StarT*** |-->
 
@@ -41,22 +59,26 @@
 			<form class="w3-container" method="post" action="/hello/loginProc.do" >
 				<br>
 				<label class="" style="font-weight: bold;">시리즈</label>
-				<select class="w3-select w3-border w3-round-large" name="writePost_series" type="text">
+				<select id="id_select_writePostSeries"
+						class="w3-select w3-border w3-round-large" name="writePost_series" type="text">
 					<option value="" disabled selected>포스트가 등록될 시리즈를 선택해 주세요</option>
 					<option value="1">일상</option>
 					<option value="2">음식</option>
-					<option value="3">ICT</option>
-					<option value="4">애니</option>
+					<option value="ICT">ICT</option>
+					<option value="게임">게임</option>
 				</select>
 				<br>
 				<br>
 				<label class="" style="font-weight: bold;">제목</label>
-				<input class="w3-input w3-border w3-round-large" type="text">
+				<input  id="id_input_writePostTitle"
+						class="w3-input w3-border w3-round-large" type="text">
 				<br>
 				<label class="" style="font-weight: bold;">내용</label>
-				 <textarea style="min-height: 500px;">Next, use our Get Started docs to setup Tiny!</textarea>
+				 <textarea  id="id_input_writePostContent"
+				 			style="min-height: 500px;">Next, use our Get Started docs to setup Tiny!</textarea>
 				<br>
-				<input class="w3-btn w3-white btnMargin btnBorderBottom"
+				<input id="id_input_submitPost"
+					   class="w3-btn w3-white btnMargin btnBorderBottom"
 				       type ="submit" value="작성하기">	
 				       
 				<input class="w3-btn w3-white btnBorderBottom"

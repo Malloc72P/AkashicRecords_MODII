@@ -96,6 +96,19 @@ function pwCheck_eventBinder(id_input_submitPWCHK){
 	})
 	
 }
+function submitPost_eventBinder(id_input_submitPost , id_input_writePostTitle, id_input_writePostContent, id_select_writePostSeries){
+	$("#"+id_input_submitPost).click(function( event ){
+		event.preventDefault()
+		
+		var post_title   = $( "#"+id_input_writePostTitle   ).val()
+		tinyMCE.triggerSave();
+		var post_content = $( "#"+id_input_writePostContent ).val()
+		
+		var series_id = $("#"+id_select_writePostSeries +"> option:selected").val()
+		
+		submitPost(post_title, post_content,series_id)
+	})
+}
 
 /******************************************************************
  * JQUERY FUNCTION 
@@ -429,7 +442,10 @@ function getWebTools( id_div_subSection ){
 			}
 		)
 }
-
+/******************************************************************
+ * AJAX-JQUERY FUNCTION
+ * 		SUBSECTION SUPPORT FUNCTION
+ *******************************************************************/
 function pwCheck_AJAX(user_password){
 	console.log("mainPage.js >>> pwCheck_AJAX >>> password : "+user_password)
 	$.ajax(
@@ -459,7 +475,24 @@ function pwCheck_AJAX(user_password){
 		})//done
 }//function submitAjax
 
-
+function submitPost(post_title, post_content, series_id){
+	console.log("mainPage.js >>> submitPost >>> 함수 호출됨")
+	
+	$.ajax( 
+			{
+				method : "post",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/writePostProc.do",
+				data   : { 
+							"post_title":post_title,
+							"post_content":post_content,
+							"series_id":series_id
+				         },
+			    success : function(result){
+			    	
+			    }//success
+			}//ajax {}
+	)//.ajax
+}//submitPost
 
 
 function getUrlParameter(sParam) {

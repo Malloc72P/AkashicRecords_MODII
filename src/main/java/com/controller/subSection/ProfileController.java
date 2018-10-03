@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ProfileProcController {
+public class ProfileController {
 	
 	@RequestMapping("/hello/profile.do")
 	public ModelAndView requestProcessor() {
