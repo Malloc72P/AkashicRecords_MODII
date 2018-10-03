@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aka_post.dao.PostDAO;
 
 @Controller
-public class RecentPostsProcController {
+public class RecentPostsController {
 	
 	@Autowired
 	private PostDAO dao;

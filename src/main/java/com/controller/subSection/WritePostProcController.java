@@ -18,13 +18,20 @@ public class WritePostProcController {
 	@Autowired
 	private PostDAO dao;
 	
-	@RequestMapping("/hello/writePost.do")
-	public ModelAndView requestProcessor() {
+	@RequestMapping("/hello/writePostProc.do")
+	public ModelAndView requestProcessor(
+			                             @RequestParam("post_title")   String post_title    ,
+										 @RequestParam("post_content") String post_content,
+										 @RequestParam("series_id")    String series_id 
+										)
+	{
 		System.out.println("________________________________________________________");
 		System.out.println("WritePostProcController.requestProcessor >>> 매서드 호출됨");
-		ModelAndView mav = new ModelAndView("subSection/writePost");
-		
-		
+		ModelAndView mav = new ModelAndView("subSection/writePostProc");
+		System.out.println("WritePostProcController.requestProcessor >>> post_title   : "+post_title);
+		System.out.println("WritePostProcController.requestProcessor >>> post_content : "+post_content);
+		System.out.println("WritePostProcController.requestProcessor >>> series_id    : "+series_id);
+		mav.addObject("saveChecker","true");
 		
 		System.out.println("________________________________________________________");
 		return mav;
