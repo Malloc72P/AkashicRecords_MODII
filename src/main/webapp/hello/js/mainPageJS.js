@@ -488,7 +488,13 @@ function submitPost(post_title, post_content, series_id){
 							"series_id":series_id
 				         },
 			    success : function(result){
-			    	
+			    	var jsonRes = JSON.parse(result)
+			    	if(jsonRes.insertChecker == "true"){
+			    		alert("성공적으로 저장되었습니다")
+			    	}
+			    	else{
+			    		alert("저장에 실패하였습니다")
+			    	}
 			    }//success
 			}//ajax {}
 	)//.ajax

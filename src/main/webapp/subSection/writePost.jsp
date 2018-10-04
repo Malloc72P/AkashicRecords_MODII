@@ -64,8 +64,8 @@
 					<option value="" disabled selected>포스트가 등록될 시리즈를 선택해 주세요</option>
 					<option value="1">일상</option>
 					<option value="2">음식</option>
-					<option value="ICT">ICT</option>
-					<option value="게임">게임</option>
+					<option value="3">ICT</option>
+					<option value="4">게임</option>
 				</select>
 				<br>
 				<br>

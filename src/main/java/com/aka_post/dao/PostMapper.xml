@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
     
 <mapper namespace="aka_post">
-	<select id="getArticles" parameterType="SAE" resultType="PostCommand">
+	<select id="getPosts" parameterType="SAE" resultType="PostCommand">
 		select * 
 		from (
 				select post_id, series_id, user_email, img_id, post_title,
@@ -17,9 +17,29 @@
 		]]>
 	</select>	
 	
-	<select id="getArticleCount" resultType="int">
+	<select id="getPostCount" resultType="int">
 		select count(*) from aka_post
 	</select>
+	
+	<insert id="insertPost" parameterType="PostCommand"> 
+		INSERT INTO AKA_POST
+			(
+				POST_ID, 		SERIES_ID, 		USER_EMAIL,
+				IMG_ID, 		POST_TITLE,		POST_CONTENT,
+				POST_REGDATE, 	POST_VIEWCOUNT, POST_CONTENTIMGLIST 
+			) 
+		VALUES
+			( 
+			   #{post_id},			#{series_id},		#{user_email},
+			   #{img_id},			#{post_title},		#{post_content},
+			   sysdate,         	#{post_viewcount},  #{post_contentimglist}
+			)
+	</insert>
+	
+	<select id="getMaxPostNum" resultType="int">
+		select MAX(POST_ID) from aka_post
+	</select>
+	
 </mapper>
 
 
