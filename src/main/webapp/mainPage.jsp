@@ -41,18 +41,18 @@
 		/*--| ***JavascripT StarT*** |--*/
 		$(document).ready(function(){
 			//로그인 패널 이벤트 바인더
-			bind_Open_Panel("id_a_openLogin"  , "id_div_loginPanel" ,"id_div_mainContent")
-			bind_Close_Panel("id_h2_loginCloser" , "id_div_loginPanel" , "id_div_mainContent")
+			bind_Open_Panel("id_a_openLogin"      , "id_div_loginPanel" ,"id_div_mainContent")
+			bind_Close_Panel("id_h2_loginCloser"  , "id_div_loginPanel" , "id_div_mainContent")
 			bind_Close_Panel("id_btn_loginGoBack" , "id_div_loginPanel" ,"id_div_mainContent")
 			
 			//리지스터 패널 이벤트 바인더
-			bind_Open_Panel("id_a_openRegister"  , "id_div_registerPanel" ,"id_div_mainContent")
-			bind_Close_Panel("id_h2_registerCloser" , "id_div_registerPanel" ,"id_div_mainContent")
+			bind_Open_Panel("id_a_openRegister"      , "id_div_registerPanel" ,"id_div_mainContent")
+			bind_Close_Panel("id_h2_registerCloser"  , "id_div_registerPanel" ,"id_div_mainContent")
 			bind_Close_Panel("id_btn_registerGoBack" , "id_div_registerPanel" ,"id_div_mainContent")
 			
 			//포스트 작성 패널 이벤트 바인더
-			bind_Close_Panel("id_div_writePostCloser" , "id_div_writePostPanel" ,"id_div_mainContent")
-			bind_Close_Panel("id_btn_writePostGoBack" , "id_div_writePostPanel" ,"id_div_mainContent")
+			bind_Close_Panel("id_div_writePostCloser"    , "id_div_writePostPanel"  ,"id_div_mainContent")
+			bind_Close_Panel("id_btn_writePostGoBack"    , "id_div_writePostPanel"  ,"id_div_mainContent")
 			submitPost_eventBinder("id_input_submitPost" , "id_input_writePostTitle", "id_input_writePostContent", "id_select_writePostSeries")
 			
 			//로그아웃 기능 이벤트 바인더

@@ -45,9 +45,9 @@ public class RecentPostsController {
 		System.out.println("RecentPostsProcController.requestProcessor >>> startRow : "+startRow);
 		System.out.println("RecentPostsProcController.requestProcessor >>> endRow   : "+endRow);
 		
-		count = dao.getArticleCount();
+		count = dao.getPostCount();
 		if (count > 0) {// 화면에 보여줄 레코드가 한개라도 존재한다면
-			articleList = dao.getArticles(startCount, endCount);// 10개씩 (endRow X)
+			articleList = dao.getPosts(startCount, endCount);// 10개씩 (endRow X)
 		}
 		else {
 			articleList = Collections.EMPTY_LIST;//해당 리스트가 비어있다는 것을 의미하는 상수
