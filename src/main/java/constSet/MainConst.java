@@ -13,7 +13,7 @@ public class MainConst {
 	
 	//***SERVER URL
 	public static final String MAIN_SERVER_PROTOCOL  = "http://";
-	public static final String MAIN_SERVER_URL       = "localhost:8090";
+	public static final String MAIN_SERVER_URL       = "skynet765.iptime.org";
 	public static final String MAIN_PAGE             = "/mainPage.do";
 	public static final String MAIN_PROJECT_URL      = MAIN_SERVER_PROTOCOL+MAIN_SERVER_URL+PROJECT_NAME+MAIN_PAGE;
 	
