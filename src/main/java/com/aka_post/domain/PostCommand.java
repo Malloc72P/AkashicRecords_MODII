@@ -8,11 +8,18 @@ public class PostCommand {
 	private String post_title         ;
 	private String post_content       ;
 	private String post_regdate       ;
-	private int    post_viewcount          ;
+	private int    post_viewcount     ;
 	private int    post_contentimglist;
+	private String post_summary       ;
 	
 	
 	
+	public String getPost_summary() {
+		return post_summary;
+	}
+	public void setPost_summary(String post_summary) {
+		this.post_summary = post_summary;
+	}
 	public int getPost_id() {
 		return post_id;
 	}

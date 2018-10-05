@@ -47,7 +47,7 @@
 	<!--| ***body StarT*** |-->
 
 		<div class="w3-white w3-card-4 w3-display-middle boxShadow-lite popUp" 
-		style="width: 70%;" id="id_div_writePostPanel">
+		style="width: 100%; height: 80%;" id="id_div_writePostPanel">
 			<div class="w3-container w3-bar w3-white" id="id_div_writePostCloser">
 				<h2 class="w3-bar-item">포스트 작성하기...</h2>
 				<h2 class="w3-bar-item w3-right w3-button"><i class="im im-x-mark"></i></h2>

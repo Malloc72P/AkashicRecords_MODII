@@ -2,6 +2,7 @@
  * AKASHIC-RECORD-MAIN PAGE JAVASCRIPT MOD I
 ************************************/
 var fadeSpeed = 250
+var writePost_bindingEvent_limiter = 0
 
 $("html").click(function(e){
 	if( !$(e.target).hasClass("main-sidebar") && !$(e.target).hasClass("chk-side-on") ){
@@ -96,6 +97,20 @@ function pwCheck_eventBinder(id_input_submitPWCHK){
 	})
 	
 }
+function writePost_eventBinder(){
+	if(writePost_bindingEvent_limiter == 0){
+		bind_Open_Panel( "id_a_writePost"     , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+		bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+		bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+		
+//		pwCheck_eventBinder("id_input_submitPWCHK")
+//		writePost_bindingEvent_limiter = 1;
+	}
+	else{
+		
+	}
+}
+
 function submitPost_eventBinder(id_input_submitPost , id_input_writePostTitle, id_input_writePostContent, id_select_writePostSeries){
 	$("#"+id_input_submitPost).click(function( event ){
 		event.preventDefault()
@@ -250,16 +265,12 @@ function getRecentPosts(id_div_subSection , id_pageNum){
 				console.log("id_postCount >>> "  +postCount  )
 				
 				//포스트리스트의 헤더에 이벤트를 바인딩한다
-				bind_Open_Panel( "id_a_writePost"     , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-				bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-				bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-				/*$("#"+"id_a_writePost").click(function(){
-					$("#"+"id_div_pwCheckerPanel").show()
-					bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-					bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-					
-				})*/
-				pwCheck_eventBinder("id_input_submitPWCHK")
+				writePost_eventBinder()
+//				bind_Open_Panel( "id_a_writePost"     , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+//				bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+//				bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+//				
+//				pwCheck_eventBinder("id_input_submitPWCHK")
 				/*
 				 * CASE1 : 만약 현재페이지가 전체 페이지수보다 작다면, 다음 페이지가 있다는 뜻이다.
 				 * 		그러므로, 다음페이지 버튼을 출력한다
