@@ -42,7 +42,7 @@
 						</div>
 						<div class="post-summary w3-small w3-opacity">
 							<p class="w3-middle post-text" style="padding: 5px 5px 5px 15px;">
-								${ article.post_content }
+								${ article.post_summary }
 							</p>				
 						</div>
 						<div class="post-footer-wrapper w3-display-bottomleft">

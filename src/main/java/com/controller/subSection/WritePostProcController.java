@@ -41,52 +41,28 @@ public class WritePostProcController {
 		
 		Document contentDOC = Jsoup.parse(post_content); 
 		Element tagBody = contentDOC.body();
+		
+		
 		System.out.println("***** HTML BODY *****");
 		System.out.println(tagBody);
+		
 		System.out.println("***** IMAGE PARSER *****");
 		for(Element el : tagBody.select("img")) {
 			System.out.println("WritePostProcController.requestProcessor >>> el : "+el);
 		}
-		
 		System.out.println("***** TEXT PARSER *****");
-		for(Element el : tagBody.select("*")) {
-			System.out.println("el.tagName : "+el.tagName());
-			if(el.tagName().equals("img") ) {
-				System.out.println("image 확인됨");
-			}
-			else {
-				System.out.println("data : "+el.text());
-			}
+		String post_summary = tagBody.text();
+		int post_summary_length = post_summary.getBytes().length;
+		System.out.println("text : "+post_summary );
+		System.out.println("TAG_BODY_LENGTH : "+tagBody.toString().length());
+		System.out.println("post_summary_LENGTH : "+post_summary_length);
+				
+		if(post_summary_length > 1000) {
+			StringBuffer buff = new StringBuffer( post_summary.substring(0, 500) ); 
+			post_summary  = new String( buff.toString() );
+					
+			System.out.println("modified post_summary_LENGTH : "+post_summary.getBytes().length);
 		}
-//		ArrayList<Node> tagList = (ArrayList<Node>)contentDOC.body().childNodesCopy();
-//		StringBuffer post_withoutIMG = new StringBuffer("");
-//		for(Node n : tagList) {
-//			if(n.toString().contains("<img")) {
-//				System.err.println("<<< 해당 태그는 이미지를 가지고 있습니다 >>>"); 
-//			}
-//			else {
-//				String temp = n.;
-//				temp = temp.replaceAll("(\\r\\n|\\r|\\n|\\n\\r)", "");
-//				post_withoutIMG.append(temp);
-//				System.out.println("n : "+temp);
-//			}
-//		}
-//		System.out.println();
-//		
-//		System.out.println("STRINGBUFFER post_withoutIMG : "+post_withoutIMG);
-		
-		
-		/*Element noImageBody = noImgContentDOC.body();
-		
-		for(Element el : noImageBody.select("img")) {
-			el.parent().remove();			
-		}
-		
-		for(Element el : noImageBody.select("p")) {
-			System.out.println("WritePostProcController.requestProcessor >>> el : "+el);
-		}*/
-		
-		
 				
 		
 		
@@ -98,6 +74,7 @@ public class WritePostProcController {
 		post.setPost_id(dao.getNewPostNum());
 		post.setPost_title(post_title);
 		post.setPost_content(post_content);
+		post.setPost_summary(post_summary);
 		post.setPost_viewcount(0);
 		post.setUser_email((String)request.getSession().getAttribute("email"));
 		post.setSeries_id(series_id);
@@ -106,7 +83,7 @@ public class WritePostProcController {
 		
 		
 		boolean insertChecker = false;
-//		boolean insertChecker = dao.insertPost(post);
+		insertChecker = dao.insertPost(post);
 		
 		
 		mav.addObject("insertChecker",insertChecker);

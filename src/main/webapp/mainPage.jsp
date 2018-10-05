@@ -65,6 +65,8 @@
 			//FUNCTION 셀렉팅 애니메이션 바인더
 			bind_Select_Function("id_div_funcList" , "id_div_subSection" , "id_tempData_in_pageNum")
 			
+			//포스트 작성 기능 바인딩
+			pwCheck_eventBinder("id_input_submitPWCHK")
 			/* binder_clickRecentPosts($("#sel-2") , $("#id_div_subSection")) */
 		})
 		
