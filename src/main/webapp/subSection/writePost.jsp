@@ -25,11 +25,17 @@
 		                  });
 		            },
 		   plugins: "image code fullscreen",
-		   toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | code | fullscreen",
-		   image_list: [
-		     {title: 'My image 1', value: 'https://www.tinymce.com/my1.gif'},
-		     {title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif'}
-		   ]
+		   toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | code | fullscreen | myButton",
+		   image_advtab: true,
+		   setup: function (editor) {
+				editor.addButton('myButton', {
+					text: '파일 업로드',
+					icon: false,
+					onclick: function () {
+						window.open('imageUploader.do','_fileupload','width=800, height=600');
+					}
+				});
+			}
 		});
 	</script>
 	<StylE>
@@ -47,7 +53,7 @@
 	<!--| ***body StarT*** |-->
 
 		<div class="w3-white w3-card-4 w3-display-middle boxShadow-lite popUp" 
-		style="width: 100%; height: 80%;" id="id_div_writePostPanel">
+		style="width: 100%; height: 100%; top:50%;" id="id_div_writePostPanel">
 			<div class="w3-container w3-bar w3-white" id="id_div_writePostCloser">
 				<h2 class="w3-bar-item">포스트 작성하기...</h2>
 				<h2 class="w3-bar-item w3-right w3-button"><i class="im im-x-mark"></i></h2>
@@ -74,8 +80,7 @@
 						class="w3-input w3-border w3-round-large" type="text">
 				<br>
 				<label class="" style="font-weight: bold;">내용</label>
-				 <textarea  id="id_input_writePostContent"
-				 			style="min-height: 500px;">Next, use our Get Started docs to setup Tiny!</textarea>
+				 <textarea id="id_input_writePostContent">Next, use our Get Started docs to setup Tiny!</textarea>
 				<br>
 				<input id="id_input_submitPost"
 					   class="w3-btn w3-white btnMargin btnBorderBottom"
