@@ -1,10 +1,5 @@
 package constSet;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import com.sun.jmx.snmp.Timestamp;
 
 public class MainConst {
 	
@@ -20,7 +15,8 @@ public class MainConst {
     //***PROPERTY FILE RELATIVE PATH FROM SERVER_FILESYSTEM_PATH
 	public static final String MAIN_DB_PROPERTY_PATH   = "/WEB-INF/db_properties";
 	public static final String MAIN_ACT_PROPERTY_PATH  = "/WEB-INF/Cmd_Proc.properties";
-	public static final String IMG_ROOT_PATH           = "/hello/img";
+	public static final String IMG_ROOT_PATH           = "hello/img/";
+	public static final int    UPLOAD_FILE_MAX_SIZE    = 1024 * 1024 * 10;
 	public static final int    IMG_DEFAULT_PROFILE_IMG = 1;
 	
 	//***PROPERTY FILE ABSOLUTE PATH
