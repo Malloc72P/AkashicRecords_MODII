@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    
+<mapper namespace="aka_image">
+	
+	<insert id="insertImage" parameterType="ImageCommand">
+		INSERT INTO AKA_IMAGE
+			(
+				IMG_ID,
+				IMG_URL, 		IMG_SIZE,
+				IMG_REF_TYPE,	IMG_NAME
+			) 
+		VALUES
+			( 
+			   seqFactory_aka_image.nextval,
+			   #{img_url},		#{img_size},		
+			   #{img_ref_type},	#{img_name}
+			)
+	</insert>
+	
+	<select id="getMaxImageNum" resultType="int">
+		SELECT MAX(IMG_ID) 
+		FROM   AKA_IMAGE
+	</select>
+	
+	<select id="getImgUrlById" parameterType="int" resultType="String">
+		SELECT	IMG_URL
+		FROM	AKA_IMAGE
+		WHERE	IMG_ID = #{img_id}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+

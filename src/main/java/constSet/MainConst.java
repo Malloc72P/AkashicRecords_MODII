@@ -16,6 +16,7 @@ public class MainConst {
 	public static final String MAIN_DB_PROPERTY_PATH   = "/WEB-INF/db_properties";
 	public static final String MAIN_ACT_PROPERTY_PATH  = "/WEB-INF/Cmd_Proc.properties";
 	public static final String IMG_ROOT_PATH           = "hello/img/";
+	public static final String IMG_POST_PATH           = "post/";
 	public static final int    UPLOAD_FILE_MAX_SIZE    = 1024 * 1024 * 10;
 	public static final int    IMG_DEFAULT_PROFILE_IMG = 1;
 	

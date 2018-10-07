@@ -46,6 +46,12 @@
 	</StylE>
 	<ScripT>
 		/*--| ***JavascripT StarT*** |--*/
+		
+		function TinyMceInsert(s)
+		{
+			tinymce.execCommand('mceInsertContent',false,s);
+		}
+		
 		/*--| ###JavascripT EnD### |--*/
 	</ScripT>
  </head>   
