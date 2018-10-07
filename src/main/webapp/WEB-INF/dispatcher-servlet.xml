@@ -12,6 +12,7 @@
   <!-- DAO빈 생성 -->  
 	<bean class="com.aka_user.dao.Impl_UserDAO" />
 	<bean class="com.aka_post.dao.Impl_PostDAO" />
+	<bean class="com.aka_image.dao.Impl_ImageDAO" />
   <!-- 컨트롤러 빈 생성 -->
 	  <!-- MgrAccount -->
 		<bean  class="com.controller.main.MainController" />

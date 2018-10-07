@@ -79,7 +79,6 @@ public class WritePostProcController {
 		post.setUser_email((String)request.getSession().getAttribute("email"));
 		post.setSeries_id(series_id);
 		post.setImg_id(2);
-		post.setPost_contentimglist(0);
 		
 		
 		boolean insertChecker = false;
