@@ -8,7 +8,7 @@
 	.post-img-area{
 		overflow:hidden;
 	}
-	.post-img{
+	.cl_img_post_thumbnail{
 	}
 	/************************************
 	 * 0px---> POST-STYLE-textarea
@@ -22,10 +22,10 @@
 	/************************************
 	 * 0px---> POST-STYLE-imgArea
 	************************************/
-	.post-img{
+	.cl_img_post_thumbnail{
 		width: 83%;
 	}
-	.post-img{
+	.cl_img_post_thumbnail{
 		margin: 0 auto;
 		width : 460px;
 		height: 230px;
@@ -77,7 +77,7 @@
 	.post-img-area{
 		float: right;
 	}
-	.post-img{
+	.cl_img_post_thumbnail{
 		width : 167px;
 		height: 167px;
 	}

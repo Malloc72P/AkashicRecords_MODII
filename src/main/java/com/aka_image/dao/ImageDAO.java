@@ -6,4 +6,5 @@ public interface ImageDAO {
 	public  boolean insertImage(ImageCommand data);
 	public  int 	getNewImageNum();
 	public  String 	getImgUrlById( int img_id );
+	public	int		getImgIdByName( String img_name );
 }

@@ -2,6 +2,8 @@ package com.util;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServletRequest;
+
 //파일업로드시 업로드 할 경로지정 및 파일의 새이름을 부여(공통 모듈)
 
 public class FileUtil {
@@ -43,6 +45,11 @@ public class FileUtil {
 	public static void removeFile(String filename) {
 		File file=new File(UPLOAD_PATH,filename);//경로명,파일명
 		if(file.exists())  file.delete();//파일이 이경로에 존재한다면 삭제시켜라
+	}
+	public static String makeImgUrl(HttpServletRequest request, String imgUrl) {
+		String serverAddr = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+		String fileRealUrl = serverAddr+request.getContextPath()+"/"+imgUrl;
+		return fileRealUrl;
 	}
 }
 

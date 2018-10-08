@@ -31,6 +31,11 @@
 		WHERE	IMG_ID = #{img_id}
 	</select>
 	
+	<select id="getImgIdByName" parameterType="String" resultType="int">
+		SELECT	IMG_ID
+		FROM	AKA_IMAGE
+		WHERE	IMG_NAME	=	#{ img_name } 
+	</select>
 </mapper>
 
 

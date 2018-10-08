@@ -8,7 +8,7 @@
 		select * 
 		from (
 				select post_id, series_id, user_email, img_id, post_title,
-					   post_content, post_regdate, post_viewcount, post_summary, rownum rnum
+					   post_content, post_regdate, post_viewcount, post_summary, post_img_list, rownum rnum
 				from aka_post
 				order by post_id desc
 			 )
@@ -26,13 +26,15 @@
 			(
 				POST_ID, 		SERIES_ID, 		USER_EMAIL,
 				IMG_ID, 		POST_TITLE,		POST_CONTENT,
-				POST_REGDATE, 	POST_VIEWCOUNT, post_summary
+				POST_REGDATE, 	POST_VIEWCOUNT, post_summary,
+				POST_IMG_LIST
 			) 
 		VALUES
 			( 
 			   #{post_id},			#{series_id},		#{user_email},
 			   #{img_id},			#{post_title},		#{post_content},
-			   sysdate,         	#{post_viewcount},  #{post_summary}
+			   sysdate,         	#{post_viewcount},  #{post_summary},
+			   	#{post_img_list}
 			)
 	</insert>
 	
