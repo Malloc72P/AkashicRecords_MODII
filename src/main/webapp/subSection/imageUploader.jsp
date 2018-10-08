@@ -15,6 +15,9 @@
 	<script src="../hello/js/dropzone.js"></script>
 	<StylE>
 		/*--| ***CSS-StylesheeT StarT*** |--*/
+		body{
+		     background: rgb(216, 226, 234);
+		}
 		*{
 			font-family: 'Source Sans Pro', sans-serif;
 		}
@@ -60,6 +63,7 @@
 		    width: 100%;
 		    height: 100%;
 		    border: 5px dotted purple;
+		    background: white;
 		}
 		.cl_div_dropzone:after {
 		    content: "";
@@ -94,7 +98,10 @@
 				
 				var myDropzone = new Dropzone(
 											    "div#id_div_dropzone",
-						                     	{ url: "../hello/imageUploadProc.do"}
+						                     	{ 
+											    	url				:	"../hello/imageUploadProc.do",
+											    	parallelUploads	:	1
+										    	}
 				 							 );
 				
 				myDropzone.on('success',function(file, response){
@@ -107,10 +114,12 @@
 					console.log("imageUploader.on( success ) >>> jsonRes.insertChecker : "+jsonRes.insertChecker);
 					console.log("imageUploader.on( success ) >>> jsonRes.img_url : "+jsonRes.img_url);
 					console.log("imageUploader.on( success ) >>> jsonRes.img_name : "+jsonRes.img_name);
+					console.log("imageUploader.on( success ) >>> jsonRes.img_id : "+jsonRes.img_id);
 					imgArr.push( 
 									{ 
-										img_url:jsonRes.img_url,
-										img_name:jsonRes.img_name
+										img_url		:	jsonRes.img_url,
+										img_name	:	jsonRes.img_name,
+										img_id		:	jsonRes.img_id
 									}
 							   );
 					//insertImage(jsonRes.img_url);
@@ -121,17 +130,17 @@
 			})
 			
 			
-			function insertImage(img_url,img_name)
+			function insertImage(img_url, img_name, img_id)
 			{
-				opener.TinyMceInsert('<p><img style="max-width: 700px" src="'+img_url+'" title="'+img_name+'"></p>');
+				opener.TinyMceInsert('<p><img style="max-width: 700px" src="'+img_url+'" alt="'+img_name+'" title="aka_imgID_'+img_id+'"></p>');
 			}
 			function eventBinder_insertImgIntotheTinyMce(id_div_insertImgIntoTinyMce){
 				$("#"+id_div_insertImgIntoTinyMce).click(function(){
 					for( var i = 0 ; i < imgArr.length ; i++ ){
-						alert("img_url : "+imgArr[i].img_url+"\n"+"img_name : "+imgArr[i].img_name);
-						insertImage( imgArr[i].img_url ,imgArr[i].img_name );
-						self.close();
+						/* alert("img_url : "+imgArr[i].img_url+"\n"+"img_name : "+imgArr[i].img_name); */
+						insertImage( imgArr[i].img_url , imgArr[i].img_name, imgArr[i].img_id );
 					}
+					self.close();
 				});
 			}
 		/*--| ###JavascripT EnD### |--*/

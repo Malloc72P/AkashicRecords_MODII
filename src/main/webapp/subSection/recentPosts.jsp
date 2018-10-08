@@ -1,3 +1,4 @@
+<%@page import="com.aka_image.dao.Impl_ImageDAO"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib
 	prefix="c"
@@ -5,6 +6,8 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="constSet.MainConst" %>
+
+
 <script src="../js/jsConstData.js"></script>
 <!--| ***body StarT*** |-->
 <div class="sel-2">
@@ -52,7 +55,9 @@
 	
 					</div>
 					<div class="post-img-area" style="text-align: center">
-						<div class="post-img imgRanderer"></div>
+						<div class="post-img imgRanderer">
+							<img class="cl_img_post_thumbnail" src="../${thumbnailMap.get(article.getImg_id())}">
+						</div>
 					</div>
 				</div> <!-- akashic-post -->
 			</div><!-- post-contentWrapper -->

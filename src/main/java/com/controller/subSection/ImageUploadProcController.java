@@ -36,8 +36,8 @@ public class ImageUploadProcController {
 		System.out.println("ImageUploadProcController.requestProcessor >>> 메서드 호출됨");
 		
 		ModelAndView mav = new ModelAndView("subSection/imageUploadProc");
-		System.out.println("ImageUploadProcController.requestProcessor >>> uploadedFile.getName() : "+uploadedFile.getName());
-		System.out.println("ImageUploadProcController.requestProcessor >>> uploadedFile.getOriginalFilename() : "+uploadedFile.getOriginalFilename());
+//		System.out.println("ImageUploadProcController.requestProcessor >>> uploadedFile.getName() : "+uploadedFile.getName());
+//		System.out.println("ImageUploadProcController.requestProcessor >>> uploadedFile.getOriginalFilename() : "+uploadedFile.getOriginalFilename());
 		
 		ServletContext application = request.getServletContext();
 		
@@ -58,9 +58,9 @@ public class ImageUploadProcController {
 				
 		String img_path     = img_Dir_path + fileName;
 		
-		System.out.println("ImageUploadProcController.requestProcessor >>> absol_path   : "+absol_path  );
-		System.out.println("ImageUploadProcController.requestProcessor >>> img_Dir_path : "+img_Dir_path  );
-		System.out.println("ImageUploadProcController.requestProcessor >>> img_path     : "+img_path  );
+//		System.out.println("ImageUploadProcController.requestProcessor >>> absol_path   : "+absol_path  );
+//		System.out.println("ImageUploadProcController.requestProcessor >>> img_Dir_path : "+img_Dir_path  );
+//		System.out.println("ImageUploadProcController.requestProcessor >>> img_path     : "+img_path  );
 		
 		File file = new File(img_path);
 		
@@ -80,11 +80,11 @@ public class ImageUploadProcController {
 			
 			System.out.println("DA전 데이터 패러미터 체크");
 			
-			System.out.println("img_id	     : "+img_id);
-			System.out.println("img_url      : "+img_url);
-			System.out.println("img_size     : "+img_size);
-			System.out.println("img_ref_type : "+img_ref_type);
-			System.out.println("img_name     : "+img_name);
+//			System.out.println("img_id	     : "+img_id);
+//			System.out.println("img_url      : "+img_url);
+//			System.out.println("img_size     : "+img_size);
+//			System.out.println("img_ref_type : "+img_ref_type);
+//			System.out.println("img_name     : "+img_name);
 			System.out.println();
 			ImageCommand data = new ImageCommand();
 			
@@ -98,15 +98,14 @@ public class ImageUploadProcController {
 			System.out.println("DB입력 성공여부 : "+insertChecker);
 			
 			mav.addObject("insertChecker",insertChecker);
-			System.out.println(""+request.getRequestURL());
-			System.out.println(""+request.getContextPath());
-			System.out.println(""+request.getLocalAddr());
 			System.out.println(request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort());
 			String serverAddr = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 			if(insertChecker) {
 				String fileRealUrl = serverAddr+request.getContextPath()+"/"+dao.getImgUrlById(img_id);
+				System.err.println("fileRealUrl : "+fileRealUrl);
 				mav.addObject("img_url",fileRealUrl);
 				mav.addObject("img_name",img_name);
+				mav.addObject("img_id", dao.getImgIdByName(img_name));
 			}
 			else {
 				mav.addObject("img_url","noData");

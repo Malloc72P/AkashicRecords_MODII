@@ -10,6 +10,7 @@ public class PostCommand {
 	private String post_regdate       ;
 	private int    post_viewcount     ;
 	private String post_summary       ;
+	private String post_img_list      ;
 	
 	
 	
@@ -67,6 +68,13 @@ public class PostCommand {
 	public void setPost_viewcount(int post_viewcount) {
 		this.post_viewcount = post_viewcount;
 	}
+	public String getPost_img_list() {
+		return post_img_list;
+	}
+	public void setPost_img_list(String post_img_list) {
+		this.post_img_list = post_img_list;
+	}
+	
 	
 	
 }

@@ -2,6 +2,7 @@ package com.controller.subSection;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aka_image.dao.ImageDAO;
 import com.aka_post.dao.PostDAO;
+import com.aka_post.domain.PostCommand;
 
 @Controller
 public class RecentPostsController {
 	
 	@Autowired
 	private PostDAO dao;
+	
+	@Autowired
+	private ImageDAO imgDao;
 	
 	@RequestMapping("/hello/recentPosts.do")
 	public ModelAndView requestProcessor(
@@ -35,8 +41,8 @@ public class RecentPostsController {
 		int endRow = currentPage * pageSize;// 1*10=10,2*10=20,3*10=30(레코드갯수 X)
 		int count = 0;// 총레코드수
 		int number = 0;// beginPerPage->페이지별 시작하는 맨 처음에 나오는 게시물번호
-		List articleList = null;// 화면에 출력할 레코드 전체
-		
+		List<PostCommand> articleList = null;// 화면에 출력할 레코드 전체
+		HashMap<Integer, String> thumbnailMap = new HashMap<Integer, String>();
 		
 		
 		int startCount = (currentPage - 1) * blockSize + 1;
@@ -48,6 +54,9 @@ public class RecentPostsController {
 		count = dao.getPostCount();
 		if (count > 0) {// 화면에 보여줄 레코드가 한개라도 존재한다면
 			articleList = dao.getPosts(startCount, endCount);// 10개씩 (endRow X)
+			for(int i = 0 ; i < articleList.size() ; i++) {
+				thumbnailMap.put( articleList.get(i).getImg_id(), imgDao.getImgUrlById(articleList.get(i).getImg_id()) );
+			}
 		}
 		else {
 			articleList = Collections.EMPTY_LIST;//해당 리스트가 비어있다는 것을 의미하는 상수
@@ -81,16 +90,17 @@ public class RecentPostsController {
 		//뷰에서는 여러 방법으로 메모리에 접근해서 데이터를 가져오면 된다.
 		//ex) EL태그
 	    
-	    mav.addObject("count"       , count       );
-		mav.addObject("articleList" , articleList );
-		mav.addObject("number"      , number      );
-		mav.addObject("currentPage" , currentPage );
-		mav.addObject("sdf"         , sdf         );
-		mav.addObject("pageSize"    , pageSize    );
-		mav.addObject("blockSize"   , blockSize   );
-		mav.addObject("startPage"   , startPage   );
-		mav.addObject("endPage"     , endPage     );
-		mav.addObject("pageCount"   , pageCount   );
+	    mav.addObject("count"			, count       );
+		mav.addObject("articleList"		, articleList );
+		mav.addObject("number"			, number      );
+		mav.addObject("currentPage"		, currentPage );
+		mav.addObject("sdf"				, sdf         );
+		mav.addObject("pageSize"		, pageSize    );
+		mav.addObject("blockSize"		, blockSize   );
+		mav.addObject("startPage"		, startPage   );
+		mav.addObject("endPage"			, endPage     );
+		mav.addObject("pageCount"		, pageCount   );
+		mav.addObject("thumbnailMap"	, thumbnailMap   );
 		
 		System.out.println("________________________________________________________");
 		return mav;

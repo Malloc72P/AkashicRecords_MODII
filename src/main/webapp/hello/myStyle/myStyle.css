@@ -74,9 +74,11 @@
 	padding-left: 0px;
 }
 
-.post-img{
-	background-image: url("../img/akashic_small2.png");
+.cl_img_post_thumbnail{
+	max-height: 100%;
+	min-height: 100%;
 }
+
 .post-title{
 	margin: 0px 0px 20px 0px;
 	padding: 0px;
