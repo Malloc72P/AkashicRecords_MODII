@@ -46,5 +46,13 @@ public class Impl_PostDAO extends SqlSessionDaoSupport implements PostDAO {
 		// TODO Auto-generated method stub
 		return (Integer)getSqlSession().selectOne("getMaxPostNum") + 1;
 	}
+
+	@Override
+	public PostCommand getPostById(String post_id) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("getPostById", post_id);
+	}
+	
+	
 	
 }

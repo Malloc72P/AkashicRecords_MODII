@@ -9,6 +9,11 @@
 
 
 <script src="../js/jsConstData.js"></script>
+
+<script>
+
+</script>
+
 <!--| ***body StarT*** |-->
 <div class="sel-2">
 
@@ -25,9 +30,9 @@
 		<div class="w3-bar-item">
 		<h5>${count} 포스트</h5>
 		</div>
-		<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writePost" href="#">
-		<h5>글쓰기</h5>
-		</a>
+		<div class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writePost" href="#" >
+			<h5>글쓰기</h5>
+		</div>
 		</div>
 	</c:if>
 
@@ -38,7 +43,8 @@
 					<div class="post-text-area">
 						<div class="post-header w3-xlarge">
 							<p class="w3-large post-title" style="padding: 5px 5px 5px 15px;">
-								<a href="<%=MainConst.PROJECT_NAME%>/content.do?num=${article.post_id}&pageNum=${currentPage}">
+								<a href="viewContent.do?post_id=${article.post_id}"
+								   class="recentPostTitle">
 									${article.post_title}
 								</a>
 							</p>
@@ -55,9 +61,7 @@
 	
 					</div>
 					<div class="post-img-area" style="text-align: center">
-						<div class="post-img imgRanderer">
-							<img class="cl_img_post_thumbnail" src="../${thumbnailMap.get(article.getImg_id())}">
-						</div>
+						<img class="cl_img_post_thumbnail" src="../${thumbnailMap.get(article.getImg_id())}">
 					</div>
 				</div> <!-- akashic-post -->
 			</div><!-- post-contentWrapper -->

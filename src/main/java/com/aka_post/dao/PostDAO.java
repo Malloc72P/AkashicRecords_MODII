@@ -9,4 +9,5 @@ public interface PostDAO {
 	public int getPostCount();
 	public int getNewPostNum();
 	public boolean insertPost(PostCommand post);
+	public PostCommand getPostById(String post_id);
 }

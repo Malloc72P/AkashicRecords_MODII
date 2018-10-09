@@ -110,6 +110,10 @@ function writePost_eventBinder(){
 		
 	}
 }
+function panelOpener_viewContent(event){
+	event.preventDefault();
+	alert("mainPage.js >>> panelOpener_viewContent \n >>> event.target : "+event.target)
+}
 
 function submitPost_eventBinder(id_input_submitPost , id_input_writePostTitle, id_input_writePostContent, id_select_writePostSeries){
 	$("#"+id_input_submitPost).click(function( event ){
@@ -263,6 +267,11 @@ function getRecentPosts(id_div_subSection , id_pageNum){
 				console.log("id_currentPage >>> "+currentPage)
 				console.log("id_pageCount >>> "  +pageCount  )
 				console.log("id_postCount >>> "  +postCount  )
+				
+				//포스트리스트의 각 포스트의 제목(포스트를 여는 오프너)에 뷰컨텐츠 오프너 함수를 바인딩한다
+				$(htmlRES).find("a").each(function(){
+					alert("포스트리스트_타이틀_이벤트바인더"+this);
+				})
 				
 				//포스트리스트의 헤더에 이벤트를 바인딩한다
 				writePost_eventBinder()
