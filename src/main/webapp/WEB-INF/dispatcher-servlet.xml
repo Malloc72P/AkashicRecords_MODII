@@ -28,6 +28,7 @@
 		<bean class="com.controller.subSection.pwCheckProcController" />
 		<bean class="com.controller.subSection.ImageUploaderController" />
 		<bean class="com.controller.subSection.ImageUploadProcController" />
+		<bean class="com.controller.subSection.ViewContentController" />
 		
 <!-- (4) viewResolver(tiles를 위해서 필요)-->
 <bean id="viewResolver"

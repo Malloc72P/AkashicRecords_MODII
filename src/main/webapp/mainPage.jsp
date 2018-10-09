@@ -68,6 +68,8 @@
 			//포스트 작성 기능 바인딩
 			pwCheck_eventBinder("id_input_submitPWCHK")
 			/* binder_clickRecentPosts($("#sel-2") , $("#id_div_subSection")) */
+			
+			
 		})
 		
 		/*--| ###JavascripT EnD### |--*/
