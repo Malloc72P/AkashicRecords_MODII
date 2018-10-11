@@ -42,7 +42,7 @@ public class ImageUploadProcController {
 		ServletContext application = request.getServletContext();
 		
 		String absol_path   = application.getRealPath("").replace("\\", "/");
-		String img_Dir_path = absol_path+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
+		String img_Dir_path = absol_path+"/"+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
 		
 		String fileName     = "";
 		
@@ -58,12 +58,19 @@ public class ImageUploadProcController {
 				
 		String img_path     = img_Dir_path + fileName;
 		
-//		System.out.println("ImageUploadProcController.requestProcessor >>> absol_path   : "+absol_path  );
-//		System.out.println("ImageUploadProcController.requestProcessor >>> img_Dir_path : "+img_Dir_path  );
-//		System.out.println("ImageUploadProcController.requestProcessor >>> img_path     : "+img_path  );
+		System.out.println("ImageUploadProcController.requestProcessor >>> absol_path   : "+absol_path  );
+		System.out.println("ImageUploadProcController.requestProcessor >>> img_Dir_path : "+img_Dir_path  );
+		System.out.println("ImageUploadProcController.requestProcessor >>> img_path     : "+img_path  );
 		
 		File file = new File(img_path);
-		
+		if(!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		try {
 			uploadedFile.transferTo(file);
 			
