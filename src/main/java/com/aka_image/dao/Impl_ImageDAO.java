@@ -35,6 +35,12 @@ public class Impl_ImageDAO extends SqlSessionDaoSupport implements ImageDAO {
 		// TODO Auto-generated method stub
 		return (Integer)getSqlSession().selectOne("getImgIdByName",img_name);
 	}
+
+	@Override
+	public String getImgNameById(int img_id) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("getImgNameById", img_id);	
+	}
 	
 	
 	
