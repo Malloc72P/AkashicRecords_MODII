@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jsoup.Jsoup;
@@ -15,14 +16,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aka_image.dao.ImageDAO;
+import com.aka_image.domain.ImageCommand;
 import com.aka_post.dao.PostDAO;
 import com.aka_post.domain.PostCommand;
+import com.util.FileUtil;
+
+import constSet.MainConst;
 
 @Controller
 public class WritePostProcController {
 	
 	@Autowired
 	private PostDAO dao;
+	
+	@Autowired
+	private ImageDAO imgDao;
 	
 	@RequestMapping("/hello/writePostProc.do")
 	public ModelAndView requestProcessor(
@@ -50,7 +59,7 @@ public class WritePostProcController {
 		
 		System.out.println("***** IMAGE PARSER *****");
 		String uploadedImgDectector = "aka_imgID_";		
-		int post_thumbnail			= 2;
+		int post_thumbnail_id		= 2;
 		boolean isThereAnyUploadedImg = false;
 		for(Element el : tagBody.select("img")) {
 			
@@ -83,8 +92,34 @@ public class WritePostProcController {
 				System.out.println("token >>> img_id : "+temp);
 				uploadedImgList.add(temp);
 			}
-			post_thumbnail = Integer.parseInt(uploadedImgList.get(0));
-			System.out.println("post_thumbnail : "+post_thumbnail); 
+			
+			post_thumbnail_id = Integer.parseInt(uploadedImgList.get(0));
+			
+			ServletContext application = request.getServletContext();
+			
+			String absol_path			=	application.getRealPath("").replace("\\", "/");
+			String img_Dir_path			=	absol_path+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
+			String post_thumbnail_name	=	imgDao.getImgNameById(post_thumbnail_id);
+			
+			
+			int pos = post_thumbnail_name.lastIndexOf( "." );
+			String post_thumbnail_ext	=	post_thumbnail_name.substring( pos + 1 );
+			ImageCommand newThumbImg	=	null;
+			try {
+				newThumbImg	=	FileUtil.makeThumbnail(img_Dir_path, post_thumbnail_name, post_thumbnail_ext);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("[썸네일] >>> newThumbImg.getImg_name()	: "+newThumbImg.getImg_name());
+			System.out.println("[썸네일] >>> newThumbImg.getImg_url		: "+newThumbImg.getImg_url());
+			System.out.println("[썸네일] >>> newThumbImg.getImg_size		: "+newThumbImg.getImg_size());
+			System.out.println("[썸네일] >>> newThumbImg.getImg_ref_type	: "+newThumbImg.getImg_ref_type());
+			
+			imgDao.insertImage(newThumbImg);
+			
+			post_thumbnail_id = imgDao.getImgIdByName(newThumbImg.getImg_name());
+			System.out.println("post_thumbnail : "+post_thumbnail_id); 
 		}
 		
 		
@@ -127,7 +162,7 @@ public class WritePostProcController {
 		post.setSeries_id(series_id);
 		post.setImg_id(2);
 		post.setPost_img_list(post_img_list);
-		post.setImg_id(post_thumbnail); 
+		post.setImg_id(post_thumbnail_id); 
 		
 		
 		boolean insertChecker = true;

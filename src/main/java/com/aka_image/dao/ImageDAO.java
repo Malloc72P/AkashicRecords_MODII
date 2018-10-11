@@ -7,4 +7,5 @@ public interface ImageDAO {
 	public  int 	getNewImageNum();
 	public  String 	getImgUrlById( int img_id );
 	public	int		getImgIdByName( String img_name );
+	public	String	getImgNameById( int img_id );
 }
