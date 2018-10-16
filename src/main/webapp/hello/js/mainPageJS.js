@@ -270,7 +270,15 @@ function getRecentPosts(id_div_subSection , id_pageNum){
 				
 				//포스트리스트의 각 포스트의 제목(포스트를 여는 오프너)에 뷰컨텐츠 오프너 함수를 바인딩한다
 				$(htmlRES).find("a").each(function(){
-					alert("포스트리스트_타이틀_이벤트바인더"+this);
+					console.log("포스트리스트_타이틀_이벤트바인더"+this);
+					$(this).click(function(event){
+						console.log("event.target : "+event.target);
+						var targetUrl	=	event.target;
+						
+						getViewPage(targetUrl);
+						
+						event.preventDefault();
+					});
 				})
 				
 				//포스트리스트의 헤더에 이벤트를 바인딩한다
@@ -461,6 +469,47 @@ function getWebTools( id_div_subSection ){
 				}
 			}
 		)
+}
+function getViewPage( requestUrl ){
+	console.log("mainPage.js.getViewPage >>> 함수 호출됨")
+	var htmlRES	=	null;
+	$.ajax(
+			{ 
+				method : "post",
+				url    : requestUrl,
+				cache  : false,
+				success: function(result){
+					htmlRES = $.parseHTML( result )
+					var post_title		=	$(htmlRES).find("input[name='post_title']").val();
+					var post_regdate	=	$(htmlRES).find("input[name='post_regdate']").val();
+					var post_viewcount	=	$(htmlRES).find("input[name='post_viewcount']").val();
+					
+					console.log("post_title : "+post_title);
+					console.log("post_regdate : "+post_regdate);
+					console.log("post_viewcount : "+post_viewcount);
+					
+					console.log("getViewPage >>> htmlRES : "+htmlRES);
+					
+					$("#id_div_viewPostTitle").empty();
+					$("#id_div_viewPostTitle").append(post_title);
+					
+					$("#id_div_viewPostRegdate").empty();
+					$("#id_div_viewPostRegdate").append("작성일 : "+post_regdate);
+					
+					$("#id_div_viewPostViewCount").empty();
+					$("#id_div_viewPostViewCount").append("조회수 : "+post_viewcount);
+					
+					$("#id_div_viewPostArticle").empty();
+					$("#id_div_viewPostArticle").append(htmlRES);
+					
+					
+					panelOpener("id_div_viewPostPanel", "id_div_mainContent");
+					
+					bind_Close_Panel("id_div_viewPostCloser" , "id_div_viewPostPanel" ,"id_div_mainContent");
+					
+				}
+			}
+		);
 }
 /******************************************************************
  * AJAX-JQUERY FUNCTION

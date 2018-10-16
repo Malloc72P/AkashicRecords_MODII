@@ -222,7 +222,8 @@
 			<jsp:include page="subSection/pwChecker.jsp"></jsp:include>
 		<!-- popPannel_postWrite -->
 			<jsp:include page="subSection/writePost.jsp"></jsp:include>
-			
+		<!-- popPannel_viewContent -->
+		<jsp:include page="subSection/viewPost.jsp"></jsp:include>	
 			
  </body>
 </html>
