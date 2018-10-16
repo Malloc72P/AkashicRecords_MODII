@@ -47,7 +47,18 @@
 		z-index: 100;
 	}
 	/************************************
+	 * 0px---> SIDEBAR
 	************************************/
+	.post_viewImg{
+		width: 100%;
+	}
+	/* div.viewPostHeader{
+		width: 100%;
+	} */
+	/************************************
+	************************************/
+	
+	
 }
 @media only screen and ( min-width : 769px ){
 	/************************************
@@ -90,7 +101,7 @@
 	/************************************
 	 * 769px---> MAIN-CONTENT
 	************************************/
-	.cl_div_mainContent{
+	.cl_div_mainContent, div.viewPostArticle{
 		width: 100%;
 	}
 	.post-footer-text{
@@ -107,13 +118,14 @@
 }
 @media only screen and ( min-width : 1024px ){
 		
-	.cl_div_mainContent{
+	.cl_div_mainContent, div.viewPostArticle{
 		width: 1024px;
 		margin: 0 auto;
 	}
 	.banner-img{
 		height: 388px;
 	}
+	
 	/************************************
 	************************************/
 }

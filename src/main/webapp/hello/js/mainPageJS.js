@@ -480,12 +480,36 @@ function getViewPage( requestUrl ){
 				cache  : false,
 				success: function(result){
 					htmlRES = $.parseHTML( result )
+					var post_title		=	$(htmlRES).find("input[name='post_title']").val();
+					var post_regdate	=	$(htmlRES).find("input[name='post_regdate']").val();
+					var post_viewcount	=	$(htmlRES).find("input[name='post_viewcount']").val();
+					
+					console.log("post_title : "+post_title);
+					console.log("post_regdate : "+post_regdate);
+					console.log("post_viewcount : "+post_viewcount);
+					
 					console.log("getViewPage >>> htmlRES : "+htmlRES);
+					
+					$("#id_div_viewPostTitle").empty();
+					$("#id_div_viewPostTitle").append(post_title);
+					
+					$("#id_div_viewPostRegdate").empty();
+					$("#id_div_viewPostRegdate").append("작성일 : "+post_regdate);
+					
+					$("#id_div_viewPostViewCount").empty();
+					$("#id_div_viewPostViewCount").append("조회수 : "+post_viewcount);
+					
+					$("#id_div_viewPostArticle").empty();
+					$("#id_div_viewPostArticle").append(htmlRES);
+					
+					
+					panelOpener("id_div_viewPostPanel", "id_div_mainContent");
+					
+					bind_Close_Panel("id_div_viewPostCloser" , "id_div_viewPostPanel" ,"id_div_mainContent");
 					
 				}
 			}
 		);
-	return htmlRES;
 }
 /******************************************************************
  * AJAX-JQUERY FUNCTION

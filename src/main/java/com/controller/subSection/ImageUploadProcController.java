@@ -101,7 +101,7 @@ public class ImageUploadProcController {
 			System.out.println(request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort());
 			String serverAddr = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 			if(insertChecker) {
-				String fileRealUrl = serverAddr+request.getContextPath()+"/"+dao.getImgUrlById(img_id);
+				String fileRealUrl = serverAddr+request.getContextPath()+"/"+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH+fileName;
 				System.err.println("fileRealUrl : "+fileRealUrl);
 				mav.addObject("img_url",fileRealUrl);
 				mav.addObject("img_name",img_name);

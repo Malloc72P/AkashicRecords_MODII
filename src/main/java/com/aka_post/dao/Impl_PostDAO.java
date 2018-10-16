@@ -44,7 +44,14 @@ public class Impl_PostDAO extends SqlSessionDaoSupport implements PostDAO {
 	@Override
 	public int getNewPostNum() {
 		// TODO Auto-generated method stub
-		return (Integer)getSqlSession().selectOne("getMaxPostNum") + 1;
+		Integer postNum = null;
+		if( getSqlSession().selectOne("getMaxPostNum") != null ) {
+			postNum = (Integer)getSqlSession().selectOne("getMaxPostNum") + 1;
+		}
+		else {
+			postNum = 0;
+		}
+		return postNum;
 	}
 
 	@Override
