@@ -270,7 +270,15 @@ function getRecentPosts(id_div_subSection , id_pageNum){
 				
 				//포스트리스트의 각 포스트의 제목(포스트를 여는 오프너)에 뷰컨텐츠 오프너 함수를 바인딩한다
 				$(htmlRES).find("a").each(function(){
-					alert("포스트리스트_타이틀_이벤트바인더"+this);
+					console.log("포스트리스트_타이틀_이벤트바인더"+this);
+					$(this).click(function(event){
+						console.log("event.target : "+event.target);
+						var targetUrl	=	event.target;
+						
+						getViewPage(targetUrl);
+						
+						event.preventDefault();
+					});
 				})
 				
 				//포스트리스트의 헤더에 이벤트를 바인딩한다
@@ -461,6 +469,23 @@ function getWebTools( id_div_subSection ){
 				}
 			}
 		)
+}
+function getViewPage( requestUrl ){
+	console.log("mainPage.js.getViewPage >>> 함수 호출됨")
+	var htmlRES	=	null;
+	$.ajax(
+			{ 
+				method : "post",
+				url    : requestUrl,
+				cache  : false,
+				success: function(result){
+					htmlRES = $.parseHTML( result )
+					console.log("getViewPage >>> htmlRES : "+htmlRES);
+					
+				}
+			}
+		);
+	return htmlRES;
 }
 /******************************************************************
  * AJAX-JQUERY FUNCTION

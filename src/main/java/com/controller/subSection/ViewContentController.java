@@ -20,12 +20,14 @@ public class ViewContentController {
 	
 	@RequestMapping("/hello/viewContent.do")
 	public ModelAndView requestProcessor(HttpServletRequest request) {
+		System.out.println("____________________________________________________");
+		System.out.println("ViewContentController.requestProcessor >>> 메서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/viewContent");
 		
 		PostCommand post = dao.getPostById(request.getParameter("post_id"));
 		
 		mav.addObject("post",post);
-		
+		System.out.println("____________________________________________________");
 		return mav;
 	}
 	
