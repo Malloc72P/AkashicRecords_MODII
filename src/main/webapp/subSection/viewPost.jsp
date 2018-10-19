@@ -70,14 +70,12 @@
 			</div>
 			<div class="viewPostArticle" >
 				<div class="viewPostHeader">
-					<div class="viewPostSeries">
-						시리즈 : 일상
+					<div class="viewPostSeries"  id="id_div_viewPostSeries">
 					</div>
 					<div class="viewPostTitle" id="id_div_viewPostTitle">
 						
 					</div>
-					<div class="viewPostWriter">
-						Malloc72P
+					<div class="viewPostWriter"  id="id_div_viewPostWriter">
 					</div>
 					<div class="viewPostDate" id="id_div_viewPostRegdate">
 						

@@ -93,7 +93,7 @@ function pwCheck_eventBinder(id_input_submitPWCHK){
 		event.preventDefault()
 		var pw = $("#"+"id_input_pwchkPW").val()
 		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
-		pwCheck_AJAX( pw )	
+		pwCheck_AJAX( "id_div_pwCheckerPanel", pw )	
 	})
 	
 }
@@ -483,10 +483,14 @@ function getViewPage( requestUrl ){
 					var post_title		=	$(htmlRES).find("input[name='post_title']").val();
 					var post_regdate	=	$(htmlRES).find("input[name='post_regdate']").val();
 					var post_viewcount	=	$(htmlRES).find("input[name='post_viewcount']").val();
+					var post_writer		=	$(htmlRES).find("input[name='post_writer']").val();
+					var post_series		=	$(htmlRES).find("input[name='post_series']").val();
 					
 					console.log("post_title : "+post_title);
 					console.log("post_regdate : "+post_regdate);
 					console.log("post_viewcount : "+post_viewcount);
+					console.log("post_writer : "+post_writer);
+					console.log("post_series : "+post_series);
 					
 					console.log("getViewPage >>> htmlRES : "+htmlRES);
 					
@@ -498,6 +502,12 @@ function getViewPage( requestUrl ){
 					
 					$("#id_div_viewPostViewCount").empty();
 					$("#id_div_viewPostViewCount").append("조회수 : "+post_viewcount);
+					
+					$("#id_div_viewPostWriter").empty();
+					$("#id_div_viewPostWriter").append(post_writer);
+					
+					$("#id_div_viewPostSeries").empty();
+					$("#id_div_viewPostSeries").append("시리즈 : "+post_series);
 					
 					$("#id_div_viewPostArticle").empty();
 					$("#id_div_viewPostArticle").append(htmlRES);
@@ -515,7 +525,11 @@ function getViewPage( requestUrl ){
  * AJAX-JQUERY FUNCTION
  * 		SUBSECTION SUPPORT FUNCTION
  *******************************************************************/
-function pwCheck_AJAX(user_password){
+function pwCheck_AJAX(openThisPanel, user_password){
+	/*
+	 * 패스워드 체크가 필요한 패널을 열기 전에 거쳐가는 패스워드 재확인 패널의 ajax함수입니다
+	 * openThisPanel은 이 패스워드 체크로 재확이
+	 * */
 	console.log("mainPage.js >>> pwCheck_AJAX >>> password : "+user_password)
 	$.ajax(
 		{ 
@@ -533,13 +547,13 @@ function pwCheck_AJAX(user_password){
 				//$("#"+"id_div_pwCheckerPanel").hide()
 				/*panel_fadeOut("id_div_pwCheckerPanel")
 				bluroff_Tag("id_div_mainContent")*/
-				panelCloser("id_div_pwCheckerPanel", "id_div_mainContent")
-				panelOpener("id_div_writePostPanel", "id_div_mainContent")
+				panelCloser(openThisPanel, "id_div_mainContent")
+				panelOpener(openThisPanel, "id_div_mainContent")
 				
 			}
 			else{//로그인 실패시
 				alert("패스워드가 일치하지 않습니다")
-				panelCloser("id_div_pwCheckerPanel", "id_div_mainContent")
+				panelCloser(openThisPanel, "id_div_mainContent")
 			}
 		})//done
 }//function submitAjax

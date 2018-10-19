@@ -44,7 +44,7 @@
 				<input class="w3-input w3-border w3-round-large" type="password"
 					   name="name_input_submitPWCHK" id="id_input_pwchkPW">
 				<br>
-				<input class="w3-btn w3-white btnMargin btnBorderBottom" id="id_input_submitPWCHK"
+				<input class="w3-btn w3-white btnMargin btnBorderBottom" id="id_submit_pwChk_writePost"
 				       type ="submit" value="입력">	
 				       
 				<input class="w3-btn w3-white btnBorderBottom"

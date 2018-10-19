@@ -23,10 +23,21 @@ public class ViewContentController {
 		System.out.println("____________________________________________________");
 		System.out.println("ViewContentController.requestProcessor >>> 메서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/viewContent");
+		dao.viewCountIncrementer( Integer.parseInt( request.getParameter("post_id") ) );
 		
-		PostCommand post = dao.getPostById(request.getParameter("post_id"));
+		PostCommand post 	= 	dao.getPostById(request.getParameter("post_id"));
+		String 		writer	=	dao.getUserNicknameByPostEmail(post.getUser_email());
+		String		series	=	dao.getSeriesTitleByPostSeriesId(post.getSeries_id());
 		
-		mav.addObject("post",post);
+		
+		
+		System.out.println("writer : "+writer);
+		System.out.println("series : "+series);
+		
+		mav.addObject("post",	post  );
+		mav.addObject("writer",	writer);
+		mav.addObject("series",	series);
+		
 		System.out.println("____________________________________________________");
 		return mav;
 	}

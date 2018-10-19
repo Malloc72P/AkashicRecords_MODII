@@ -8,4 +8,6 @@ ${post.getPost_content()}
 	<input type="hidden" name="post_title" value="${ post.getPost_title() }">
 	<input type="hidden" name="post_regdate" value="${ post.getPost_regdate() }">
 	<input type="hidden" name="post_viewcount" value="${ post.getPost_viewcount() }">
+	<input type="hidden" name="post_writer" value="${ writer }">
+	<input type="hidden" name="post_series" value="${ series }">
 </form>

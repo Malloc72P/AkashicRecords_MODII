@@ -59,6 +59,28 @@ public class Impl_PostDAO extends SqlSessionDaoSupport implements PostDAO {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("getPostById", post_id);
 	}
+
+	@Override
+	public String getUserNicknameByPostEmail(String post_email) {
+		// TODO Auto-generated method stub
+		return (String)getSqlSession().selectOne("getUserNicknameByPostEmail",post_email);
+	}
+
+	@Override
+	public String getSeriesTitleByPostSeriesId(int post_seriesId) {
+		// TODO Auto-generated method stub
+		return (String)getSqlSession().selectOne("getSeriesTitleByPostSeriesId", post_seriesId);
+	}
+
+	@Override
+	public boolean viewCountIncrementer(int post_id) {
+		// TODO Auto-generated method stub
+		int queryRes = getSqlSession().update("viewCount_Incrementer", post_id);
+		if(queryRes != 0) {
+			return true;
+		}
+		else return false;
+	}
 	
 	
 	

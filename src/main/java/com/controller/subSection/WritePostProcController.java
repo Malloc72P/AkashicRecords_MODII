@@ -125,8 +125,13 @@ public class WritePostProcController {
 		
 		
 		System.out.println("***** TEXT PARSER *****");
-		String post_summary = tagBody.text();
+		String post_summary = tagBody.text().trim();
+		
+		post_summary	=	post_summary.replaceAll("(^\\p{Z}+|\\p{Z}+$)", "");
+		
+		
 		int post_summary_length = post_summary.getBytes().length;
+		
 		System.out.println("text : "+post_summary );
 		System.out.println("TAG_BODY_LENGTH : "+tagBody.toString().length());
 		System.out.println("post_summary_LENGTH : "+post_summary_length);
@@ -165,7 +170,7 @@ public class WritePostProcController {
 		post.setImg_id(post_thumbnail_id); 
 		
 		
-		boolean insertChecker = true;
+		boolean insertChecker = false;
 		insertChecker = dao.insertPost(post);
 		
 		
