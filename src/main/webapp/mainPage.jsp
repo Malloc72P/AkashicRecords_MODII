@@ -23,6 +23,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
 	<script src="js/jsConstData.js"></script>
   	<script src="js/mainPageJS.js"></script>
+  	
+  	<script src="js/AjaxFunction.js"></script>
+  	<script src="js/EffectAndAnime.js"></script>
+  	<script src="js/MainEventBinder.js"></script>
+  	<script src="js/Panel.js"></script>
+  	<script src="js/SubSectionEventBinder.js"></script>
+  	
   	<script src="js/mgr_account_MK2.js"></script>
   	<script src="js/animeBinder.js"></script>
 	<StylE>
