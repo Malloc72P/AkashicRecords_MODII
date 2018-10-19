@@ -48,6 +48,24 @@
 		WHERE	POST_ID = #{ post_id }
 	</select>
 	
+	<select id="getUserNicknameByPostEmail" parameterType="string" resultType="string">
+		SELECT  USER_NICKNAME
+		FROM	AKA_USER
+		WHERE	USER_EMAIL	=	#{ post_email }
+	</select>
+	
+	<select id="getSeriesTitleByPostSeriesId" parameterType="int" resultType="string">
+		SELECT	SERIES_TITLE
+		FROM	AKA_SERIES
+		WHERE	SERIES_ID	=	#{ post_seriesId }
+	</select>
+	
+	<update id="viewCount_Incrementer" parameterType="int">
+		UPDATE	AKA_POST
+		SET		POST_VIEWCOUNT	=	POST_VIEWCOUNT + 1
+		WHERE 	POST_ID	=	#{post_id}	
+	</update>
+	
 </mapper>
 
 
