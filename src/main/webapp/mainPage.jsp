@@ -24,14 +24,19 @@
 	<script src="js/jsConstData.js"></script>
   	<script src="js/mainPageJS.js"></script>
   	
-  	<script src="js/AjaxFunction.js"></script>
-  	<script src="js/EffectAndAnime.js"></script>
-  	<script src="js/MainEventBinder.js"></script>
-  	<script src="js/Panel.js"></script>
-  	<script src="js/SubSectionEventBinder.js"></script>
+  	<script src="js/a_ajaxRequest.js"></script>
+  	
+  	<script src="js/v_effectAndAnime.js"></script>
+  	
+  	<script src="js/b_binderEvent_Core.js"></script>
+  	<script src="js/b_binderEvent_SubSection.js"></script>
+  	
+  	<script src="js/p_Panels.js"></script>
+  	
   	
   	<script src="js/mgr_account_MK2.js"></script>
   	<script src="js/animeBinder.js"></script>
+  	
 	<StylE>
 		/*--| ***CSS-StylesheeT StarT*** |--*/
 		*{
@@ -65,6 +70,8 @@
 			//시리즈 작성 패널 이벤트 바인더
 			bind_Close_Panel("id_div_writeSeriesCloser"  , "id_div_writeSeriesPanel"  ,"id_div_mainContent")
 			bind_Close_Panel("id_btn_writeSeriesGoBack"  , "id_div_writeSeriesPanel"  ,"id_div_mainContent")
+			submitSeries_eventBinder("id_input_submitSeries" , "id_input_writeSeriesTitle")
+			
 			
 			//패스워드체크 패널 이벤트 바인더
 			bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")

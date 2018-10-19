@@ -346,3 +346,27 @@ function submitPost(post_title, post_content, series_id){
 			}//ajax {}
 	)//.ajax
 }//submitPost
+
+function submitSeries(seriesTitle){
+	console.log("mainPage.js >>> submitSeries >>> 함수 호출됨")
+	
+	$.ajax( 
+			{
+				method : "post",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/writeSeriesProc.do",
+				data   : { 
+							"seriesTitle":seriesTitle
+				         },
+			    success : function(result){
+			    	var jsonRes = JSON.parse(result)
+			    	if(jsonRes.insertChecker == "true"){
+			    		alert("성공적으로 저장되었습니다")
+			    		panelCloser("id_div_writeSeriesPanel", "id_div_mainContent")
+			    	}
+			    	else{
+			    		alert("저장에 실패하였습니다")
+			    	}
+			    }//success
+			}//ajax {}
+	)//.ajax
+}//submitPost

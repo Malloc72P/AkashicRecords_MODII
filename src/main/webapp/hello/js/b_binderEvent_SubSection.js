@@ -56,6 +56,15 @@ function submitPost_eventBinder(id_input_submitPost , id_input_writePostTitle, i
 	})
 }
 
+function submitSeries_eventBinder(id_input_submitSeries , id_input_writeSeriesTitle){
+	$("#"+id_input_submitSeries).click(function( event ){
+		event.preventDefault();
+		var seriesTitle = $("#"+id_input_writeSeriesTitle).val();
+		console.log("seriesTitle : "+seriesTitle);
+		submitSeries(seriesTitle);
+	})
+}
+
 /******************************************************************
  * JQUERY FUNCTION 
  * 		SUBSECTIN SELECTING FUNCTION BINDER
