@@ -24,14 +24,19 @@
 	<script src="js/jsConstData.js"></script>
   	<script src="js/mainPageJS.js"></script>
   	
-  	<script src="js/AjaxFunction.js"></script>
-  	<script src="js/EffectAndAnime.js"></script>
-  	<script src="js/MainEventBinder.js"></script>
-  	<script src="js/Panel.js"></script>
-  	<script src="js/SubSectionEventBinder.js"></script>
+  	<script src="js/a_ajaxRequest.js"></script>
+  	
+  	<script src="js/v_effectAndAnime.js"></script>
+  	
+  	<script src="js/b_binderEvent_Core.js"></script>
+  	<script src="js/b_binderEvent_SubSection.js"></script>
+  	
+  	<script src="js/p_Panels.js"></script>
+  	
   	
   	<script src="js/mgr_account_MK2.js"></script>
   	<script src="js/animeBinder.js"></script>
+  	
 	<StylE>
 		/*--| ***CSS-StylesheeT StarT*** |--*/
 		*{
@@ -62,6 +67,16 @@
 			bind_Close_Panel("id_btn_writePostGoBack"    , "id_div_writePostPanel"  ,"id_div_mainContent")
 			submitPost_eventBinder("id_input_submitPost" , "id_input_writePostTitle", "id_input_writePostContent", "id_select_writePostSeries")
 			
+			//시리즈 작성 패널 이벤트 바인더
+			bind_Close_Panel("id_div_writeSeriesCloser"  , "id_div_writeSeriesPanel"  ,"id_div_mainContent")
+			bind_Close_Panel("id_btn_writeSeriesGoBack"  , "id_div_writeSeriesPanel"  ,"id_div_mainContent")
+			submitSeries_eventBinder("id_input_submitSeries" , "id_input_writeSeriesTitle")
+			
+			
+			//패스워드체크 패널 이벤트 바인더
+			bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+			bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+			
 			//로그아웃 기능 이벤트 바인더
 			logout_eventBinder("id_a_logout")
 			
@@ -73,7 +88,8 @@
 			bind_Select_Function("id_div_funcList" , "id_div_subSection" , "id_tempData_in_pageNum")
 			
 			//포스트 작성 기능 바인딩
-			pwCheck_eventBinder("id_input_submitPWCHK")
+			
+			
 			/* binder_clickRecentPosts($("#sel-2") , $("#id_div_subSection")) */
 			
 			
@@ -230,7 +246,9 @@
 		<!-- popPannel_postWrite -->
 			<jsp:include page="subSection/writePost.jsp"></jsp:include>
 		<!-- popPannel_viewContent -->
-		<jsp:include page="subSection/viewPost.jsp"></jsp:include>	
+		<jsp:include page="subSection/viewPost.jsp"></jsp:include>
+		<!-- popPannel_seriesWrite -->
+		<jsp:include page="subSection/writeSeries.jsp"></jsp:include>		
 			
  </body>
 </html>

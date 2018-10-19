@@ -13,6 +13,7 @@
 	<bean class="com.aka_user.dao.Impl_UserDAO" />
 	<bean class="com.aka_post.dao.Impl_PostDAO" />
 	<bean class="com.aka_image.dao.Impl_ImageDAO" />
+	<bean class="com.aka_series.dao.Impl_SeriesDAO" />
   <!-- 컨트롤러 빈 생성 -->
 	  <!-- MgrAccount -->
 		<bean  class="com.controller.main.MainController" />
@@ -29,6 +30,7 @@
 		<bean class="com.controller.subSection.ImageUploaderController" />
 		<bean class="com.controller.subSection.ImageUploadProcController" />
 		<bean class="com.controller.subSection.ViewContentController" />
+		<bean class="com.controller.subSection.WriteSeriesProcController" />
 		
 <!-- (4) viewResolver(tiles를 위해서 필요)-->
 <bean id="viewResolver"

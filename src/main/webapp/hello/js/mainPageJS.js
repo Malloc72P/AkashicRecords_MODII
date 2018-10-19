@@ -2,7 +2,6 @@
  * AKASHIC-RECORD-MAIN PAGE JAVASCRIPT MOD I
 ************************************/
 var fadeSpeed = 250
-var writePost_bindingEvent_limiter = 0
 
 $("html").click(function(e){
 	if( !$(e.target).hasClass("main-sidebar") && !$(e.target).hasClass("chk-side-on") ){
