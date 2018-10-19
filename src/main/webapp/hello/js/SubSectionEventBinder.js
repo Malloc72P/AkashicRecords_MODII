@@ -1,19 +1,35 @@
-function pwCheck_eventBinder(id_input_submitPWCHK){
+var writePost_bindingEvent_limiter	 = 0
+var writeSeries_bindingEvent_limiter = 0
+
+function pwCheck_eventBinder(id_input_submitPWCHK, openThisPanel){
+	//openThisPanel은 패스워드체크패널로 검사 후 열고 싶은 패널을 의미합니다
 	$("#"+id_input_submitPWCHK).click(function(event){
 		alert("pwChecker.jsp >>> pwCheck_eventBinder >>> 함수 호출됨")
 		event.preventDefault()
 		var pw = $("#"+"id_input_pwchkPW").val()
 		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
-		pwCheck_AJAX( pw )	
+		pwCheck_AJAX( pw, openThisPanel )	
 	})
 	
 }
+
 function writePost_eventBinder(){
 	if(writePost_bindingEvent_limiter == 0){
 		bind_Open_Panel( "id_a_writePost"     , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-		bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-		bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+		$("#id_input_submitPWCHK").unbind("click")
+		pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writePostPanel")
+//		pwCheck_eventBinder("id_input_submitPWCHK")
+//		writePost_bindingEvent_limiter = 1;
+	}
+	else{
 		
+	}
+}
+function writeSeries_eventBinder(){
+	if(writeSeries_bindingEvent_limiter == 0){
+		bind_Open_Panel( "id_a_writeSeries", "id_div_pwCheckerPanel" ,"id_div_mainContent")
+		$("#id_input_submitPWCHK").unbind("click")
+		pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writeSeriesPanel")
 //		pwCheck_eventBinder("id_input_submitPWCHK")
 //		writePost_bindingEvent_limiter = 1;
 	}

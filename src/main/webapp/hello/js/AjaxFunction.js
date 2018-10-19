@@ -172,7 +172,7 @@ function getpostListPage( id_div_subSection ){
 					$("#"+id_div_subSection).append(htmlRES)
 					//AJAX로 받아온 페이지엔 CURRENT_PAGE와 PAGECOUNT값을 가지고 있는 히든태그가 있고 다음과 같이 가져올 수 있다
 					//파싱된 HTML객체라서 다음과 같이 DOM을 이용해서 값을 찾을 수 있다.
-					
+					writeSeries_eventBinder();
 					show_subSection("sel-3")
 				}
 			}
@@ -288,12 +288,12 @@ function getViewPage( requestUrl ){
  * AJAX-JQUERY FUNCTION
  * 		SUBSECTION SUPPORT FUNCTION
  *******************************************************************/
-function pwCheck_AJAX(user_password){
+function pwCheck_AJAX(user_password, openThisPanel){
 	/*
 	 * 패스워드 체크가 필요한 패널을 열기 전에 거쳐가는 패스워드 재확인 패널의 ajax함수입니다
-	 * openThisPanel은 이 패스워드 체크로 재확이
 	 * */
 	console.log("mainPage.js >>> pwCheck_AJAX >>> password : "+user_password)
+		
 	$.ajax(
 		{ 
 			method : "post",
@@ -311,12 +311,12 @@ function pwCheck_AJAX(user_password){
 				/*panel_fadeOut("id_div_pwCheckerPanel")
 				bluroff_Tag("id_div_mainContent")*/
 				panelCloser("id_div_pwCheckerPanel", "id_div_mainContent")
-				panelOpener("id_div_writePostPanel", "id_div_mainContent")
+				panelOpener(openThisPanel, "id_div_mainContent")
 				
 			}
 			else{//로그인 실패시
 				alert("패스워드가 일치하지 않습니다")
-				panelCloser("id_div_writePostPanel", "id_div_mainContent")
+				panelCloser(openThisPanel, "id_div_mainContent")
 			}
 		})//done
 }//function submitAjax
