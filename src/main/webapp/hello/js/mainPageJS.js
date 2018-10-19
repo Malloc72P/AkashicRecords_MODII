@@ -93,7 +93,7 @@ function pwCheck_eventBinder(id_input_submitPWCHK){
 		event.preventDefault()
 		var pw = $("#"+"id_input_pwchkPW").val()
 		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
-		pwCheck_AJAX( "id_div_pwCheckerPanel", pw )	
+		pwCheck_AJAX( pw )	
 	})
 	
 }
@@ -525,7 +525,7 @@ function getViewPage( requestUrl ){
  * AJAX-JQUERY FUNCTION
  * 		SUBSECTION SUPPORT FUNCTION
  *******************************************************************/
-function pwCheck_AJAX(openThisPanel, user_password){
+function pwCheck_AJAX(user_password){
 	/*
 	 * 패스워드 체크가 필요한 패널을 열기 전에 거쳐가는 패스워드 재확인 패널의 ajax함수입니다
 	 * openThisPanel은 이 패스워드 체크로 재확이
@@ -547,13 +547,13 @@ function pwCheck_AJAX(openThisPanel, user_password){
 				//$("#"+"id_div_pwCheckerPanel").hide()
 				/*panel_fadeOut("id_div_pwCheckerPanel")
 				bluroff_Tag("id_div_mainContent")*/
-				panelCloser(openThisPanel, "id_div_mainContent")
-				panelOpener(openThisPanel, "id_div_mainContent")
+				panelCloser("id_div_pwCheckerPanel", "id_div_mainContent")
+				panelOpener("id_div_writePostPanel", "id_div_mainContent")
 				
 			}
 			else{//로그인 실패시
 				alert("패스워드가 일치하지 않습니다")
-				panelCloser(openThisPanel, "id_div_mainContent")
+				panelCloser("id_div_writePostPanel", "id_div_mainContent")
 			}
 		})//done
 }//function submitAjax
