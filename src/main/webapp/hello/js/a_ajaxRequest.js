@@ -104,15 +104,24 @@ function append_morePosts(id_div_subSection , id_pageNum){
 					
 					console.log("id_currentPage >>> "+currentPage)
 					console.log("id_pageCount >>> "  +pageCount  )
-					/*
-					 * 글쓰기 버튼 누를 경우, 패스워드 확인하는 창 띄워주기
-					 * */
+									//포스트리스트의 각 포스트의 제목(포스트를 여는 오프너)에 뷰컨텐츠 오프너 함수를 바인딩한다
+					$(htmlRES).find("a").each(function(){
+						console.log("포스트리스트_타이틀_이벤트바인더"+this);
+						$(this).click(function(event){
+							console.log("event.target : "+event.target);
+							var targetUrl	=	event.target;
+							
+							getViewPage(targetUrl);
+							
+							event.preventDefault();
+						});
+					})
 					
 					/*
 					 * CASE1 : 만약 현재페이지가 전체 페이지수보다 작다면, 다음 페이지가 있다는 뜻이다.
-					 * 		그러므로, 다음페이지 버튼을 출력한다
+					 * 		그러므로, 다음페이지 버튼을 서브섹션의 최하단에 append한다
 					 * CASE1 : 만약 현재페이지가 전체 페이지수와 같다면, 현재 페이지가 마지막 페이지가 된다.
-					 * 		그러므로, 다음페이지 버튼을 출력하지 않는다.
+					 * 		그러므로, 다음페이지 버튼을 숨긴다. append하지 않는다.
 					 * CASE3 : 있어어는 안되는 케이스로, 오류상황이다. 
 					 * */
 					if( currentPage < pageCount ){

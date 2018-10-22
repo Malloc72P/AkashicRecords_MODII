@@ -20,6 +20,8 @@ import com.aka_image.dao.ImageDAO;
 import com.aka_image.domain.ImageCommand;
 import com.aka_post.dao.PostDAO;
 import com.aka_post.domain.PostCommand;
+import com.aka_series.dao.SeriesDAO;
+import com.aka_series.domain.SeriesCommand;
 import com.util.FileUtil;
 
 import constSet.MainConst;
@@ -32,6 +34,9 @@ public class WritePostProcController {
 	
 	@Autowired
 	private ImageDAO imgDao;
+	
+	@Autowired
+	private SeriesDAO seriesDao;
 	
 	@RequestMapping("/hello/writePostProc.do")
 	public ModelAndView requestProcessor(
@@ -165,13 +170,23 @@ public class WritePostProcController {
 		post.setPost_viewcount(0);
 		post.setUser_email((String)request.getSession().getAttribute("email"));
 		post.setSeries_id(series_id);
-		post.setImg_id(2);
 		post.setPost_img_list(post_img_list);
 		post.setImg_id(post_thumbnail_id); 
 		
+		//시리즈 메타데이터 수정하는 코드
+		SeriesCommand seriesData = new SeriesCommand();
+		seriesData.setSeries_id(series_id);
+		seriesData.setImg_id(post_thumbnail_id);
 		
 		boolean insertChecker = false;
 		insertChecker = dao.insertPost(post);
+		if(post_thumbnail_id == 2) {//이미지가 없을때
+			seriesDao.updateSeries(seriesData);
+		}
+		else {
+			seriesDao.updateSeriesAndImg(seriesData);
+		}
+		
 		
 		
 		mav.addObject("insertChecker",insertChecker);

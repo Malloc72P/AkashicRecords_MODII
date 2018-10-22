@@ -18,7 +18,6 @@
 		.postList-img{
 			position : absolute;
 			border: 1px solid #c1c1c1;
-			background-image: url(../hello/img/akashic_small2.png);
 			width: 72px; height: 72px;
 		}
 		.postList-img1{
@@ -55,30 +54,30 @@
 	<div class="sel-3">
 	<div id="id_div_seriesListHeader" class="w3-card w3-bar" style="margin-bottom: 40px;" >
 		<div class="w3-bar-item">
-			<h5>4 시리즈</h5>
+			<h5>${ seriesCount } 시리즈</h5>
 		</div>
 		<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writeSeries" href="#">
 			<h5>시리즈 추가</h5>
 		</a>
 	</div>
-	<c:forEach var="i" begin="1" end="4">
+	<c:forEach var="series" items="${ seriesList }">
 		<div class="postList-Wrapper">
 			<div class="postList w3-container w3-pannel w3-leftbar custom-w3-card">
-				<div class="postList-img postList-img1 imgRanderer"></div>
-				<div class="postList-img postList-img2 imgRanderer"></div>
-				<div class="postList-img postList-img3 imgRanderer"></div>
+				<img class="postList-img postList-img1 imgRanderer cl_img_post_thumbnail" src="../${ imgMap.get(series.getImg_id()) }">
+				<img class="postList-img postList-img2 imgRanderer cl_img_post_thumbnail" src="../${ imgMap.get(series.getImg_id()) }">
+				<img class="postList-img postList-img3 imgRanderer cl_img_post_thumbnail" src="../${ imgMap.get(series.getImg_id()) }">
 				
 				<div class="postList-text">
-					<div class="postList-text-title w3-xlarge">
-						TestingSeries
+					<div class="postList-text-title" style="font-size: 20px;">
+						${ series.getSeries_Title() }
 					</div>
 					<div class="postList-text-article w3-small w3-opacity">
-						<span>게시글 : 42개 </span>
+						<span>게시글 : ${ series.getSeries_postcount() }개 </span>
 						<span class="textDivider">|</span>
-						<span>조회수 : 765회</span>
+						<span>조회수 : ${ series.getSeries_viewcount() }회</span>
 					</div>
 					<div class="postList-text-article w3-small w3-opacity">
-						<span>2018-09-19 수요일</span>
+						<span>${ series.getSeries_regdate() }</span>
 					</div>
 				</div>
 			</div><!-- postList-Wrapper -->
