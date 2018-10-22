@@ -66,6 +66,7 @@
 		.adminProfileImg{
 			background-image: url(../hello/img/profile.jpg);
 		    width: 48px;
+	        min-width: 48px;
 		    height: 48px;
 		    border-radius: 50%;
 		    top: -18px;
@@ -173,8 +174,6 @@
 					<div class="adminFullWrapper">
 						<div class="adminBalloon">
 							<p class="guestBook_text w3-large">Response messsage from admin, testing DummyString
-							 testing DummyString testing DummyString testing DummyString
-							 testing DummyString testing DummyString testing DummyString
 							 testing DummyString testing DummyString testing DummyString
 							 testing DummyString testing DummyString testing DummyString </p>
 						</div>
