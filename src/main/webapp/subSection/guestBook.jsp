@@ -13,6 +13,8 @@
 		.adminMsgWrapper{
 		    display: block;
 		    width: 100%;
+		    top: -56px;
+    		position: relative;
 		}
 		.adminMsgWrapper:after{
 			display: block;
@@ -24,8 +26,14 @@
 		    display: block;
 		    width: 100%;
 		}
+		.userMsgWrapper:after{
+			display: block;
+			content: '';
+			clear: both;
+			margin-bottom: 40px;
+		}
 		.msgCoupler{
-		    margin-bottom: 50px;
+		    /* margin-bottom: 50px; */
 		    content: '';
 		    display: block;
 		}
@@ -50,7 +58,7 @@
 		    margin-right: 22px;
 		    border-radius: 5px;
 		    margin-bottom: 10px;
-		    max-width: 636px;
+		    max-width: 420px;
 		}
 		.adminBalloon:after {
 		    content: '';
@@ -106,7 +114,7 @@
 		    margin-left: 71px;
 		    border-radius: 5px;
 		    margin-bottom: 10px;
-		    max-width: 636px;
+		    max-width: 420px;
 		}
 		.userBalloon:after {
 		    content: '';
@@ -159,17 +167,28 @@
 
 <!--| ***body StarT*** |-->
 <div class="sel-4">
-	<div id="id_div_seriesListHeader" class="w3-card w3-bar" style="margin-bottom: 40px;" >
+	<div id="id_div_guestBookHeader" class="w3-card w3-bar" style="margin-bottom: 40px;" >
 		<div class="w3-bar-item">
 			<h5>4 포스트</h5>
 		</div>
-		<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writePost" href="#">
+		<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writeGuestBook" href="#">
 			<h5>방명록 작성</h5>
 		</a>
 	</div>
 	<div class="guestBookFullWrapper">
 		<c:forEach var="i" begin="1" end="3" step="1">
 			<div class="msgCoupler">
+				<div class="userMsgWrapper">
+					<div class="userFullWrapper">
+						<div class="userBalloon">
+							<p class="guestBook-text w3-large">Request messsage from user</p>
+						</div>
+						<div class="userName guestBookProfileName"><h5>guest</h5></div>
+						<div class="imgRanderer userProfileImg"/>
+						<div class="guestBookUserRegDate"><p class="w3-small">2018-09-20, 목</p></div>
+					</div>
+				</div><!-- msgWrapper -->
+				
 				<div class="adminMsgWrapper">
 					<div class="adminFullWrapper">
 						<div class="adminBalloon">
@@ -182,17 +201,7 @@
 						<div class="guestBookAdminRegDate"><p class="w3-small">2018-09-20, 목</p></div>
 					</div>
 				</div><!-- msgWrapper -->
-	
-				<div class="userMsgWrapper">
-					<div class="userFullWrapper">
-						<div class="userBalloon">
-							<p class="guestBook-text w3-large">Request messsage from user</p>
-						</div>
-						<div class="userName guestBookProfileName"><h5>guest</h5></div>
-						<div class="imgRanderer userProfileImg"/>
-						<div class="guestBookUserRegDate"><p class="w3-small">2018-09-20, 목</p></div>
-					</div>
-				</div><!-- msgWrapper -->		
+						
 			</div><!-- msgCoupler -->
 		</c:forEach>
 		
