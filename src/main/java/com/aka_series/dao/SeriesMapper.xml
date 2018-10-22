@@ -24,9 +24,15 @@
 		WHERE	SERIES_ID	=	#{series_id}
 	</update>
 	
-	<update id="updateSeries" parameterType="SeriesCommand">
+	<update id="updateSeriesPostcount" parameterType="int">
 		UPDATE	AKA_SERIES
 		SET		SERIES_POSTCOUNT	=	SERIES_POSTCOUNT + 1
+		WHERE	SERIES_ID	=	#{series_id}
+	</update>
+	
+	<update id="updateSeriesViewcount" parameterType="int">
+		UPDATE	AKA_SERIES
+		SET		SERIES_VIEWCOUNT	=	SERIES_VIEWCOUNT + 1
 		WHERE	SERIES_ID	=	#{series_id}
 	</update>
 

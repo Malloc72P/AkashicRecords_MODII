@@ -13,4 +13,5 @@ public interface PostDAO {
 	public String 		getUserNicknameByPostEmail(String post_email);
 	public String 		getSeriesTitleByPostSeriesId(int post_seriesId);
 	public boolean		viewCountIncrementer(int post_id);
+	public int			getSeriesIdByPostId(int post_id);
 }

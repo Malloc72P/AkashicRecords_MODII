@@ -181,7 +181,7 @@ public class WritePostProcController {
 		boolean insertChecker = false;
 		insertChecker = dao.insertPost(post);
 		if(post_thumbnail_id == 2) {//이미지가 없을때
-			seriesDao.updateSeries(seriesData);
+			seriesDao.updateSeriesPostcount(seriesData.getSeries_id());
 		}
 		else {
 			seriesDao.updateSeriesAndImg(seriesData);

@@ -81,6 +81,12 @@ public class Impl_PostDAO extends SqlSessionDaoSupport implements PostDAO {
 		}
 		else return false;
 	}
+
+	@Override
+	public int getSeriesIdByPostId(int post_id) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("getSeriesIdByPostId", post_id);
+	}
 	
 	
 	

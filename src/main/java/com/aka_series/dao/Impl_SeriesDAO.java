@@ -35,14 +35,22 @@ public class Impl_SeriesDAO extends SqlSessionDaoSupport implements SeriesDAO{
 		else return false;
 	}
 	@Override
-	public boolean updateSeries(SeriesCommand data) {
+	public boolean updateSeriesPostcount(int series_id) {
 		// TODO Auto-generated method stub
-		int updateResult = getSqlSession().update("updateSeries", data);
+		int updateResult = getSqlSession().update("updateSeriesPostcount", series_id);
 		if(updateResult != 0) {
 			return true;
 		}
 		else return false;
 	}
-	
+	@Override
+	public boolean updateSeriesViewcount(int series_id) {
+		// TODO Auto-generated method stub
+		int updateResult = getSqlSession().update("updateSeriesViewcount", series_id);
+		if(updateResult != 0) {
+			return true;
+		}
+		else return false;
+	}
 	
 }

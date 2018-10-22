@@ -8,5 +8,6 @@ public interface SeriesDAO {
 	public boolean 				insertSeries(String series_title);
 	public List<SeriesCommand> 	getSeriesList();
 	public boolean				updateSeriesAndImg(SeriesCommand data);
-	public boolean				updateSeries(SeriesCommand data);
+	public boolean				updateSeriesPostcount(int series_id);
+	public boolean				updateSeriesViewcount(int series_id);
 }

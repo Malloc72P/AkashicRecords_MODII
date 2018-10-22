@@ -73,6 +73,12 @@
 		WHERE 	POST_ID	=	#{post_id}	
 	</update>
 	
+	<select id="getSeriesIdByPostId" parameterType="int" resultType="int">
+		SELECT	SERIES_ID
+		FROM	AKA_POST
+		WHERE	POST_ID = #{post_id}
+	</select>
+	
 </mapper>
 
 
