@@ -4,11 +4,37 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
     
 <mapper namespace="aka_series">
+
+	<select id="getSeriesList" resultType="SeriesCommand">
+		SELECT	SERIES_ID, 			SERIES_TITLE,	IMG_ID,		
+				SERIES_POSTCOUNT,	SERIES_VIEWCOUNT,
+				SERIES_REGDATE
+		FROM	AKA_SERIES
+	</select>
 	
 	<insert id="insertAkaSeries" parameterType="String">
-		INSERT	INTO AKA_SERIES( SERIES_ID, SERIES_TITLE )
-		VALUES	( SEQFACTORY_AKA_SERIES.nextval, #{series_title} )
+		INSERT	INTO AKA_SERIES( SERIES_ID, SERIES_TITLE, SERIES_REGDATE )
+		VALUES	( SEQFACTORY_AKA_SERIES.nextval, #{series_title}, SYSDATE )
 	</insert>
+	
+	<update id="updateSeriesAndImg" parameterType="SeriesCommand">
+		UPDATE	AKA_SERIES
+		SET		IMG_ID	=	#{img_id},
+				SERIES_POSTCOUNT	=	SERIES_POSTCOUNT + 1
+		WHERE	SERIES_ID	=	#{series_id}
+	</update>
+	
+	<update id="updateSeriesPostcount" parameterType="int">
+		UPDATE	AKA_SERIES
+		SET		SERIES_POSTCOUNT	=	SERIES_POSTCOUNT + 1
+		WHERE	SERIES_ID	=	#{series_id}
+	</update>
+	
+	<update id="updateSeriesViewcount" parameterType="int">
+		UPDATE	AKA_SERIES
+		SET		SERIES_VIEWCOUNT	=	SERIES_VIEWCOUNT + 1
+		WHERE	SERIES_ID	=	#{series_id}
+	</update>
 
 </mapper>
 

@@ -72,6 +72,10 @@
 			bind_Close_Panel("id_btn_writeSeriesGoBack"  , "id_div_writeSeriesPanel"  ,"id_div_mainContent")
 			submitSeries_eventBinder("id_input_submitSeries" , "id_input_writeSeriesTitle")
 			
+			//방명록 작성 패널 이벤트 바인더
+			bind_Close_Panel("id_div_GbCloser"       , "id_div_writeGbPanel"  ,"id_div_mainContent")
+			bind_Close_Panel("id_btn_writeGbGoBack"  , "id_div_writeGbPanel"  ,"id_div_mainContent")
+			submitGbMsg_eventBinder("id_input_submitGb" , "id_input_writeGbMsg")
 			
 			//패스워드체크 패널 이벤트 바인더
 			bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
@@ -248,7 +252,9 @@
 		<!-- popPannel_viewContent -->
 		<jsp:include page="subSection/viewPost.jsp"></jsp:include>
 		<!-- popPannel_seriesWrite -->
-		<jsp:include page="subSection/writeSeries.jsp"></jsp:include>		
+		<jsp:include page="subSection/writeSeries.jsp"></jsp:include>
+		<!-- popPannel_GbWrite -->
+		<jsp:include page="subSection/writeGB.jsp"></jsp:include>		
 			
  </body>
 </html>

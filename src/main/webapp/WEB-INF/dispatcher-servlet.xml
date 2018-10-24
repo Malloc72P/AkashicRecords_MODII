@@ -14,6 +14,7 @@
 	<bean class="com.aka_post.dao.Impl_PostDAO" />
 	<bean class="com.aka_image.dao.Impl_ImageDAO" />
 	<bean class="com.aka_series.dao.Impl_SeriesDAO" />
+	<bean class="com.aka_guestbook.dao.Impl_guestbookDAO" />
   <!-- 컨트롤러 빈 생성 -->
 	  <!-- MgrAccount -->
 		<bean  class="com.controller.main.MainController" />
@@ -21,7 +22,8 @@
 		<bean  class="com.controller.mgrAccount.RegisterProcController" />
 		<bean  class="com.controller.mgrAccount.LogoutProcController" />
 	  <!-- SubSection -->
-		<bean class="com.controller.subSection.GuestBookProcController" />
+		<bean class="com.controller.subSection.GuestBookController" />
+		<bean class="com.controller.subSection.GuestbookProcController" />
 		<bean class="com.controller.subSection.PostListController" />
 		<bean class="com.controller.subSection.ProfileController" />
 		<bean class="com.controller.subSection.RecentPostsController" />
@@ -31,6 +33,7 @@
 		<bean class="com.controller.subSection.ImageUploadProcController" />
 		<bean class="com.controller.subSection.ViewContentController" />
 		<bean class="com.controller.subSection.WriteSeriesProcController" />
+		
 		
 <!-- (4) viewResolver(tiles를 위해서 필요)-->
 <bean id="viewResolver"
