@@ -1,6 +1,6 @@
 var writePost_bindingEvent_limiter	 = 0
 var writeSeries_bindingEvent_limiter = 0
-
+var writeGB_bindingEvent_limiter = 0
 function pwCheck_eventBinder(id_input_submitPWCHK, openThisPanel){
 	//openThisPanel은 패스워드체크패널로 검사 후 열고 싶은 패널을 의미합니다
 	$("#"+id_input_submitPWCHK).click(function(event){
@@ -37,6 +37,17 @@ function writeSeries_eventBinder(){
 		
 	}
 }
+function writeGB_eventBinder(){
+	if(writeGB_bindingEvent_limiter == 0){
+		bind_Open_Panel( "id_a_writeGuestBook", "id_div_pwCheckerPanel" ,"id_div_mainContent")
+		$("#id_input_submitPWCHK").unbind("click")
+		pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writeGbPanel")
+		//id_a_writeGuestBook
+	}
+	else {
+		
+	}
+}
 function panelOpener_viewContent(event){
 	event.preventDefault();
 	alert("mainPage.js >>> panelOpener_viewContent \n >>> event.target : "+event.target)
@@ -64,6 +75,18 @@ function submitSeries_eventBinder(id_input_submitSeries , id_input_writeSeriesTi
 		submitSeries(seriesTitle);
 	})
 }
+
+function submitGbMsg_eventBinder(id_input_submitGb , id_input_writeGbMsg){
+	$("#"+id_input_submitGb).click(function( event ){
+		event.preventDefault();
+		var gbMsg = $("#"+id_input_writeGbMsg).val();
+		console.log("gbMsg : "+gbMsg);
+		submitGbMsg(gbMsg);
+	})
+}
+
+
+
 
 /******************************************************************
  * JQUERY FUNCTION 

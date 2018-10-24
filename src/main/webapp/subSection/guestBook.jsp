@@ -176,20 +176,20 @@
 		</a>
 	</div>
 	<div class="guestBookFullWrapper">
-		<c:forEach var="i" begin="1" end="3" step="1">
+		<c:forEach var="guestMsg" items="${ guestMsgList }">
 			<div class="msgCoupler">
 				<div class="userMsgWrapper">
 					<div class="userFullWrapper">
 						<div class="userBalloon">
-							<p class="guestBook-text w3-large">Request messsage from user</p>
+							<p class="guestBook-text w3-large">${ guestMsg.getGb_content() }</p>
 						</div>
-						<div class="userName guestBookProfileName"><h5>guest</h5></div>
+						<div class="userName guestBookProfileName"><h5>${ guestMsg.getGb_writer_email() }</h5></div>
 						<div class="imgRanderer userProfileImg"/>
-						<div class="guestBookUserRegDate"><p class="w3-small">2018-09-20, 목</p></div>
+						<div class="guestBookUserRegDate"><p class="w3-small">${ guestMsg_timeSet.get( guestMsg.getGb_id() ) }</p></div>
 					</div>
 				</div><!-- msgWrapper -->
 				
-				<div class="adminMsgWrapper">
+				<!-- <div class="adminMsgWrapper">
 					<div class="adminFullWrapper">
 						<div class="adminBalloon">
 							<p class="guestBook_text w3-large">Response messsage from admin, testing DummyString
@@ -200,7 +200,7 @@
 						<div class="imgRanderer adminProfileImg" />
 						<div class="guestBookAdminRegDate"><p class="w3-small">2018-09-20, 목</p></div>
 					</div>
-				</div><!-- msgWrapper -->
+				</div>msgWrapper -->
 						
 			</div><!-- msgCoupler -->
 		</c:forEach>

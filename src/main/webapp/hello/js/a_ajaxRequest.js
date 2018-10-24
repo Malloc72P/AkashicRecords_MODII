@@ -199,7 +199,7 @@ function getGuestBook( id_div_subSection ){
 					$("#"+id_div_subSection).append(htmlRES)
 					//AJAX로 받아온 페이지엔 CURRENT_PAGE와 PAGECOUNT값을 가지고 있는 히든태그가 있고 다음과 같이 가져올 수 있다
 					//파싱된 HTML객체라서 다음과 같이 DOM을 이용해서 값을 찾을 수 있다.
-					
+					writeGB_eventBinder();
 					show_subSection("sel-4")
 				}
 			}
@@ -379,3 +379,27 @@ function submitSeries(seriesTitle){
 			}//ajax {}
 	)//.ajax
 }//submitPost
+
+function submitGbMsg(gbMsg){
+	console.log("mainPage.js >>> submitGbMsg >>> 함수 호출됨")
+	
+	$.ajax( 
+			{
+				method : "post",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/guestBookProc.do",
+				data   : { 
+							"gbMsg":gbMsg
+				         },
+			    success : function(result){
+			    	var jsonRes = JSON.parse(result)
+			    	if(jsonRes.insertChecker == "true"){
+			    		alert("성공적으로 저장되었습니다")
+			    		panelCloser("id_div_writeGbPanel", "id_div_mainContent")
+			    	}
+			    	else{
+			    		alert("저장에 실패하였습니다")
+			    	}
+			    }//success
+			}//ajax {}
+	)//.ajax
+}//submitGbMsg
