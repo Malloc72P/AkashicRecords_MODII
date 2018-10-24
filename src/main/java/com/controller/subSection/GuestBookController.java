@@ -42,6 +42,7 @@ public class GuestBookController {
 			//2018-09-20, 목
 			guestMsg_timeSet.put(item.getGb_id(), sdf.format(item.getGb_regdate())); 
 		}
+		guestMsg_timeSet.get(key)
 		System.out.println("_________________________________");
 		
 		mav.addObject("guestMsgList"	, guestMsgList);
