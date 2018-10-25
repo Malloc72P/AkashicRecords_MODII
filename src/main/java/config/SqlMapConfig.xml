@@ -13,6 +13,7 @@
 	    <typeAlias alias="SeriesCommand" type="com.aka_series.domain.SeriesCommand"/>
 	    <typeAlias alias="GB_Admin_Msg_Command" type="com.aka_guestbook.domain.GB_Admin_MsgCommand"/>
 	    <typeAlias alias="GB_Guest_Msg_Command" type="com.aka_guestbook.domain.GB_Guest_MsgCommand"/>
+	    <typeAlias alias="GB_GuestAndAdmin" type="com.aka_guestbook.domain.GB_GuestAndAdmin"/>
 	</typeAliases>
 		
 	<!-- DB접속시 불러올 테이블의 정보를 담고있는 xml 리스트 목록 -->

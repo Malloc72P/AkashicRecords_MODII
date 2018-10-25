@@ -87,9 +87,9 @@
 		    top: -30px;
 		}
 		.guestBookAdminRegDate{
-		    position: absolute;
+	        position: absolute;
 		    left: 0px;
-		    top: -13px;
+		    bottom: -8px;
 		    opacity: 0.60;
 		}
 		.userFullWrapper{ 
@@ -211,18 +211,20 @@
 					</div>
 				</div><!-- msgWrapper -->
 				
-				<!-- <div class="adminMsgWrapper">
-					<div class="adminFullWrapper">
-						<div class="adminBalloon">
-							<p class="guestBook_text w3-large">Response messsage from admin, testing DummyString
-							 testing DummyString testing DummyString testing DummyString
-							 testing DummyString testing DummyString testing DummyString </p>
+				<c:if test="${ guestMsg.getGb_from_admin_id() != -1 }">
+					<div class="adminMsgWrapper">
+						<div class="adminFullWrapper">
+							<div class="adminBalloon">
+								<p class="guestBook_text w3-large">${ guestReplyMap.get( guestMsg.getGb_id() ).getGb_content() }</p>
+							</div>
+							<div class="adminName guestBookProfileName"><h5>${ guestReplyMap.get( guestMsg.getGb_id() ).getGb_writer_email() }</h5></div>
+							<div class="imgRanderer adminProfileImg" />
+							<div class="guestBookAdminRegDate"><p class="w3-small">${ adminMsg_timeSet.get( guestReplyMap.get( guestMsg.getGb_id() ).getGb_id() ) }</p></div>
 						</div>
-						<div class="adminName guestBookProfileName"><h5>Malloc72P</h5></div>
-						<div class="imgRanderer adminProfileImg" />
-						<div class="guestBookAdminRegDate"><p class="w3-small">2018-09-20, 목</p></div>
-					</div>
-				</div>msgWrapper -->
+					</div><!-- msgWrapper -->
+				</c:if>
+				
+
 						
 			</div><!-- msgCoupler -->
 		</c:forEach>

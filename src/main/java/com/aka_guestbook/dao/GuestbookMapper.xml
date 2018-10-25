@@ -9,11 +9,29 @@
 		VALUES					( SEQFACTORY_AKA_GB.NEXTVAL,	#{gb_writer_email},	#{gb_content} 	)
 	</insert>
 	
-	<insert id="insertAdminMsg" parameterType="GB_Admin_Msg_Command">
-		INSERT	INTO	GB_ADMIN_MSG( GB_ID,						GB_WRITER_EMAIL,	GB_CONTENT,		GB_TO_GUEST_ID )
-		VALUES						( SEQFACTORY_AKA_GB.NEXTVAL,	#{gb_writer_email},	#{gb_content},	#{gb_to_guest_id} )
+	
+	<insert id="insertAdminMsg" parameterType="GB_Admin_Msg_Command" useGeneratedKeys="true" keyProperty="gb_id" >
+		<selectKey keyProperty="gb_id" resultType="int" order="BEFORE">
+			SELECT	SEQFACTORY_AKA_GB.NEXTVAL
+			FROM	DUAL
+		</selectKey>
+		INSERT	INTO	GB_ADMIN_MSG( GB_ID,	GB_WRITER_EMAIL,	GB_CONTENT,		GB_TO_GUEST_ID )
+		VALUES						( #{gb_id},	#{gb_writer_email},	#{gb_content},	#{gb_to_guest_id} )
 	</insert>
-
+	
+	<select id="getGuestMsgById" parameterType="int" resultType="GB_Guest_Msg_Command">
+		SELECT	* 
+		FROM	GB_GUEST_MSG
+		WHERE	GB_ID = #{gb_id}
+	</select>
+	
+	<select id="getAdminMsgById" parameterType="int" resultType="GB_Admin_Msg_Command">
+		SELECT	*
+		FROM	GB_ADMIN_MSG
+		WHERE	GB_ID = #{gb_id}	
+	</select>
+	
+	
 	<select id="getGuestMsgs" parameterType="SAE" resultType="GB_Guest_Msg_Command" >
 		SELECT * 
 		FROM    (
@@ -28,6 +46,15 @@
 		WHERE #{start} <= RNUM AND RNUM <= #{end}
 		]]>
 	</select>
+	
+	<update id="updateGuestMsgRef" parameterType="GB_GuestAndAdmin"> 
+		UPDATE	GB_GUEST_MSG
+		SET		GB_FROM_ADMIN_ID = #{gb_admin_id}
+		WHERE	GB_ID = #{gb_guest_id}
+	</update>
+	
+	
+	
 	
 </mapper>
 
