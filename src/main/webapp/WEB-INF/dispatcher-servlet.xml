@@ -23,6 +23,7 @@
 		<bean  class="com.controller.mgrAccount.LogoutProcController" />
 	  <!-- SubSection -->
 		<bean class="com.controller.subSection.GuestBookController" />
+		<bean class="com.controller.subSection.GuestBookReplyProcController" />
 		<bean class="com.controller.subSection.GuestbookProcController" />
 		<bean class="com.controller.subSection.PostListController" />
 		<bean class="com.controller.subSection.ProfileController" />

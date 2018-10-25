@@ -34,7 +34,7 @@ public class GuestBookController {
 		System.out.println("_________________________________");
 		System.out.println("gusetMsgList .size : "+ guestMsgList.size()); 
 		System.out.println("gusetMsgList 출력중...");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd a hh:mm");
 		HashMap<Integer, String> guestMsg_timeSet = new HashMap<Integer, String>();
 		for(GB_Guest_MsgCommand item : guestMsgList) {
 			System.out.println("data : "+item.getGb_id());
@@ -42,7 +42,6 @@ public class GuestBookController {
 			//2018-09-20, 목
 			guestMsg_timeSet.put(item.getGb_id(), sdf.format(item.getGb_regdate())); 
 		}
-		guestMsg_timeSet.get(key)
 		System.out.println("_________________________________");
 		
 		mav.addObject("guestMsgList"	, guestMsgList);

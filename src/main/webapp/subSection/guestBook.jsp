@@ -144,7 +144,7 @@
 		.guestBookUserRegDate{
 		    position: absolute;
 		    right : 0px;
-		    top: -13px;
+		    bottom: -8px;
 		    opacity: 0.60;
 		}
 		
@@ -161,6 +161,23 @@
 		.guestBook-text{
 			
 		}
+		.guestBookUserReply{
+			display: inline-block;
+		    position: absolute;
+	        right: -23px;
+		    bottom: -17px;
+		}
+		.guestBookUserReply_icon{
+			-webkit-transition-duration: 0.4s; /* Safari */
+    		transition-duration: 0.4s;
+    		cursor: pointer;
+			font-size: 18px;
+			opacity: 0.6;
+		}
+		.guestBookUserReply_icon:hover{
+		
+			opacity: 1;
+		}
 
 	</style>
 </head>
@@ -175,7 +192,7 @@
 			<h5>방명록 작성</h5>
 		</a>
 	</div>
-	<div class="guestBookFullWrapper">
+	<div class="guestBookFullWrapper" id="id_div_guestBookFullWrapper">
 		<c:forEach var="guestMsg" items="${ guestMsgList }">
 			<div class="msgCoupler">
 				<div class="userMsgWrapper">
@@ -186,6 +203,11 @@
 						<div class="userName guestBookProfileName"><h5>${ guestMsg.getGb_writer_email() }</h5></div>
 						<div class="imgRanderer userProfileImg"/>
 						<div class="guestBookUserRegDate"><p class="w3-small">${ guestMsg_timeSet.get( guestMsg.getGb_id() ) }</p></div>
+						<div	id="id_div_gbReplyBtn" 
+								class="guestBookUserReply">
+							<i 	id="id_i_gbReplyBtn"
+								class="im im-plus-circle guestBookUserReply_icon" title="${ guestMsg.getGb_id() }"></i>
+						</div>
 					</div>
 				</div><!-- msgWrapper -->
 				

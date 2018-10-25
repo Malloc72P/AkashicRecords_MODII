@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.aka_guestbook.domain.GB_Admin_MsgCommand;
 import com.aka_guestbook.domain.GB_Guest_MsgCommand;
 import com.aka_post.domain.StartAndEnd;
 
@@ -18,6 +19,16 @@ public class Impl_guestbookDAO extends SqlSessionDaoSupport implements guestbook
 		}
 		else return false;
 	}
+	
+	@Override
+	public boolean insertAdminMsg(GB_Admin_MsgCommand adminMsg) {
+		// TODO Auto-generated method stub
+		int insertChecker = getSqlSession().insert("insertAdminMsg", adminMsg);
+		if(insertChecker != 0) {
+			return true;
+		}
+		else return false;
+	}
 
 	@Override
 	public List<GB_Guest_MsgCommand> getGuestMsgs(StartAndEnd sae) {
@@ -27,6 +38,9 @@ public class Impl_guestbookDAO extends SqlSessionDaoSupport implements guestbook
 		return getSqlSession().selectList("getGuestMsgs", sae);
 		
 	}
+
+
+
 	
 	
 }

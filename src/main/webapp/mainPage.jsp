@@ -77,9 +77,18 @@
 			bind_Close_Panel("id_btn_writeGbGoBack"  , "id_div_writeGbPanel"  ,"id_div_mainContent")
 			submitGbMsg_eventBinder("id_input_submitGb" , "id_input_writeGbMsg")
 			
+			//방명록 답글 패널 이벤트 바인더
+			bind_Close_Panel("id_div_GbReplyCloser"       , "id_div_writeGbReplyPanel"  ,"id_div_mainContent")
+			bind_Close_Panel("id_btn_writeGbReplyGoBack"  , "id_div_writeGbReplyPanel"  ,"id_div_mainContent")
+			submitGb_ReplyMsg_eventBinder("id_input_submitGbReply" , "id_input_writeGbReplyMsg", "id_i_gbReplyBtn")
+			
 			//패스워드체크 패널 이벤트 바인더
 			bind_Close_Panel("id_btn_pwchkGoBack" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
 			bind_Close_Panel("id_div_pwchkCloser" , "id_div_pwCheckerPanel" ,"id_div_mainContent")
+			
+			//패스워드체크 패널 이벤트 바인더
+			bind_Close_Panel("id_btn_admin_pwchkGoBack" , "id_div_admin_pwCheckerPanel" ,"id_div_mainContent")
+			bind_Close_Panel("id_div_admin_pwchkCloser" , "id_div_admin_pwCheckerPanel" ,"id_div_mainContent")
 			
 			//로그아웃 기능 이벤트 바인더
 			logout_eventBinder("id_a_logout")
@@ -247,6 +256,8 @@
 			<jsp:include page="mgr_account/register.jsp"></jsp:include>
 		<!-- popPannel_pwChecker -->
 			<jsp:include page="subSection/pwChecker.jsp"></jsp:include>
+		<!-- popPannel_pwChecker -->
+			<jsp:include page="subSection/pwChecker_admin.jsp"></jsp:include>
 		<!-- popPannel_postWrite -->
 			<jsp:include page="subSection/writePost.jsp"></jsp:include>
 		<!-- popPannel_viewContent -->
@@ -254,7 +265,10 @@
 		<!-- popPannel_seriesWrite -->
 		<jsp:include page="subSection/writeSeries.jsp"></jsp:include>
 		<!-- popPannel_GbWrite -->
-		<jsp:include page="subSection/writeGB.jsp"></jsp:include>		
+		<jsp:include page="subSection/writeGB.jsp"></jsp:include>
+		<!-- popPannel_GbReplyWrite -->
+		<jsp:include page="subSection/writeGB_Reply.jsp"></jsp:include>
+							
 			
  </body>
 </html>

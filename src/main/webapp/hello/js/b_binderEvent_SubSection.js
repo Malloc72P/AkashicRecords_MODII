@@ -1,6 +1,7 @@
 var writePost_bindingEvent_limiter	 = 0
 var writeSeries_bindingEvent_limiter = 0
 var writeGB_bindingEvent_limiter = 0
+var currentGB = 0;
 function pwCheck_eventBinder(id_input_submitPWCHK, openThisPanel){
 	//openThisPanel은 패스워드체크패널로 검사 후 열고 싶은 패널을 의미합니다
 	$("#"+id_input_submitPWCHK).click(function(event){
@@ -8,7 +9,19 @@ function pwCheck_eventBinder(id_input_submitPWCHK, openThisPanel){
 		event.preventDefault()
 		var pw = $("#"+"id_input_pwchkPW").val()
 		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
-		pwCheck_AJAX( pw, openThisPanel )	
+		pwCheck_AJAX( pw, openThisPanel, "id_div_pwCheckerPanel" )	
+	})
+	
+}
+
+function pwCheck_admin_eventBinder(id_input_submitPWCHK, openThisPanel){
+	//openThisPanel은 패스워드체크패널로 검사 후 열고 싶은 패널을 의미합니다
+	$("#"+id_input_submitPWCHK).click(function(event){
+		alert("pwChecker.jsp >>> pwCheck_eventBinder >>> 함수 호출됨")
+		event.preventDefault()
+		var pw = $("#"+"id_input_admin_pwchkPW").val()
+		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
+		pwCheck_AJAX( pw, openThisPanel, "id_div_admin_pwCheckerPanel" )	
 	})
 	
 }
@@ -48,6 +61,18 @@ function writeGB_eventBinder(){
 		
 	}
 }
+function writeGB_Reply_eventBinder(){
+	$("#"+"id_div_guestBookFullWrapper").find("i").each(function(){
+		$(this).click(function(event){
+			event.preventDefault()
+			currentGB = $(this).attr("title");
+			panelOpener("id_div_admin_pwCheckerPanel" , "id_div_mainContent")
+		})
+	})
+	$("#id_input_admin_submitPWCHK").unbind("click")
+	pwCheck_admin_eventBinder("id_input_admin_submitPWCHK", "id_div_writeGbReplyPanel")
+	//id_a_writeGuestBook
+}
 function panelOpener_viewContent(event){
 	event.preventDefault();
 	alert("mainPage.js >>> panelOpener_viewContent \n >>> event.target : "+event.target)
@@ -82,6 +107,17 @@ function submitGbMsg_eventBinder(id_input_submitGb , id_input_writeGbMsg){
 		var gbMsg = $("#"+id_input_writeGbMsg).val();
 		console.log("gbMsg : "+gbMsg);
 		submitGbMsg(gbMsg);
+	})
+}
+
+function submitGb_ReplyMsg_eventBinder(id_input_submitGbReply , id_input_writeGbReplyMsg, id_i_gbReplyBtn){
+	$("#"+id_input_submitGbReply).click(function( event ){
+		event.preventDefault();
+		var gbReplyMsg		=	$("#"+id_input_writeGbReplyMsg).val();
+		var gbReplyMsg_id	=	currentGB;
+		console.log("gbReplyMsg_id : "+gbReplyMsg_id);
+		console.log("gbReplyMsg    : "+gbReplyMsg);
+		submitGbReplyMsg(gbReplyMsg, gbReplyMsg_id);
 	})
 }
 
