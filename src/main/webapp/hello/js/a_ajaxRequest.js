@@ -200,6 +200,7 @@ function getGuestBook( id_div_subSection ){
 					//AJAX로 받아온 페이지엔 CURRENT_PAGE와 PAGECOUNT값을 가지고 있는 히든태그가 있고 다음과 같이 가져올 수 있다
 					//파싱된 HTML객체라서 다음과 같이 DOM을 이용해서 값을 찾을 수 있다.
 					writeGB_eventBinder();
+					writeGB_Reply_eventBinder();
 					show_subSection("sel-4")
 				}
 			}
@@ -297,7 +298,7 @@ function getViewPage( requestUrl ){
  * AJAX-JQUERY FUNCTION
  * 		SUBSECTION SUPPORT FUNCTION
  *******************************************************************/
-function pwCheck_AJAX(user_password, openThisPanel){
+function pwCheck_AJAX(user_password, openThisPanel, id_div_pwCheckPanel){
 	/*
 	 * 패스워드 체크가 필요한 패널을 열기 전에 거쳐가는 패스워드 재확인 패널의 ajax함수입니다
 	 * */
@@ -319,7 +320,7 @@ function pwCheck_AJAX(user_password, openThisPanel){
 				//$("#"+"id_div_pwCheckerPanel").hide()
 				/*panel_fadeOut("id_div_pwCheckerPanel")
 				bluroff_Tag("id_div_mainContent")*/
-				panelCloser("id_div_pwCheckerPanel", "id_div_mainContent")
+				panelCloser(id_div_pwCheckPanel, "id_div_mainContent")
 				panelOpener(openThisPanel, "id_div_mainContent")
 				
 			}
@@ -403,3 +404,51 @@ function submitGbMsg(gbMsg){
 			}//ajax {}
 	)//.ajax
 }//submitGbMsg
+
+
+function submitGbReplyMsg(gbReplyMsg, gbReplyMsg_id){
+	console.log("mainPage.js >>> submitGbMsg >>> 함수 호출됨")
+	
+	$.ajax( 
+			{
+				method : "post",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/guestBookReplyProc.do",
+				data   : { 
+							"gbReplyMsg"	:	gbReplyMsg	  ,
+							"gbReplyMsg_id"	:	gbReplyMsg_id
+				         },
+			    success : function(result){
+			    	var jsonRes = JSON.parse(result)
+			    	if(jsonRes.insertChecker == "true"){
+			    		alert("성공적으로 저장되었습니다")
+			    		panelCloser("id_div_writeGbReplyPanel", "id_div_mainContent")
+			    	}
+			    	else{
+			    		alert("저장에 실패하였습니다")
+			    	}
+			    }//success
+			}//ajax {}
+	)//.ajax
+}//submitGbMsg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

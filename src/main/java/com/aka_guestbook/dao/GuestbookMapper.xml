@@ -8,6 +8,11 @@
 		INSERT INTO GB_GUEST_MSG( GB_ID,						GB_WRITER_EMAIL,	GB_CONTENT 		)
 		VALUES					( SEQFACTORY_AKA_GB.NEXTVAL,	#{gb_writer_email},	#{gb_content} 	)
 	</insert>
+	
+	<insert id="insertAdminMsg" parameterType="GB_Admin_Msg_Command">
+		INSERT	INTO	GB_ADMIN_MSG( GB_ID,						GB_WRITER_EMAIL,	GB_CONTENT,		GB_TO_GUEST_ID )
+		VALUES						( SEQFACTORY_AKA_GB.NEXTVAL,	#{gb_writer_email},	#{gb_content},	#{gb_to_guest_id} )
+	</insert>
 
 	<select id="getGuestMsgs" parameterType="SAE" resultType="GB_Guest_Msg_Command" >
 		SELECT * 
