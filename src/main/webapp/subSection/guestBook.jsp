@@ -87,9 +87,9 @@
 		    top: -30px;
 		}
 		.guestBookAdminRegDate{
-		    position: absolute;
+	        position: absolute;
 		    left: 0px;
-		    top: -13px;
+		    bottom: -8px;
 		    opacity: 0.60;
 		}
 		.userFullWrapper{ 
@@ -184,14 +184,18 @@
 
 <!--| ***body StarT*** |-->
 <div class="sel-4">
-	<div id="id_div_guestBookHeader" class="w3-card w3-bar" style="margin-bottom: 40px;" >
-		<div class="w3-bar-item">
-			<h5>4 포스트</h5>
+
+	<c:if test="${ currentPage == 1 }">
+		<div id="id_div_guestBookHeader" class="w3-card w3-bar" style="margin-bottom: 40px;" >
+			<div class="w3-bar-item">
+				<h5>${ count } 메세지</h5>
+			</div>
+			<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writeGuestBook" href="#">
+				<h5>방명록 작성</h5>
+			</a>
 		</div>
-		<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writeGuestBook" href="#">
-			<h5>방명록 작성</h5>
-		</a>
-	</div>
+	</c:if>
+	
 	<div class="guestBookFullWrapper" id="id_div_guestBookFullWrapper">
 		<c:forEach var="guestMsg" items="${ guestMsgList }">
 			<div class="msgCoupler">
@@ -211,22 +215,26 @@
 					</div>
 				</div><!-- msgWrapper -->
 				
-				<!-- <div class="adminMsgWrapper">
-					<div class="adminFullWrapper">
-						<div class="adminBalloon">
-							<p class="guestBook_text w3-large">Response messsage from admin, testing DummyString
-							 testing DummyString testing DummyString testing DummyString
-							 testing DummyString testing DummyString testing DummyString </p>
+				<c:if test="${ guestMsg.getGb_from_admin_id() != -1 }">
+					<div class="adminMsgWrapper">
+						<div class="adminFullWrapper">
+							<div class="adminBalloon">
+								<p class="guestBook_text w3-large">${ guestReplyMap.get( guestMsg.getGb_id() ).getGb_content() }</p>
+							</div>
+							<div class="adminName guestBookProfileName"><h5>${ guestReplyMap.get( guestMsg.getGb_id() ).getGb_writer_email() }</h5></div>
+							<div class="imgRanderer adminProfileImg" />
+							<div class="guestBookAdminRegDate"><p class="w3-small">${ adminMsg_timeSet.get( guestReplyMap.get( guestMsg.getGb_id() ).getGb_id() ) }</p></div>
 						</div>
-						<div class="adminName guestBookProfileName"><h5>Malloc72P</h5></div>
-						<div class="imgRanderer adminProfileImg" />
-						<div class="guestBookAdminRegDate"><p class="w3-small">2018-09-20, 목</p></div>
-					</div>
-				</div>msgWrapper -->
+					</div><!-- msgWrapper -->
+				</c:if>
+				
+
 						
 			</div><!-- msgCoupler -->
 		</c:forEach>
-		
+		<input type="hidden" id="id_gb_postCount" 	name="postCount" 	value="${count}">
+		<input type="hidden" id="id_gb_pageCount" 	name="pageCount" 	value="${ pageCount }">
+		<input type="hidden" id="id_gb_currentPage" name="currentPage" 	value="${ currentPage }">
 
 </div>
 <!--| ###body EnD### |-->

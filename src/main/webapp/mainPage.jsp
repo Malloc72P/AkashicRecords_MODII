@@ -228,7 +228,8 @@
 		</div>
 		
 		<form id="id_form_tempData" name="form_tempData">
-			<input id="id_tempData_in_pageNum"  type="hidden" value="1">
+			<input id="id_tempData_in_pageNum"  type="hidden" value="1"><!-- recentPost의 pageNum -->
+			<input id="id_tempData_gb_pageNum"  type="hidden" value="1"><!-- guestBook의 pageNum -->
 		</form>
 		
 		<!-- 아카식 SUB-SECTION -->
