@@ -3,7 +3,8 @@
  *******************************************************************/
 //getRecentPosts함수는 최초로 포스트를 집어오는 함수이다
 //따라서 여기서 pageNum을 1로 초기화해준다
-function getRecentPosts(id_div_subSection , id_pageNum){
+function getRecentPosts(id_div_subSection){
+	id_pageNum = "id_tempData_in_pageNum";
 	$("#"+id_pageNum).val("1")
 	var pageNum = $("#"+id_pageNum).val()
 	console.log("getRecentPosts >>> "+pageNum)
@@ -189,10 +190,18 @@ function getpostListPage( id_div_subSection ){
 }
 function getGuestBook( id_div_subSection ){
 	console.log("mainPage.js.GuestBook >>> 함수 호출됨")
+	
+	//#######
+	$("#"+"id_tempData_gb_pageNum").val("1")
+	var pageNum = $("#"+"id_tempData_gb_pageNum").val()
+	console.log("getGuestBook >>> "+pageNum)
+	//#######
+	
 	$.ajax(
 			{ 
 				method : "post",
 				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/guestBook.do",
+				data   : { "pageNum":pageNum },
 				cache  : false,
 				success: function(result){
 					var htmlRES = $.parseHTML( result )
@@ -201,6 +210,92 @@ function getGuestBook( id_div_subSection ){
 					//파싱된 HTML객체라서 다음과 같이 DOM을 이용해서 값을 찾을 수 있다.
 					writeGB_eventBinder();
 					writeGB_Reply_eventBinder();
+					
+					//#########
+					var currentPage = $(htmlRES).find("#id_gb_currentPage").attr("value");
+					var pageCount   = $(htmlRES).find("#id_gb_pageCount").attr("value");
+					var postCount   = $(htmlRES).find("#id_gb_postCount").attr("value");
+					
+					console.log("id_currentPage >>> "+currentPage)
+					console.log("id_pageCount >>> "  +pageCount  )
+					console.log("id_postCount >>> "  +postCount  )
+					
+					if( currentPage < pageCount ){
+						console.log("if( currentPage < pageCount )")
+						var strTemp = '<div id="id_div_gbNextMsg" class="w3-card w3-middle w3-button" style="width: 100%; ">';
+						   strTemp += '<h4>다음메세지</h4>';
+						   strTemp += '</div>';
+						   $("#"+id_div_subSection).append(strTemp)
+						   
+						   bind_appendMsg("id_div_gbNextMsg", id_div_subSection);
+					}
+					else if( currentPage == pageCount ){
+						console.log("else if( currentPage == pageCount )")
+					}
+					else{
+						console.log("else")
+						console.log("포스트를 가져오는 과정에서 에러가 발생했습니다.")
+					}
+					//#########
+					
+					show_subSection("sel-4")
+				}
+			}
+		)
+}
+function append_moreMsg(id_div_subSection){
+	//#######
+	$("#"+"id_tempData_gb_pageNum").val("1")
+	var pageNum = parseInt( $("#"+"id_tempData_gb_pageNum").attr("value") )
+	pageNum = pageNum + 1
+	$("#"+"id_tempData_gb_pageNum").attr("value" , pageNum )
+	console.log("append_moreMsg >>> pageNum : "+$("#"+"id_tempData_gb_pageNum").attr("value"))
+	//#######
+	 
+	$.ajax(
+			{ 
+				method : "post",
+				url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/guestBook.do",
+				data   : { "pageNum":pageNum },
+				cache  : false,
+				async  : true,
+				success: function(result){
+					var htmlRES = $.parseHTML( result )
+					$("#"+id_div_subSection).append(htmlRES)
+					
+					//AJAX로 받아온 페이지엔 CURRENT_PAGE와 PAGECOUNT값을 가지고 있는 히든태그가 있고 다음과 같이 가져올 수 있다
+					//파싱된 HTML객체라서 다음과 같이 DOM을 이용해서 값을 찾을 수 있다.
+					var currentPage = $(htmlRES).find("#id_gb_currentPage").attr("value");
+					var pageCount   = $(htmlRES).find("#id_gb_pageCount").attr("value");
+					
+					console.log("id_currentPage >>> "+currentPage)
+					console.log("id_pageCount >>> "  +pageCount  )
+					
+					$(htmlRES).find("i").each(function(){
+						$(this).click(function(event){
+							event.preventDefault()
+							currentGB = $(this).attr("title");
+							panelOpener("id_div_admin_pwCheckerPanel" , "id_div_mainContent")
+						})
+					})
+					
+
+					if( currentPage < pageCount ){
+						console.log("if( currentPage < pageCount )")
+						$("#id_div_gbNextMsg").appendTo( $("#"+id_div_subSection) )
+					  
+					}
+					else if( currentPage == pageCount ){
+						console.log("else if( currentPage == pageCount )")
+						//더이상 추가페이지가 없으므로 버튼을 숨긴다
+						$("#id_div_gbNextMsg").hide()
+					}
+					else{
+						console.log("else")
+						console.log("메세지를 가져오는 과정에서 에러가 발생했습니다.")
+					}
+					
+					console.log("hidden tag : "+$("#id_tempData_gb_pageNum").attr("value"))
 					show_subSection("sel-4")
 				}
 			}
@@ -347,6 +442,12 @@ function submitPost(post_title, post_content, series_id){
 			    	var jsonRes = JSON.parse(result)
 			    	if(jsonRes.insertChecker == "true"){
 			    		alert("성공적으로 저장되었습니다")
+			    		
+			    		refreshSubSection( getRecentPosts );
+			    		tinyMCE.get('id_input_writePostContent').setContent("");
+			    		
+			    		$("#id_input_writePostTitle").val("");
+			    		
 			    		panelCloser("id_div_writePostPanel", "id_div_mainContent")
 			    	}
 			    	else{
@@ -371,6 +472,9 @@ function submitSeries(seriesTitle){
 			    	var jsonRes = JSON.parse(result)
 			    	if(jsonRes.insertChecker == "true"){
 			    		alert("성공적으로 저장되었습니다")
+			    		
+			    		refreshSubSection( getpostListPage );
+			    		
 			    		panelCloser("id_div_writeSeriesPanel", "id_div_mainContent")
 			    	}
 			    	else{
@@ -395,6 +499,9 @@ function submitGbMsg(gbMsg){
 			    	var jsonRes = JSON.parse(result)
 			    	if(jsonRes.insertChecker == "true"){
 			    		alert("성공적으로 저장되었습니다")
+			    		
+			    		refreshSubSection( getGuestBook );
+			    		
 			    		panelCloser("id_div_writeGbPanel", "id_div_mainContent")
 			    	}
 			    	else{
@@ -421,7 +528,10 @@ function submitGbReplyMsg(gbReplyMsg, gbReplyMsg_id){
 			    	var jsonRes = JSON.parse(result)
 			    	if(jsonRes.insertChecker == "true"){
 			    		alert("성공적으로 저장되었습니다")
-			    		panelCloser("id_div_writeGbReplyPanel", "id_div_mainContent")
+			    		
+			    		refreshSubSection( getGuestBook );
+			    		
+			    		panelCloser("id_div_writeGbReplyPanel", "id_div_mainContent");
 			    	}
 			    	else{
 			    		alert("저장에 실패하였습니다")

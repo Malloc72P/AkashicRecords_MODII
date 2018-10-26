@@ -53,7 +53,12 @@
 		WHERE	GB_ID = #{gb_guest_id}
 	</update>
 	
+	<select id="getGuestMsgCount" resultType="int">
+		SELECT COUNT(*)
+		FROM GB_GUEST_MSG		
+	</select>
 	
+
 	
 	
 </mapper>

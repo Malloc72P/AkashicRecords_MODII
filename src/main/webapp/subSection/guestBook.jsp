@@ -184,14 +184,18 @@
 
 <!--| ***body StarT*** |-->
 <div class="sel-4">
-	<div id="id_div_guestBookHeader" class="w3-card w3-bar" style="margin-bottom: 40px;" >
-		<div class="w3-bar-item">
-			<h5>4 포스트</h5>
+
+	<c:if test="${ currentPage == 1 }">
+		<div id="id_div_guestBookHeader" class="w3-card w3-bar" style="margin-bottom: 40px;" >
+			<div class="w3-bar-item">
+				<h5>${ count } 메세지</h5>
+			</div>
+			<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writeGuestBook" href="#">
+				<h5>방명록 작성</h5>
+			</a>
 		</div>
-		<a class="w3-right w3-bar-item w3-button w3-mobile" id="id_a_writeGuestBook" href="#">
-			<h5>방명록 작성</h5>
-		</a>
-	</div>
+	</c:if>
+	
 	<div class="guestBookFullWrapper" id="id_div_guestBookFullWrapper">
 		<c:forEach var="guestMsg" items="${ guestMsgList }">
 			<div class="msgCoupler">
@@ -228,7 +232,9 @@
 						
 			</div><!-- msgCoupler -->
 		</c:forEach>
-		
+		<input type="hidden" id="id_gb_postCount" 	name="postCount" 	value="${count}">
+		<input type="hidden" id="id_gb_pageCount" 	name="pageCount" 	value="${ pageCount }">
+		<input type="hidden" id="id_gb_currentPage" name="currentPage" 	value="${ currentPage }">
 
 </div>
 <!--| ###body EnD### |-->

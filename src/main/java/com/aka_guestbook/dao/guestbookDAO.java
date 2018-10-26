@@ -18,4 +18,6 @@ public interface guestbookDAO {
 	
 	public List<GB_Guest_MsgCommand> getGuestMsgs(StartAndEnd sae);
 	
+	public int getGuestMsgCount();
+	
 }

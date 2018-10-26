@@ -137,7 +137,7 @@ function bind_Select_Function(id_div_funcList , id_div_subSection , id_tempData_
 	effectOn_selectedFuncSelector( id_div_funcList )
 	console.log(" bind_Select_Function ")
 	console.log("bind_Select_Function>>> i will send this : "+$("#"+id_tempData_in_pageNum).val())
-	getRecentPosts(id_div_subSection ,id_tempData_in_pageNum)
+	getRecentPosts(id_div_subSection)
 	
 	$("#"+id_div_funcList).find("a[href^='#sel-']").each(function(){
 		console.log("find a tag")
@@ -165,7 +165,7 @@ function bind_Select_Function(id_div_funcList , id_div_subSection , id_tempData_
 				//만약 최신포스트 셀렉터가 눌렸다면......
 				
 				console.log("mainPage.js.bind_Select_Function >>> 최신포스트 보기 기능 선택됨")
-				getRecentPosts(id_div_subSection ,id_tempData_in_pageNum)
+				getRecentPosts(id_div_subSection)
 				
 			}
 			if($(this).attr("id") == "sel-3"){//this는 클릭된 functionSelector이다
@@ -203,5 +203,11 @@ function bind_Select_Function(id_div_funcList , id_div_subSection , id_tempData_
 function bind_appendPost(id_btn, subSection , id_pageNum){
 	$("#"+id_btn).click(function(){
 		append_morePosts(subSection , id_pageNum)
+	})
+}//bind_appendPost
+
+function bind_appendMsg(id_btn, subSection){
+	$("#"+id_btn).click(function(){
+		append_moreMsg(subSection)
 	})
 }//bind_appendPost

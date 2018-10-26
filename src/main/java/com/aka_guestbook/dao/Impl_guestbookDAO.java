@@ -65,6 +65,13 @@ public class Impl_guestbookDAO extends SqlSessionDaoSupport implements guestbook
 		else return false;
 	}
 
+	@Override
+	public int getGuestMsgCount() {
+		// TODO Auto-generated method stub
+		return (Integer)getSqlSession().selectOne("getGuestMsgCount");
+	}
+	
+	
 
 
 	

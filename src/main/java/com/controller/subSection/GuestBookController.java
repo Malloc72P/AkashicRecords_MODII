@@ -1,12 +1,14 @@
 package com.controller.subSection;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aka_guestbook.dao.guestbookDAO;
@@ -21,14 +23,28 @@ public class GuestBookController {
 	guestbookDAO dao;
 	
 	@RequestMapping("/hello/guestBook.do")
-	public ModelAndView requestProcessor() {
+	public ModelAndView requestProcessor( @RequestParam(value="pageNum", defaultValue="1") int currentPage ) {
 		System.out.println("_____________________________________________________");
 		System.out.println("GuestBookController.requestProcessor >>> 메서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/guestBook");
 		
+		
+		int pageSize 	=	10;
+		int blockSize	=	10;
+		
+		int startRow	=	(currentPage -1) * pageSize + 1;
+		int endRow		=	currentPage * pageSize;
+		
+		int	count		=	0;
+		int firstRecordsNumber	=	0;
+		
+		//startCount와 endCount로 RowNum을 제한하여 메세지를 가져옴
+		int startCount 	= 	(currentPage - 1) * blockSize +1;
+		int endCount	=	currentPage * blockSize;
+		
 		StartAndEnd sae = new StartAndEnd();
-		sae.setStart(1);
-		sae.setEnd(10);
+		sae.setStart(startCount);
+		sae.setEnd(endCount);
 		
 		List<GB_Guest_MsgCommand> guestMsgList = dao.getGuestMsgs(sae);
 		
@@ -39,6 +55,8 @@ public class GuestBookController {
 		HashMap<Integer, String> 				guestMsg_timeSet	= new HashMap<Integer, String>();
 		HashMap<Integer, String> 				adminMsg_timeSet	= new HashMap<Integer, String>();
 		HashMap<Integer, GB_Admin_MsgCommand>	guestReplyMap		= new HashMap<Integer, GB_Admin_MsgCommand>();
+		
+		count	=	dao.getGuestMsgCount();
 		
 		for(GB_Guest_MsgCommand item : guestMsgList) {
 			System.out.println("data : "+item.getGb_id());
@@ -62,6 +80,22 @@ public class GuestBookController {
 		mav.addObject("adminMsg_timeSet", adminMsg_timeSet);
 		mav.addObject("guestReplyMap", guestReplyMap);
 		System.out.println("_____________________________________________________");
+		
+		int pageCount = 0;//pageCount는 총 페이지의 갯수이다. 이걸 이용해서 메세지 더 가져오기 버튼을 활성화할지 비활성화할지를 결정한다.
+		
+		if(count > 0) {
+			pageCount = count / pageSize + (count % pageSize == 0 ? 0:1);
+			
+		}
+		else {
+		}
+		guestMsgList = Collections.EMPTY_LIST;
+		mav.addObject("count", 			count);
+		mav.addObject("pageCount", 		pageCount);
+		mav.addObject("currentPage", 	currentPage);
+		/*
+		 * currentPage, pageCount, count
+		 * */
 		return mav;
 	}
 	
