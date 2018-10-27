@@ -21,6 +21,7 @@
 		<bean  class="com.controller.mgrAccount.LoginProcController" />
 		<bean  class="com.controller.mgrAccount.RegisterProcController" />
 		<bean  class="com.controller.mgrAccount.LogoutProcController" />
+		<bean  class="com.controller.mgrAccount.UserMetadataListController" />
 	  <!-- SubSection -->
 		<bean class="com.controller.subSection.GuestBookController" />
 		<bean class="com.controller.subSection.GuestBookReplyProcController" />

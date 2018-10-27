@@ -27,6 +27,26 @@
 		values(#{user_email}, #{user_password})
 	</insert>
 	
+	<select id="checkSuperUser" parameterType="String" resultType="int">
+		SELECT  COUNT(U.USER_EMAIL)
+		FROM    AKA_USER_LOGIN U JOIN AKA_USER_ADMIN A
+		ON      U.USER_EMAIL = A.USER_EMAIL
+		WHERE   	A.ADMIN_LEVEL >= 5 
+				AND 
+					U.USER_EMAIL = #{user_email}	
+	</select>	
+	
+	<select id="getUsersMetadata" resultType="UserMetadataCommand">
+		SELECT  U.USER_EMAIL,    U.IMG_ID,   U.USER_NICKNAME,    U.VALIDATION,
+		        A.ADMIN_LEVEL
+		FROM    AKA_USER U JOIN AKA_USER_ADMIN A
+		ON 		U.USER_EMAIL = A.USER_EMAIL
+	</select>
+	
+
+	
+
+	
 	
 	
 </mapper>

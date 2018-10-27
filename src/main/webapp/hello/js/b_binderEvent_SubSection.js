@@ -21,6 +21,9 @@ function pwCheck_admin_eventBinder(id_input_submitPWCHK, openThisPanel){
 		event.preventDefault()
 		var pw = $("#"+"id_input_admin_pwchkPW").val()
 		console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw)
+		
+		//id_div_adminPagePanel
+		
 		pwCheck_AJAX( pw, openThisPanel, "id_div_admin_pwCheckerPanel" )	
 	})
 	
@@ -67,10 +70,11 @@ function writeGB_Reply_eventBinder(){
 			event.preventDefault()
 			currentGB = $(this).attr("title");
 			panelOpener("id_div_admin_pwCheckerPanel" , "id_div_mainContent")
+			$("#id_input_admin_submitPWCHK").unbind("click")
+			pwCheck_admin_eventBinder("id_input_admin_submitPWCHK", "id_div_writeGbReplyPanel")
 		})
 	})
-	$("#id_input_admin_submitPWCHK").unbind("click")
-	pwCheck_admin_eventBinder("id_input_admin_submitPWCHK", "id_div_writeGbReplyPanel")
+	
 	//id_a_writeGuestBook
 }
 function panelOpener_viewContent(event){
