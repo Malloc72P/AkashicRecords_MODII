@@ -1,8 +1,11 @@
 package com.aka_user.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.aka_user.domain.UserCommand;
+import com.aka_user.domain.UserMetadataCommand;
 
 import constSet.MainConst;
 
@@ -149,4 +152,23 @@ public class Impl_UserDAO extends SqlSessionDaoSupport implements UserDAO {
 		
 	}//UserCommandChecker
 
+	@Override
+	public boolean checkSuperUser(String user_email) {
+		// TODO Auto-generated method stub
+		int checkSuper	=	getSqlSession().selectOne("checkSuperUser", user_email);
+		
+		if(checkSuper != 0) {//Lv5이상인 유저인 경우
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public List<UserMetadataCommand> getUsersMetadata() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("getUsersMetadata");
+	}
+
+
+	
 }

@@ -51,6 +51,8 @@ function logout_eventBinder(id_trigger){
 	})
 }
 
+
+
 /******************************************************************
  * VALIDATOR FUNCTION
  *******************************************************************/
@@ -122,10 +124,15 @@ function loginAjax(email , password){
 			//서버로부터 받은 데이터를 json으로 파싱한다
 			// 그러면 loginChecker랑 email data를 얻는다
 			//		전자는 로그인 성공여부를, 후자는 email문자열값을 가진다
+			console.log("loginAjax >>> jsonRes : ",jsonRes);
 			if(jsonRes.loginChecker=="true"){//로그인 성공시
 				panel_fadeOut("id_div_loginPanel")
 				bluroff_Tag("id_div_mainContent")
-				redraw_LoggedIn_Sidebar(jsonRes.email)
+				redraw_LoggedIn_Sidebar(jsonRes.email, jsonRes.adminCheck)
+				
+				/*
+				 * <h4><a  id='id_a_logout' class='w3-bar-item w3-button'>AdminPage</a></h4>
+				 * */
 			}
 			else{//로그인 실패시
 				alert("로그인실패")
@@ -181,7 +188,7 @@ function logoutAjax(){
 /************************************
  * AKASHIC-RECORD-AJAX RENDERING MODULE MK1 
 ************************************/
-function redraw_LoggedIn_Sidebar(str_email){
+function redraw_LoggedIn_Sidebar(str_email, adminChecker){
 	console.log("redraw_LoggedIn_Sidebar >>> " +str_email )
 	
 	//1. 로그인버전 사이드바를 보여주고
@@ -199,6 +206,16 @@ function redraw_LoggedIn_Sidebar(str_email){
 	//5.상단바의 오프너의 종류를 키버전에서 이메일버전으로 전환해준다
 	$("#id_btn_emailOpener_sidebar").css("display","block")
 	$("#id_btn_keyOpener_sidebar").css("display","none")
+	
+	//6.어드민 체크를 하고, 어드민인경우 어드민페이지 버튼을 넣어준다.
+	var adminBtnFinder = true;
+	$("#id_div_loggedIn_sidebar").find("a[id=id_a_adminPageOpener]").each(function(){
+		adminBtnFinder = false;
+	})
+	if(adminBtnFinder){
+		$("#id_div_loggedIn_sidebar").append("<h4><a  id='id_a_adminPageOpener' class='w3-bar-item w3-button'>AdminPage</a></h4>");
+		adminPageOpener_eventBinder();
+	}
 }
 function redraw_LoggedOff_Sidebar(){
 	//1. 로그인버전 사이드바를 숨기고

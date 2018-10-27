@@ -35,18 +35,22 @@ public class LoginProcController {
 		System.out.println("loginProcController.requestProcessor >>> dao접근 후");
 		System.out.println("loginProcController.requestProcessor >>> dao.getEmail : "+userdata.getUser_email());
 		
-		boolean loginChecker = false;
-		
+		boolean loginChecker 	= 	false;
+		boolean superChecker	=	false;
 		if(userdata.getUser_password().equals(user_password)) {
 			System.out.println("loginProcController.requestProcessor >>> 패스워드 일치");
 			loginChecker = true;
 			request.getSession().setAttribute("loginChecker", loginChecker);
 			request.getSession().setAttribute("email"       , user_email);
 			System.out.println("loginProcController.requestProcessor >>> 세션 저장 성공");
+			
+			superChecker = dao.checkSuperUser(user_email);
+			
 		}
 		
 		System.out.println("_____________________________________________");
 		ModelAndView mav = new ModelAndView("mgr_account/loginProc");
+		mav.addObject("superChecker",superChecker);
 		System.out.println("loginProcController.requestProcessor >>> mav view : "+mav.getViewName());
 		return mav; 
 	}

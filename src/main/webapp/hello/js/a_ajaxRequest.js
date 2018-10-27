@@ -415,6 +415,8 @@ function pwCheck_AJAX(user_password, openThisPanel, id_div_pwCheckPanel){
 				//$("#"+"id_div_pwCheckerPanel").hide()
 				/*panel_fadeOut("id_div_pwCheckerPanel")
 				bluroff_Tag("id_div_mainContent")*/
+				$("#id_input_pwchkPW").val("");
+				$("#id_input_admin_pwchkPW").val("");
 				panelCloser(id_div_pwCheckPanel, "id_div_mainContent")
 				panelOpener(openThisPanel, "id_div_mainContent")
 				
@@ -475,6 +477,8 @@ function submitSeries(seriesTitle){
 			    		
 			    		refreshSubSection( getpostListPage );
 			    		
+			    		$("#id_input_writeSeriesTitle").val("");
+			    		
 			    		panelCloser("id_div_writeSeriesPanel", "id_div_mainContent")
 			    	}
 			    	else{
@@ -501,6 +505,8 @@ function submitGbMsg(gbMsg){
 			    		alert("성공적으로 저장되었습니다")
 			    		
 			    		refreshSubSection( getGuestBook );
+			    		
+			    		$("#id_input_writeGbMsg").val("");
 			    		
 			    		panelCloser("id_div_writeGbPanel", "id_div_mainContent")
 			    	}
@@ -530,6 +536,7 @@ function submitGbReplyMsg(gbReplyMsg, gbReplyMsg_id){
 			    		alert("성공적으로 저장되었습니다")
 			    		
 			    		refreshSubSection( getGuestBook );
+			    		$("#id_input_writeGbReplyMsg").val("");
 			    		
 			    		panelCloser("id_div_writeGbReplyPanel", "id_div_mainContent");
 			    	}
@@ -540,6 +547,8 @@ function submitGbReplyMsg(gbReplyMsg, gbReplyMsg_id){
 			}//ajax {}
 	)//.ajax
 }//submitGbMsg
+
+
 
 
 

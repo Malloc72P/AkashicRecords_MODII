@@ -23,3 +23,13 @@ function bind_Close_Panel(id_trigger, id_panel ,id_background){
 		}*/
 	})
 }
+function adminPageOpener_eventBinder(){
+	$("#id_a_adminPageOpener").click(function(event){
+		event.preventDefault()
+		panelOpener("id_div_admin_pwCheckerPanel" , "id_div_mainContent")
+		$("#id_input_admin_submitPWCHK").unbind("click");
+		pwCheck_admin_eventBinder("id_input_admin_submitPWCHK", "id_div_adminPagePanel");
+	})
+}
+
+
