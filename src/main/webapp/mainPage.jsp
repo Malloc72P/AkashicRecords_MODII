@@ -150,9 +150,6 @@
 							<h4>
 								<a  class="w3-bar-item w3-button" id="id_a_logout">logout</a>
 							</h4>
-							<!-- <h4>
-								<a  id="id_a_logout" class="w3-bar-item w3-button">AdminPage</a>
-							</h4> -->
 						</div>
 						<div id="id_div_notLoggedIn_sidebar">
 							<h3 class="chk-side-on w3-bar-item w3-button" onclick="w3_close()">Close</h3>
@@ -263,8 +260,6 @@
 			<jsp:include page="mgr_account/login.jsp"></jsp:include>
 		<!-- popPannel_register -->
 			<jsp:include page="mgr_account/register.jsp"></jsp:include>
-		<!-- popPannel_adminPage -->
-			<jsp:include page="mgr_account/adminPage.jsp"></jsp:include>
 		<!-- popPannel_pwChecker -->
 			<jsp:include page="subSection/pwChecker.jsp"></jsp:include>
 		<!-- popPannel_pwChecker -->

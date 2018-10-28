@@ -36,11 +36,11 @@
 				<hr class="w3-black">
 			</div>
 			
-			<form class="w3-container" method="post" >
+			<form id="id_form_pwCheckAdmin" class="w3-container" method="post" >
 				<br>
 				<label class="" style="font-weight: bold;">패스워드</label>
 				<input class="w3-input w3-border w3-round-large" type="password"
-					   name="name_input_submitPWCHK" id="id_input_admin_pwchkPW">
+					   name="adminPW" id="id_input_admin_pwchkPW">
 				<br>
 				<input class="w3-btn w3-white btnMargin btnBorderBottom" id="id_input_admin_submitPWCHK"
 				       type ="submit" value="입력">	
@@ -48,6 +48,7 @@
 				<input class="w3-btn w3-white btnBorderBottom"
 				       type ="button" name="bt_goBack" id="id_btn_admin_pwchkGoBack"value="뒤로가기">
 				<br><br>
+				<input type="hidden">
 			</form>
 		</div>
 

@@ -126,10 +126,12 @@ function loginAjax(email , password){
 			//		전자는 로그인 성공여부를, 후자는 email문자열값을 가진다
 			console.log("loginAjax >>> jsonRes : ",jsonRes);
 			if(jsonRes.loginChecker=="true"){//로그인 성공시
-				panel_fadeOut("id_div_loginPanel")
-				bluroff_Tag("id_div_mainContent")
+				panel_fadeOut("id_div_loginPanel");
+				bluroff_Tag("id_div_mainContent");
+				console.log("mgr_account.loginAjax >>> jsonRes.adminCheck : "+jsonRes.adminCheck);
 				redraw_LoggedIn_Sidebar(jsonRes.email, jsonRes.adminCheck)
-				
+				$("#email").val("");
+				$("#password").val("");
 				/*
 				 * <h4><a  id='id_a_logout' class='w3-bar-item w3-button'>AdminPage</a></h4>
 				 * */
@@ -208,11 +210,16 @@ function redraw_LoggedIn_Sidebar(str_email, adminChecker){
 	$("#id_btn_keyOpener_sidebar").css("display","none")
 	
 	//6.어드민 체크를 하고, 어드민인경우 어드민페이지 버튼을 넣어준다.
-	var adminBtnFinder = true;
+	var decision_adminBtn = true;
 	$("#id_div_loggedIn_sidebar").find("a[id=id_a_adminPageOpener]").each(function(){
-		adminBtnFinder = false;
+		//만약 이미 adminPage버튼이 있다면 생성하지 않도록 막는 코드이다.
+		decision_adminBtn = false;
 	})
-	if(adminBtnFinder){
+	if(adminChecker === "false"){
+		decision_adminBtn = false;
+	}
+	
+	if(decision_adminBtn){
 		$("#id_div_loggedIn_sidebar").append("<h4><a  id='id_a_adminPageOpener' class='w3-bar-item w3-button'>AdminPage</a></h4>");
 		adminPageOpener_eventBinder();
 	}
@@ -233,7 +240,7 @@ function redraw_LoggedOff_Sidebar(){
 	//5.상단바의 오프너의 종류를 이메일버전에서 키버전으로 바꿔준다
 	$("#id_btn_emailOpener_sidebar").css("display","none")
 	$("#id_btn_keyOpener_sidebar").css("display","block")
-	
+	$("#id_a_adminPageOpener").closest("h4").remove();
 	
 }
 

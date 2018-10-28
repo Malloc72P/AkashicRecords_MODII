@@ -169,6 +169,15 @@ public class Impl_UserDAO extends SqlSessionDaoSupport implements UserDAO {
 		return getSqlSession().selectList("getUsersMetadata");
 	}
 
-
+	@Override
+	public boolean mgr_updateUsrData(UserCommand userData) {
+		// TODO Auto-generated method stub
+		int updateChecker	=	getSqlSession().update("mgr_updateUsrData", userData);
+		
+		if(updateChecker != 0) {//Lv5이상인 유저인 경우
+			return true;
+		}
+		else return false;
+	}
 	
 }

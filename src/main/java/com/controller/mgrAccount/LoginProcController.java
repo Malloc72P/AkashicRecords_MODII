@@ -27,6 +27,9 @@ public class LoginProcController {
             							 ,@RequestParam(value="password" , defaultValue="") String user_password) {
 		System.out.println("_____________________________________________");
 		System.out.println("loginProcController.requestProcessor >>> 매서드 호출됨");
+		
+		ModelAndView mav = new ModelAndView("mgr_account/loginProc");
+		
 		System.out.println("loginProcController.requestProcessor >>> user_email : "+user_email);
 		System.out.println("loginProcController.requestProcessor >>> user_password : "+user_password);
 		
@@ -48,8 +51,15 @@ public class LoginProcController {
 			
 		}
 		
+		//######
+		mav.addObject("loginChecker",	loginChecker);
+		mav.addObject("user_email",		user_email);
+		//######
+		System.out.println("user_email		: "+user_email);
+		System.out.println("loginChecker	: "+loginChecker);
+		System.out.println("superChecker	: "+superChecker);
 		System.out.println("_____________________________________________");
-		ModelAndView mav = new ModelAndView("mgr_account/loginProc");
+		
 		mav.addObject("superChecker",superChecker);
 		System.out.println("loginProcController.requestProcessor >>> mav view : "+mav.getViewName());
 		return mav; 

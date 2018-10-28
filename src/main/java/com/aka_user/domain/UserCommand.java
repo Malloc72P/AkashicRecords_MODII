@@ -2,18 +2,28 @@ package com.aka_user.domain;
 
 public class UserCommand {
 	//________________________________________계정정보
-	private String user_email;
-	private String user_password;
-	private String user_nickname;
+	private String 	user_email;
+	private String 	user_password;
+	private String 	user_nickname;
+	private String	validation;
 	private int img_id;
-	
+		
 	//————————————————————————————————————————————————————————————————————————————————————
 	public UserCommand() {
 		this.img_id = -1;//비어있는 상태가 -1임
 	}
 	//————————————————————————————————————————————————————————————————————————————————————
 	
+
+
 	//————————————————————————————————————————————————————————————————————————————————————
+	public String getValidation() {
+		return validation;
+	}
+
+	public void setValidation(String validation) {
+		this.validation = validation;
+	}
 	public String getUser_email() {
 		return user_email;
 	}

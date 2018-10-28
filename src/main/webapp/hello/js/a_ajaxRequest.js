@@ -418,7 +418,15 @@ function pwCheck_AJAX(user_password, openThisPanel, id_div_pwCheckPanel){
 				$("#id_input_pwchkPW").val("");
 				$("#id_input_admin_pwchkPW").val("");
 				panelCloser(id_div_pwCheckPanel, "id_div_mainContent")
-				panelOpener(openThisPanel, "id_div_mainContent")
+				
+				if(openThisPanel == "id_div_adminPagePanel"){
+					window.open("adminPage.do","_adminPage","width=800","600");
+				}
+				else{
+					panelOpener(openThisPanel, "id_div_mainContent");	
+				}
+				
+				
 				
 			}
 			else{//로그인 실패시

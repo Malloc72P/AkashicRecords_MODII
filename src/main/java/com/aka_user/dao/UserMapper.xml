@@ -43,10 +43,14 @@
 		ON 		U.USER_EMAIL = A.USER_EMAIL
 	</select>
 	
-
-	
-
-	
+	<update id="mgr_updateUsrData" parameterType="UserCommand">
+		UPDATE AKA_USER
+		SET 
+		    IMG_ID          =   #{img_id},
+		    USER_NICKNAME   =   #{user_nickname},
+		    VALIDATION      =   #{validation}
+		WHERE   USER_EMAIL  =   #{user_email}	
+	</update>
 	
 	
 </mapper>
