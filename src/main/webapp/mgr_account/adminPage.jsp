@@ -40,6 +40,12 @@
 			border	:	1px solid black;
 			text-align: center;
 		}
+		div#id_table_adminUserMgr_wrapper{
+			 overflow: auto;
+		}
+		table#id_table_adminUserMgr {
+		    width: 100% !important;
+		}
 		
 		/*--| ###CSS-StylesheeT EnD### |--*/
 	</StylE>
@@ -84,7 +90,7 @@
 		    } );
 		    
 		    updateEventBinder(myDataTable);
-		    deleteEventBinder();
+		    deleteEventBinder(myDataTable);
 		    closeEventBinder();
 		    resetEventBinder();
 		} );
@@ -142,9 +148,29 @@
 				)//.ajax
 			})
 		}
-		function deleteEventBinder(){
+		function deleteEventBinder($myDataTable){
 			$("#id_btn_delete").click(function(){
-				
+				var	email	=	$("#id_input_update_email").val();
+				$.ajax( 
+						{
+							method : "post",
+							url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/deleteUserdata.do",
+							data   : { 
+										"email"	:	email
+							         },
+						    success : function(result){
+						    	var jsonRes = JSON.parse(result)
+						    	if(jsonRes.deleteChecker == "true"){
+						    		alert("성공적으로 삭제되었습니다");
+						    		updateTableClear();
+						    		$myDataTable.ajax.reload();
+						    	}
+						    	else{
+						    		alert("삭제에 실패하였습니다")
+						    	}
+						    }//success
+						}//ajax {}
+				)//.ajax
 			})
 		}
 		function closeEventBinder(){
@@ -211,14 +237,14 @@
 					        </tr>
 					    </thead>
 					</table>
-					<div style="width: 100%; margin-top: 15px;">
+					<div style="width: 100%; margin-top: 15px; overflow: auto;">
 						<table class="updateTable">
 							<thead>
 								<tr>
-						            <th>thumbnail_image_id</th>
-						            <th>user_nickname</th>
+						            <th>thumbnail</th>
+						            <th>nickname</th>
 						            <th>validation</th>
-						            <th>authority_level</th>
+						            <th>authority</th>
 								</tr>
 							</thead>
 <!-- 							<tbody> -->
@@ -229,7 +255,7 @@
 											class="updateInputer w3-select w3-border w3-round-large" type="text">
 											<option value="" disabled selected>썸네일 이미지를 리셋하려면 1을 선택해주세요</option>
 											<option id="id_opt_thumb1" value="1">1</option>
-											<option id="id_opt_thumb2" value="1">previous Thumbnail image</option>
+											<option id="id_opt_thumb2" value="1">기존 이미지</option>
 										</select>
 									</td>
 									<td><input class="updateInputer" type="text" id="id_input_update_nickname"></td>

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aka_user.dao.UserDAO;
 import com.aka_user.domain.UserCommand;
+import com.aka_user.domain.UserMetadataCommand;
 
 @Controller
 public class updateUserdata {
@@ -27,7 +28,7 @@ public class updateUserdata {
 										 ,@RequestParam(value="imgid" 		, defaultValue="") int    imgid
 										 ,@RequestParam(value="nickname"	, defaultValue="") String nickname
 										 ,@RequestParam(value="validation" 	, defaultValue="") String validation
-            							 ,@RequestParam(value="authority" 	, defaultValue="") String authority) {
+            							 ,@RequestParam(value="authority" 	, defaultValue="") int	  authority) {
 		System.out.println("_____________________________________________");
 		System.out.println("updateUserdata.requestProcessor >>> 매서드 호출됨");
 		ModelAndView mav = new ModelAndView("mgr_account/updateUserdata");
@@ -44,7 +45,7 @@ public class updateUserdata {
 			mav.addObject("updateChecker", updateChecker);
 			return mav;
 		}
-		UserCommand prevUsrData = dao.getUserDataByEmail(email);
+		UserMetadataCommand prevUsrData = dao.getUserMetaDataByEmail(email); 
 		if(prevUsrData != null) {
 			UserCommand newMetadata = new UserCommand();
 			newMetadata.setUser_email(email);
@@ -52,6 +53,16 @@ public class updateUserdata {
 			newMetadata.setUser_nickname(nickname);
 			newMetadata.setValidation(validation);
 			updateChecker	=	dao.mgr_updateUsrData(newMetadata);
+			
+			//권한 재설정
+			if(prevUsrData.getAdmin_level() != authority) {
+				UserMetadataCommand	authorityData	=	new UserMetadataCommand();
+				authorityData.setUser_email(email);
+				authorityData.setAdmin_level(authority);
+				updateChecker	=	dao.mgr_updateUsrAuthority(authorityData);	
+			}
+			
+			
 		}
 		else {//만약 해당 이메일을 가진 계정이 존재하지 않는다면
 			mav.addObject("updateChecker", updateChecker);

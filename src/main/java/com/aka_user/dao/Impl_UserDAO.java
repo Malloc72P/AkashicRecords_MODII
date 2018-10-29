@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.aka_user.domain.UserAuthorityCommand;
 import com.aka_user.domain.UserCommand;
 import com.aka_user.domain.UserMetadataCommand;
 
@@ -87,11 +88,18 @@ public class Impl_UserDAO extends SqlSessionDaoSupport implements UserDAO {
 			return false;
 		}
 				
-		int insertCoreRES  = getSqlSession().insert("insertUserDataInToTheCore" , newUser);
-		int insertLoginRES = getSqlSession().insert("insertUserDataInToTheLogin", newUser); 
+		int insertCoreRES 	= 	getSqlSession().insert("insertUserDataInToTheCore" , newUser);
+		int insertLoginRES	= 	getSqlSession().insert("insertUserDataInToTheLogin", newUser);
+		
+		UserAuthorityCommand authData	=	new UserAuthorityCommand();
+		authData.setUser_email(newUser.getUser_email());
+		authData.setUser_password(newUser.getUser_password());
+		authData.setAdmin_level(1);
+		
+		int insertAuthRES	=	getSqlSession().insert("insertAuthorityData", authData);	
 		boolean insertChecker = false;
 		
-		if(insertCoreRES != 0 && insertLoginRES != 0) {
+		if(insertCoreRES != 0 && insertLoginRES != 0 && insertAuthRES != 0) {
 			insertChecker = true;
 			System.out.println("Impl_UserDAO.insertUserData >>> DB입력 성공");
 		}
@@ -178,6 +186,88 @@ public class Impl_UserDAO extends SqlSessionDaoSupport implements UserDAO {
 			return true;
 		}
 		else return false;
+	}
+
+	@Override
+	public boolean mgr_updateUsrAuthority(UserMetadataCommand userMetaData) {
+		// TODO Auto-generated method stub
+		int updateChecker	=	getSqlSession().update("mgr_updateUsrAuthority", userMetaData);
+		
+		if(updateChecker != 0) {//Lv5이상인 유저인 경우
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public UserMetadataCommand getUserMetaDataByEmail(String user_email) {
+		// TODO Auto-generated method stub
+		System.out.println("_____________________________________________");
+		System.out.println("Impl_UserDAO.getUserMetaDataByEmail >>> 매서드 호출됨");
+		UserMetadataCommand userdata = (UserMetadataCommand)getSqlSession().selectOne("getUserMetaDataByEmail",user_email);
+		
+		if(userdata != null) {//검색성공한 경우
+			System.out.println("Impl_UserDAO.getUserMetaDataByEmail >>> 이메일 검색됨");
+			System.out.println("_____________________________________________");
+			return userdata;
+		}
+		else {//검색실패한 경우. 입력한 이메일과 일치하는 계정 없음.
+			System.out.println("Impl_UserDAO.getUserMetaDataByEmail >>> 검색실패, 입력한 이메일과 일치하는 계정 없음");
+			System.out.println("_____________________________________________");
+			return null;
+		}
+	}
+
+	@Override
+	public boolean del_authData(String user_email) {
+		// TODO Auto-generated method stub
+		System.out.println("______________________________________");
+		System.out.println("Impl_UserDao.del_authData >>> 메서드 호출됨");
+		System.out.println("user_email : "+user_email);
+		int deleteChecker	=	getSqlSession().delete("del_authData", user_email);
+		
+		if(deleteChecker != 0) {//삭제 성공한 경우
+			System.out.println("______________________________________");
+			return true;
+		}
+		else {
+			System.out.println("______________________________________");
+			return false;
+		}
+	}
+
+	@Override
+	public boolean del_loginData(String user_email) {
+		// TODO Auto-generated method stub
+		System.out.println("______________________________________");
+		System.out.println("Impl_UserDao.del_loginData >>> 메서드 호출됨");
+		int deleteChecker	=	getSqlSession().delete("del_loginData", user_email);
+		
+		if(deleteChecker != 0) {//삭제 성공한 경우
+			System.out.println("______________________________________");
+			return true;
+		}
+		else {
+			System.out.println("______________________________________");
+			return false;
+		}
+	}
+
+	@Override
+	public boolean del_userData(String user_email) {
+		// TODO Auto-generated method stub
+		System.out.println("______________________________________");
+		System.out.println("Impl_UserDao.del_userData >>> 메서드 호출됨");
+		int deleteChecker	=	getSqlSession().delete("del_userData", user_email);
+		
+		if(deleteChecker != 0) {//삭제 성공한 경우
+			System.out.println("______________________________________");
+			return true;
+		}
+		else {
+			System.out.println("______________________________________");
+			return false;
+		}
 	}
 	
 }

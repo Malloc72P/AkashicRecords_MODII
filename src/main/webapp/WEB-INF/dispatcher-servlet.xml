@@ -24,6 +24,7 @@
 		<bean  class="com.controller.mgrAccount.UserMetadataListController" />
 		<bean  class="com.controller.mgrAccount.adminPageController" />
 		<bean  class="com.controller.mgrAccount.updateUserdata" />
+		<bean  class="com.controller.mgrAccount.deleteUserdata" />
 	  <!-- SubSection -->
 		<bean class="com.controller.subSection.GuestBookController" />
 		<bean class="com.controller.subSection.GuestBookReplyProcController" />

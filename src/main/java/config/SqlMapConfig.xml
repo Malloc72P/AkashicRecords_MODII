@@ -7,6 +7,7 @@
    <!-- 테이블의 필드에 대한 정보를 담고있는 객체(DTO) 자료형의 별칭부여  -->
 	<typeAliases>
 	    <typeAlias alias="UserCommand"   type="com.aka_user.domain.UserCommand"/>
+	    <typeAlias alias="UserAuthCommand"   type="com.aka_user.domain.UserAuthorityCommand"/>
 	    <typeAlias alias="UserMetadataCommand"   type="com.aka_user.domain.UserMetadataCommand"/>
 	    <typeAlias alias="PostCommand"   type="com.aka_post.domain.PostCommand"/>
 	    <typeAlias alias="SAE"           type="com.aka_post.domain.StartAndEnd"/>

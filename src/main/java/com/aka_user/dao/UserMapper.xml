@@ -27,6 +27,13 @@
 		values(#{user_email}, #{user_password})
 	</insert>
 	
+	<insert id="insertAuthorityData" parameterType="UserAuthCommand">
+		INSERT INTO AKA_USER_ADMIN( USER_EMAIL, ADMIN_PASSWORD, ADMIN_LEVEL )
+		VALUES  ( #{user_email}, #{user_password}, #{admin_level} )
+	</insert>
+	
+
+	
 	<select id="checkSuperUser" parameterType="String" resultType="int">
 		SELECT  COUNT(U.USER_EMAIL)
 		FROM    AKA_USER_LOGIN U JOIN AKA_USER_ADMIN A
@@ -42,6 +49,15 @@
 		FROM    AKA_USER U JOIN AKA_USER_ADMIN A
 		ON 		U.USER_EMAIL = A.USER_EMAIL
 	</select>
+	 
+	<select id="getUserMetaDataByEmail" parameterType="String" resultType="UserMetadataCommand">
+		SELECT	U.USER_EMAIL, U.USER_NICKNAME, U.IMG_ID, U.VALIDATION, U.USER_PASSWORD, A.ADMIN_LEVEL
+		FROM	AKA_USER U	JOIN	AKA_USER_ADMIN A
+		ON		U.USER_EMAIL	=	A.USER_EMAIL
+		WHERE	U.USER_EMAIL	=	#{user_email}
+	</select>
+	
+
 	
 	<update id="mgr_updateUsrData" parameterType="UserCommand">
 		UPDATE AKA_USER
@@ -51,6 +67,28 @@
 		    VALIDATION      =   #{validation}
 		WHERE   USER_EMAIL  =   #{user_email}	
 	</update>
+	
+	<update id="mgr_updateUsrAuthority" parameterType="UserMetadataCommand"> 
+		UPDATE AKA_USER_ADMIN
+		SET 
+		        ADMIN_LEVEL	=	#{admin_level}
+		WHERE	USER_EMAIL	=	#{user_email}
+	</update>	
+	
+	<delete id="del_authData" parameterType="String">
+		DELETE FROM AKA_USER_ADMIN
+		WHERE	USER_EMAIL    =   #{user_email}
+	</delete>
+	
+	<delete id="del_loginData" parameterType="String">
+		DELETE FROM AKA_USER_LOGIN
+		WHERE USER_EMAIL    =   #{user_email}
+	</delete>
+	
+	<delete id="del_userData" parameterType="String">
+		DELETE FROM AKA_USER
+		WHERE USER_EMAIL    =   #{user_email}
+	</delete>
 	
 	
 </mapper>
