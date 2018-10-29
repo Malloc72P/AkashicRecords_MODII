@@ -13,20 +13,20 @@ import com.aka_user.dao.UserDAO;
 import com.aka_user.domain.UserCommand;
 
 @Controller
-public class pwCheckProcController {
+public class adminPwCheckProcController {
 
 	@Autowired
 	UserDAO dao;
 	
-	@RequestMapping("/hello/pwCheckProc.do")
+	@RequestMapping("/hello/adminPwCheckProc.do")
 	public ModelAndView requestProcessor( HttpServletRequest request,
 			                              @RequestParam("user_password") String user_password ) {
 		System.out.println("________________________________________________________");
-		System.out.println("pwCheckProcController.requestProcessor >>> 매서드 호출됨");
+		System.out.println("adminPwCheckProcController.requestProcessor >>> 매서드 호출됨");
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView("subSection/pwCheckProc");
 		String user_email   = "";
-		boolean validator	= 	false;
+		boolean validator = false;
 		String activation	=	"false";
 		
 		if(session.getAttribute("email") != null) {
@@ -34,8 +34,8 @@ public class pwCheckProcController {
 			UserCommand user = dao.getUserDataByEmail(user_email);
 			
 			if(user.getUser_password().equals(user_password)) {
-				validator 	= 	true;
-				activation	=	dao.getUserMetaDataByEmail(user_email).getValidation();
+				validator = dao.checkSuperUser(user_email);
+				activation	=	dao.getUserMetaDataByEmail(user_email).getValidation();	
 			}
 			else {
 				validator = false;
@@ -47,7 +47,7 @@ public class pwCheckProcController {
 		System.out.println("pwCheckProcController.requestProcessor >>> validator : "+validator);
 		
 		
-		mav.addObject( "validator",	 validator );
+		mav.addObject( "validator", validator );
 		mav.addObject( "activation", activation );
 		System.out.println("________________________________________________________");
 		return mav;

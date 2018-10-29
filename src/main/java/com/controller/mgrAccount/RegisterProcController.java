@@ -48,7 +48,8 @@ public class RegisterProcController {
 		}
 		
 		System.out.println("RegisterProcController.requestProcessor >>> dao 접근 전");
-		boolean insertChecker = dao.insertUserData(newUser);
+		boolean insertChecker =	false; 
+		insertChecker	=	dao.insertUserData(newUser);
 		System.out.println("RegisterProcController.requestProcessor >>> dao 접근 후");
 		
 		ModelAndView mav = new ModelAndView("mgr_account/registerProc");

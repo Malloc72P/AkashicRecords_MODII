@@ -24,45 +24,30 @@ function pwCheck_admin_eventBinder(id_input_submitPWCHK, openThisPanel){
 		
 		//id_div_adminPagePanel
 		
-		pwCheck_AJAX( pw, openThisPanel, "id_div_admin_pwCheckerPanel" )	
+		adminPwCheck_AJAX( pw, openThisPanel, "id_div_admin_pwCheckerPanel" );
 	})
 	
 }
 
 function writePost_eventBinder(){
-	if(writePost_bindingEvent_limiter == 0){
-		bind_Open_Panel( "id_a_writePost"     , "id_div_pwCheckerPanel" ,"id_div_mainContent")
-		$("#id_input_submitPWCHK").unbind("click")
-		pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writePostPanel")
-//		pwCheck_eventBinder("id_input_submitPWCHK")
-//		writePost_bindingEvent_limiter = 1;
-	}
-	else{
-		
-	}
+	$("#id_a_writePost").click(function(){
+		panelOpener("id_div_admin_pwCheckerPanel" , "id_div_mainContent")
+		$("#id_input_admin_submitPWCHK").unbind("click")
+		pwCheck_admin_eventBinder("id_input_admin_submitPWCHK", "id_div_writePostPanel")
+	})
 }
 function writeSeries_eventBinder(){
-	if(writeSeries_bindingEvent_limiter == 0){
-		bind_Open_Panel( "id_a_writeSeries", "id_div_pwCheckerPanel" ,"id_div_mainContent")
-		$("#id_input_submitPWCHK").unbind("click")
-		pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writeSeriesPanel")
-//		pwCheck_eventBinder("id_input_submitPWCHK")
-//		writePost_bindingEvent_limiter = 1;
-	}
-	else{
-		
-	}
+	$("#id_a_writeSeries").click(function(){
+		panelOpener("id_div_admin_pwCheckerPanel" , "id_div_mainContent")
+		$("#id_input_admin_submitPWCHK").unbind("click")
+		pwCheck_admin_eventBinder("id_input_admin_submitPWCHK", "id_div_writeSeriesPanel")
+	})
 }
 function writeGB_eventBinder(){
-	if(writeGB_bindingEvent_limiter == 0){
-		bind_Open_Panel( "id_a_writeGuestBook", "id_div_pwCheckerPanel" ,"id_div_mainContent")
-		$("#id_input_submitPWCHK").unbind("click")
-		pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writeGbPanel")
-		//id_a_writeGuestBook
-	}
-	else {
-		
-	}
+	bind_Open_Panel( "id_a_writeGuestBook", "id_div_pwCheckerPanel" ,"id_div_mainContent")
+	$("#id_input_submitPWCHK").unbind("click")
+	pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writeGbPanel")
+	//id_a_writeGuestBook
 }
 function writeGB_Reply_eventBinder(){
 	$("#"+"id_div_guestBookFullWrapper").find("i").each(function(){
