@@ -22,6 +22,9 @@
 		<bean  class="com.controller.mgrAccount.RegisterProcController" />
 		<bean  class="com.controller.mgrAccount.LogoutProcController" />
 		<bean  class="com.controller.mgrAccount.UserMetadataListController" />
+		<bean  class="com.controller.mgrAccount.adminPageController" />
+		<bean  class="com.controller.mgrAccount.updateUserdata" />
+		<bean  class="com.controller.mgrAccount.deleteUserdata" />
 	  <!-- SubSection -->
 		<bean class="com.controller.subSection.GuestBookController" />
 		<bean class="com.controller.subSection.GuestBookReplyProcController" />
@@ -31,6 +34,7 @@
 		<bean class="com.controller.subSection.RecentPostsController" />
 		<bean class="com.controller.subSection.WritePostProcController" />
 		<bean class="com.controller.subSection.pwCheckProcController" />
+		<bean class="com.controller.subSection.adminPwCheckProcController" />
 		<bean class="com.controller.subSection.ImageUploaderController" />
 		<bean class="com.controller.subSection.ImageUploadProcController" />
 		<bean class="com.controller.subSection.ViewContentController" />
@@ -58,6 +62,8 @@
 		<property name="maxUploadSize" value="52428800" />
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+	
+
 
 
 </beans>
