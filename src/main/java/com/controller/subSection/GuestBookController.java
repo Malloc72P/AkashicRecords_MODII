@@ -78,7 +78,7 @@ public class GuestBookController {
 			String guestEmail = item.getGb_writer_email();
 			System.out.println("######");
 			System.out.println("item : "+item.getGb_content());
-			if( !adminProfImgMap.containsKey( guestEmail ) ) {
+			if( !guestProfImgMap.containsKey( guestEmail ) ) {
 				System.out.println("프로필 이미지 저장(guest)");
 				int img_id = userDao.getUserMetaDataByEmail(guestEmail).getImg_id();
 				System.out.println("img_id : "+img_id);
