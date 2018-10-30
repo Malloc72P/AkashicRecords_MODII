@@ -25,14 +25,12 @@
 		}
 		input#id_reg_btn_profileImgUploader {
 		    border: 1px solid #d5d5d5;
-		    margin-left: 12px;
-		}
-		input#id_reg_btn_profileImgUploader {
-		    border: 1px solid #d5d5d5;
 		    margin-left: 0px;
 		    position: relative;
 		    top: 10px;
 		    left: -22px;
+		    border: 1px solid #d5d5d5;
+		    margin-left: 12px;
 		}
 		div.regThumbWrapper {
 		    width: 128px;
@@ -63,7 +61,7 @@
 				})
 			
 			}
-			function setProfileImg(imgUrl,imgId){
+			function Reg_setProfileImg(imgUrl,imgId){
 				$("#id_img_regThumb").attr("src",imgUrl);
 				$("#id_input_regImgId").attr("value",imgId);
 			}

@@ -53,17 +53,17 @@
 			//######
 			
 			//######
- 			profileImgUploader();
+ 			myPageProfileImgUploader();
  			
 			})//document.ready
 			
-			function profileImgUploader(){
+			function myPageProfileImgUploader(){
 				$("#id_input_myPageProfImgUpload").click(function(){
 					window.open('profileImgUploader.do','_fileupload','width=800, height=600');
 				})
 			
 			}
-			function setProfileImg(imgUrl,imgId){
+			function myPage_setProfileImg(imgUrl,imgId){
 				$("#id_img_myPageThumb").attr("src",imgUrl);
 				$("#id_input_myPageImgId").attr("value",imgId);
 			}

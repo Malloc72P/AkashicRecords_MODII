@@ -133,7 +133,12 @@
 					    success(result) {
 					    	resultJSON = JSON.parse(result);
  					    	console.log("resultJSON",resultJSON);
- 					    	opener.setProfileImg(resultJSON.img_url, resultJSON.img_id);
+ 					    	if(opener.Reg_setProfileImg){
+ 					    		opener.Reg_setProfileImg(resultJSON.img_url, resultJSON.img_id);	
+ 					    	}
+ 					    	if(opener.myPage_setProfileImg){
+ 					    		opener.myPage_setProfileImg(resultJSON.img_url, resultJSON.img_id);
+ 					    	}
 					      	self.close();
 					    },
 					    error() {
@@ -153,9 +158,6 @@
 		<img class="imageTest" id="id_img_imageTest" src="img/warmind2.jpg">
 	</div>
 	
-	<input class="w3-btn btnMargin btnBorderBottom profileImgBtn" 
-					   type="button" name="reg_btn_submit" 
-					   id="id_reg_btn_profileImgUploader" value="수정">
 	<input class="w3-btn btnMargin btnBorderBottom profileImgBtn" 
 		   type="file" name="id_uploadImg" 
 		   id="id_uploadImg" value="기술실증">
