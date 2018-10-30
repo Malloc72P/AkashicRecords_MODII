@@ -51,5 +51,26 @@ function adminPageOpener_eventBinder(){
 		//pwCheck_admin_eventBinder("id_input_admin_submitPWCHK", "id_div_adminPagePanel");
 	})
 }
-
+function myPageOpener_eventBinder(){
+	$("#id_a_myPageOpener").unbind("click");
+	bind_Open_Panel( "id_a_myPageOpener", "id_div_pwCheckerPanel" ,"id_div_mainContent");
+	$("#id_a_myPageOpener").click(function(){
+		$("#id_input_submitPWCHK").unbind("click");
+		$("#id_input_submitPWCHK").click(function(){
+			event.preventDefault();
+			var pw = $("#"+"id_input_pwchkPW").val();
+			console.log("mainPage.js >>> pwCheck_eventBinder >>> pw : "+pw);
+			//pwCheck_AJAX( pw, openThisPanel, "id_div_pwCheckerPanel" )
+			myPage_AJAX( pw, "id_div_myPagePanel", "id_div_pwCheckerPanel" );
+		});
+	})
+	//pwCheck_eventBinder("id_input_submitPWCHK", "id_div_myPagePanel");
+}
+function appendMyPageBtn(){
+	$("#id_div_loggedIn_sidebar").append("<h4><a  id='id_a_myPageOpener' class='w3-bar-item w3-button'>MyPage</a></h4>");
+	myPageOpener_eventBinder();
+}
+function removeMyPageBtn(){
+	$("#id_a_myPageOpener").closest("h4").remove();
+}
 

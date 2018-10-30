@@ -613,6 +613,50 @@ function submitGbReplyMsg(gbReplyMsg, gbReplyMsg_id){
 }//submitGbMsg
 
 
+function myPage_AJAX(user_password, openThisPanel, id_div_pwCheckPanel){
+	/*
+	 * 패스워드 체크가 필요한 패널을 열기 전에 거쳐가는 패스워드 재확인 패널의 ajax함수입니다
+	 * */
+	console.log("mainPage.js >>> pwCheck_AJAX >>> password : "+user_password)
+		
+	$.ajax(
+		{ 
+			method : "post",
+			url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/myPage.do",
+			data   : { "user_password":user_password },
+			cache  : false
+		}
+	)
+		.done(function(result){
+			console.log("mainPage.js >>> pwCheck_AJAX >>> AJAX수신 완료")
+			var jsonRes = JSON.parse(result)
+			//서버로부터 받은 데이터를 json으로 파싱한다
+			console.log("jsonRes : ",jsonRes);
+			if(jsonRes.validator=="true"){//로그인 성공시
+				//$("#"+"id_div_pwCheckerPanel").hide()
+				/*panel_fadeOut("id_div_pwCheckerPanel")
+				bluroff_Tag("id_div_mainContent")*/
+				console.log("pwCheck_AJAX : ",jsonRes);
+				$("#id_input_pwchkPW").val("");
+				$("#id_input_admin_pwchkPW").val("");
+				panelCloser(id_div_pwCheckPanel, "id_div_mainContent");
+				
+				$("#id_input_myPageImgId").val(jsonRes.img_id);
+				$("#id_img_myPageThumb").attr("src", jsonRes.img_url);
+				$("#myPage_email").val(jsonRes.email);
+				$("#myPage_nickname").val(jsonRes.nickname);
+				$("#id_input_myPageImgId").val(jsonRes.validator);
+				
+				panelOpener(openThisPanel, "id_div_mainContent");
+			}
+			else{//로그인 실패시
+				alert("패스워드가 일치하지 않습니다")
+				panelCloser(openThisPanel, "id_div_mainContent")
+				panelCloser("id_div_pwCheckerPanel", "id_div_mainContent");
+			}
+		})//done
+}//function submitAjax
+
 
 
 

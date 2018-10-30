@@ -47,6 +47,31 @@ function register_eventBinder(id_trigger){
 		registerAjax(PARAM_email , PARAM_password, PARAM_nickname, PARAM_profImg)
 	})
 }
+
+function myPageUpdater_eventBinder(id_trigger){
+	$("#"+id_trigger).click(function(event){
+		var validator = true
+		event.preventDefault()
+		
+		//변수에 input필드의 값들을 저장한다.
+		var PARAM_password1 = $('#myPage_prevPassword').val();
+		var PARAM_password2 = $('#myPage_newPassword').val();
+		var PARAM_password3 = $('#myPage_newPasswordCheck').val();
+		var PARAM_nickname = $('#myPage_nickname').val();
+		var PARAM_profImg  = $('#id_input_myPageImgId').val();
+		
+		console.log("PARAM_password1 >>> " + PARAM_password1);
+		console.log("PARAM_password2 >>> " + PARAM_password2);
+		console.log("PARAM_password3 >>> " + PARAM_password3);
+		console.log("PARAM_nickname >>> " + PARAM_nickname);
+		console.log("PARAM_profImg >>> " + PARAM_profImg);
+		
+		//저장한 정보를 서버에 ajax를 통해서 전송한다
+		//registerAjax(PARAM_email , PARAM_password, PARAM_nickname, PARAM_profImg);
+		updatorAjax(PARAM_password1, PARAM_password2, PARAM_password3, PARAM_nickname, PARAM_profImg);
+	})
+}
+
 function logout_eventBinder(id_trigger){
 	$("#"+id_trigger).click(function(){
 		logoutAjax()
@@ -131,7 +156,7 @@ function loginAjax(email , password){
 				panel_fadeOut("id_div_loginPanel");
 				bluroff_Tag("id_div_mainContent");
 				console.log("mgr_account.loginAjax >>> jsonRes.adminCheck : "+jsonRes.adminCheck);
-				redraw_LoggedIn_Sidebar(jsonRes.email, jsonRes.adminCheck)
+				redraw_LoggedIn_Sidebar(jsonRes.email, jsonRes.adminCheck);
 				$("#email").val("");
 				$("#password").val("");
 				/*
@@ -177,6 +202,37 @@ function registerAjax(email , password ,nickname, profImg){
 			}
 			else{//실패한 경우
 				alert("회원가입 실패")
+			}
+		})//done
+}//function submitAjax
+
+function updatorAjax(pw1, pw2, pw3, nickname, profImg){
+	$.ajax(
+		{ 
+			method : "post",
+			url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/myPageProc.do",
+			data   : { 
+						"pw1"		:	pw1		 ,
+						"pw2"		:	pw2		 ,
+						"pw3"		:	pw3		 ,
+						"nickname"	:	nickname ,
+						"profImg"	:	profImg
+					 },
+			cache  : false
+		}
+	)
+		.done(function(result){
+			var jsonRes = JSON.parse(result)
+			//받은 json data엔 insertChecker가 있다
+			//이걸로 db로의 데이터 입력이 성공적으로 이루어졌는지를 알 수 있다. 
+			console.log(jsonRes.updateChecker)
+			if(jsonRes.updateChecker == "true"){//성공한 경우
+				alert("성공적으로 수정되었습니다");
+				panel_fadeOut("id_div_myPagePanel");
+				bluroff_Tag("id_div_mainContent");
+			}
+			else{//실패한 경우
+				alert("회원수정 실패");
 			}
 		})//done
 }//function submitAjax
@@ -230,6 +286,10 @@ function redraw_LoggedIn_Sidebar(str_email, adminChecker){
 		$("#id_div_loggedIn_sidebar").append("<h4><a  id='id_a_adminPageOpener' class='w3-bar-item w3-button'>AdminPage</a></h4>");
 		adminPageOpener_eventBinder();
 	}
+	appendMyPageBtn();
+	
+	
+	
 }
 function redraw_LoggedOff_Sidebar(){
 	//1. 로그인버전 사이드바를 숨기고
@@ -247,7 +307,8 @@ function redraw_LoggedOff_Sidebar(){
 	//5.상단바의 오프너의 종류를 이메일버전에서 키버전으로 바꿔준다
 	$("#id_btn_emailOpener_sidebar").css("display","none")
 	$("#id_btn_keyOpener_sidebar").css("display","block")
-	$("#id_a_adminPageOpener").closest("h4").remove();
 	
+	$("#id_a_adminPageOpener").closest("h4").remove();
+	removeMyPageBtn();
 }
 

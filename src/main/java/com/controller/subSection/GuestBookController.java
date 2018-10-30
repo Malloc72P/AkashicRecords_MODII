@@ -64,6 +64,9 @@ public class GuestBookController {
 		
 		HashMap<String, String>	adminProfImgMap	= new HashMap<String, String>();
 		HashMap<String, String>	guestProfImgMap	= new HashMap<String, String>();
+		adminProfImgMap.clear();
+		guestProfImgMap.clear();
+		System.out.println(adminProfImgMap.containsKey("dase1102@gmail.com"));
 		count	=	dao.getGuestMsgCount();
 		
 		for(GB_Guest_MsgCommand item : guestMsgList) {
@@ -73,6 +76,8 @@ public class GuestBookController {
 			guestMsg_timeSet.put(item.getGb_id(), sdf.format(item.getGb_regdate()));
 			
 			String guestEmail = item.getGb_writer_email();
+			System.out.println("######");
+			System.out.println("item : "+item.getGb_content());
 			if( !adminProfImgMap.containsKey( guestEmail ) ) {
 				System.out.println("프로필 이미지 저장(guest)");
 				int img_id = userDao.getUserMetaDataByEmail(guestEmail).getImg_id();
@@ -82,14 +87,15 @@ public class GuestBookController {
 				guestProfImgMap.put( guestEmail, imgPath);
 			}
 			
-			
+			System.out.println("|||||||||||||"); 
 			//답글이 달려있는지 확인하고, 있으면 맵에 저장
 			if(item.getGb_from_admin_id() != -1) {
+				System.out.println("답글 확인됨");
 				GB_Admin_MsgCommand replyMsg = dao.getAdminMsgById(item.getGb_from_admin_id());
 				guestReplyMap.put(item.getGb_id(), replyMsg);
 				adminMsg_timeSet.put(replyMsg.getGb_id(), sdf.format(replyMsg.getGb_regdate())); 
 				//guestReplyMap.get( item.getGb_id() ).getGb_writer_email()
-				String adminEmail = item.getGb_writer_email();
+				String adminEmail = dao.getAdminMsgById(item.getGb_from_admin_id()).getGb_writer_email();
 				if( !adminProfImgMap.containsKey( adminEmail ) ) {
 					System.out.println("프로필 이미지 저장(admin)");
 					int img_id = userDao.getUserMetaDataByEmail(adminEmail).getImg_id();
@@ -99,9 +105,10 @@ public class GuestBookController {
 					adminProfImgMap.put( adminEmail, imgPath );
 				}
 			}
+			System.out.println("######");
 			
-		}
-		System.out.println("final testing : "+ guestProfImgMap.get("asdf@gmail.com")  );
+		}//for
+		System.out.println("final testing : "+ guestProfImgMap.get("dase1102@gmail.com")  );
 		
 		System.out.println("_________________________________");
 		

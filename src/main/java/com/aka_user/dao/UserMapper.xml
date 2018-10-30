@@ -90,6 +90,34 @@
 		WHERE USER_EMAIL    =   #{user_email}
 	</delete>
 	
+	<update id="updateAkaUser" parameterType="UserMetadataCommand">
+		UPDATE AKA_USER
+		SET 
+		    USER_NICKNAME   =   #{user_nickname}
+		    ,USER_PASSWORD  =   #{user_password}
+		    ,IMG_ID         =   #{img_id}
+		WHERE   USER_EMAIL  =   #{user_email}
+	</update>
+	
+	<update id="updateAkaUserAdmin" parameterType="UserMetadataCommand">
+		UPDATE AKA_USER_ADMIN
+		SET     ADMIN_PASSWORD	=   #{user_password}
+		WHERE   USER_EMAIL		=   #{user_email}
+	</update>
+	
+	<update id="updateAkaUserLogin" parameterType="UserMetadataCommand">
+		UPDATE AKA_USER_LOGIN
+		SET 
+		    USER_PASSWORD  	=   #{user_password}
+		WHERE   USER_EMAIL  =   #{user_email}
+	</update>
+	
+
+	
+
+	
+
+	
 	
 </mapper>
 
