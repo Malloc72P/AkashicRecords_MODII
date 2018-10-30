@@ -25,6 +25,8 @@
 		<bean  class="com.controller.mgrAccount.adminPageController" />
 		<bean  class="com.controller.mgrAccount.updateUserdata" />
 		<bean  class="com.controller.mgrAccount.deleteUserdata" />
+		<bean  class="com.controller.mgrAccount.ProfileImgUploaderController" />
+		<bean  class="com.controller.mgrAccount.ProfileImgUploadProcController" />
 	  <!-- SubSection -->
 		<bean class="com.controller.subSection.GuestBookController" />
 		<bean class="com.controller.subSection.GuestBookReplyProcController" />

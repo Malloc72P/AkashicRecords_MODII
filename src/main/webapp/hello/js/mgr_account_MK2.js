@@ -37,12 +37,14 @@ function register_eventBinder(id_trigger){
 		var PARAM_email    = $('#reg_email').val()
 		var PARAM_password = $('#reg_password').val()
 		var PARAM_nickname = $('#reg_nickname').val()
+		var PARAM_profImg  = $('#id_input_regImgId').val()
 		console.log("PARAM_email >>> " + PARAM_email)
 		console.log("PARAM_password >>> " + PARAM_password)
 		console.log("PARAM_nickname >>> " + PARAM_nickname)
+		console.log("PARAM_profImg >>> " + PARAM_profImg)
 		
 		//저장한 정보를 서버에 ajax를 통해서 전송한다
-		registerAjax(PARAM_email , PARAM_password, PARAM_nickname)
+		registerAjax(PARAM_email , PARAM_password, PARAM_nickname, PARAM_profImg)
 	})
 }
 function logout_eventBinder(id_trigger){
@@ -149,12 +151,17 @@ function loginAjax(email , password){
  * 	register ajax function
  * 	email, password, nickname을 registerProc로서 서버에 전송한다
  * */
-function registerAjax(email , password ,nickname){
+function registerAjax(email , password ,nickname, profImg){
 	$.ajax(
 		{ 
 			method : "post",
 			url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/registerProc.do",
-			data   : { "email":email, "password":password, "nickname":nickname },
+			data   : { 
+						"email"		:	email, 
+						"password"	:	password, 
+						"nickname"	:	nickname ,
+						"profImg"	:	profImg
+					 },
 			cache  : false
 		}
 	)

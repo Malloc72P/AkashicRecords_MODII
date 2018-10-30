@@ -7,11 +7,7 @@ public class UserCommand {
 	private String 	user_nickname;
 	private String	validation;
 	private int img_id;
-		
-	//————————————————————————————————————————————————————————————————————————————————————
-	public UserCommand() {
-		this.img_id = -1;//비어있는 상태가 -1임
-	}
+	
 	//————————————————————————————————————————————————————————————————————————————————————
 	
 

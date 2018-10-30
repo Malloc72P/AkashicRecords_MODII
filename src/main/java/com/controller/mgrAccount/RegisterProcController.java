@@ -28,7 +28,7 @@ public class RegisterProcController {
 										 ,@RequestParam(value="email"    ,defaultValue=""  ) String user_email
             							 ,@RequestParam(value="password" ,defaultValue=""  ) String user_password
 										 ,@RequestParam(value="nickname" ,defaultValue=""  ) String user_nickname
-										 ,@RequestParam(value="img_id"   ,defaultValue="-1") int img_id){
+										 ,@RequestParam(value="profImg"   ,defaultValue="-1") int img_id){
 		System.out.println("_____________________________________________");
 		System.out.println("RegisterProcController.requestProcessor >>> 매서드 호출됨");
 		System.out.println("RegisterProcController.requestProcessor >>> user_email    : "+user_email);
