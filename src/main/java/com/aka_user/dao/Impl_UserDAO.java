@@ -269,5 +269,22 @@ public class Impl_UserDAO extends SqlSessionDaoSupport implements UserDAO {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean myPageUpdator(UserMetadataCommand userMetaData) {
+		// TODO Auto-generated method stub
+		int upChecker1 = 0;
+		int upChecker2 = 0;
+		int upChecker3 = 0;
+		
+		upChecker1 = getSqlSession().update("updateAkaUser", userMetaData);
+		upChecker2 = getSqlSession().update("updateAkaUser", userMetaData);
+		upChecker3 = getSqlSession().update("updateAkaUser", userMetaData);
+		
+		if( (upChecker1 * upChecker2 * upChecker3) != 0 ) {
+			return true;
+		}
+		else return false;
+	}
 	
 }

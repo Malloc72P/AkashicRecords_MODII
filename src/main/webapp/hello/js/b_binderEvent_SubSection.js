@@ -45,8 +45,11 @@ function writeSeries_eventBinder(){
 }
 function writeGB_eventBinder(){
 	bind_Open_Panel( "id_a_writeGuestBook", "id_div_pwCheckerPanel" ,"id_div_mainContent")
-	$("#id_input_submitPWCHK").unbind("click")
-	pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writeGbPanel")
+	$("#id_a_writeGuestBook").click(function(){
+		$("#id_input_submitPWCHK").unbind("click")
+		pwCheck_eventBinder("id_input_submitPWCHK", "id_div_writeGbPanel")	
+	})
+	
 	//id_a_writeGuestBook
 }
 function writeGB_Reply_eventBinder(){

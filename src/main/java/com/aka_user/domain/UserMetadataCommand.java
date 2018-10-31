@@ -7,10 +7,18 @@ public class UserMetadataCommand {
 	private int 	img_id;
 	private String 	validation;
 	private int		admin_level;
+	private	String	user_password;
 	//————————————————————————————————————————————————————————————————————————————————————
 
 	
+	
 	//————————————————————————————————————————————————————————————————————————————————————
+	public String getUser_password() {
+		return user_password;
+	}
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
+	}
 	public String getUser_email() {
 		return user_email;
 	}

@@ -71,16 +71,7 @@
 		    right: -22px;
 		    clear: both;
 		}
-		.adminProfileImg{
-			background-image: url(../hello/img/profile.jpg);
-		    width: 48px;
-	        min-width: 48px;
-		    height: 48px;
-		    border-radius: 50%;
-		    top: -18px;
-		    left: 6px;
-		    position: relative;
-		}
+		
 		.adminName{
 		    position: absolute;
 		    right: 60px;
@@ -127,12 +118,27 @@
 		    left: -22px;
 		    clear: both;
 		}
-		.userProfileImg{
-		    background-image: url(../hello/img/profile_default.png);
+		.adminProfileImgWrapper{
+			width: 48px;
+		    height: 48px;
+		}
+		.userProfileImgWrapper{
+			width: 48px;
+		    height: 48px;
+		}
+		.adminProfileImg{
 		    width: 48px;
 		    height: 48px;
 		    border-radius: 50%;
-		    top: -18px;
+	        top: -12px;
+		    left: 6px;
+		    position: relative;
+		}
+		.userProfileImg{
+		    width: 48px;
+		    height: 48px;
+		    border-radius: 50%;
+	        top: -87px;
 		    left: -5px;
 		    position: relative;
 		}
@@ -205,7 +211,10 @@
 							<p class="guestBook-text w3-large">${ guestMsg.getGb_content() }</p>
 						</div>
 						<div class="userName guestBookProfileName"><h5>${ guestMsg.getGb_writer_email() }</h5></div>
-						<div class="imgRanderer userProfileImg"/>
+						<div class="userProfileImgWrapper">
+							<!-- ################################### -->
+							<img class="userProfileImg" src="../${ guestProfImgMap.get( guestMsg.getGb_writer_email() ) }">
+						</div>
 						<div class="guestBookUserRegDate"><p class="w3-small">${ guestMsg_timeSet.get( guestMsg.getGb_id() ) }</p></div>
 						<div	id="id_div_gbReplyBtn" 
 								class="guestBookUserReply">
@@ -222,7 +231,9 @@
 								<p class="guestBook_text w3-large">${ guestReplyMap.get( guestMsg.getGb_id() ).getGb_content() }</p>
 							</div>
 							<div class="adminName guestBookProfileName"><h5>${ guestReplyMap.get( guestMsg.getGb_id() ).getGb_writer_email() }</h5></div>
-							<div class="imgRanderer adminProfileImg" />
+							<div class="adminProfileImgWrapper">
+								<img class="adminProfileImg" src="../${ adminProfImgMap.get( guestReplyMap.get( guestMsg.getGb_id() ).getGb_writer_email() ) }">
+							</div>
 							<div class="guestBookAdminRegDate"><p class="w3-small">${ adminMsg_timeSet.get( guestReplyMap.get( guestMsg.getGb_id() ).getGb_id() ) }</p></div>
 						</div>
 					</div><!-- msgWrapper -->

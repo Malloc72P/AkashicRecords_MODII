@@ -18,6 +18,7 @@ public interface UserDAO {
 	//###UPDATE DATA###
 	public boolean						mgr_updateUsrData(UserCommand userData);
 	public boolean						mgr_updateUsrAuthority(UserMetadataCommand userMetaData);
+	public boolean						myPageUpdator(UserMetadataCommand userMetaData);
 	//###DELETE DATA###
 	public boolean						del_authData(String user_email);
 	public boolean						del_loginData(String user_email);

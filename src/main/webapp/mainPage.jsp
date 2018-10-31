@@ -64,8 +64,11 @@
 			
 			//어드민 페이지 이벤트 바인더
 			adminPageOpener_eventBinder();
-			bind_Close_Panel("id_div_adminPageCloser"  , "id_div_adminPagePanel" ,"id_div_mainContent")
-			bind_Close_Panel("id_btn_adminPageGoBack"  , "id_div_adminPagePanel" ,"id_div_mainContent")
+			
+			//마이페이지 페이지 이벤트 바인더
+			myPageOpener_eventBinder()
+			bind_Close_Panel("id_h2_myPageCloser"  , "id_div_myPagePanel" ,"id_div_mainContent")
+			bind_Close_Panel("id_btn_myPageGoBack"  , "id_div_myPagePanel" ,"id_div_mainContent")
 			
 			//포스트 작성 패널 이벤트 바인더
 			bind_Close_Panel("id_div_writePostCloser"    , "id_div_writePostPanel"  ,"id_div_mainContent")
@@ -134,6 +137,7 @@
 									<a  id="id_a_adminPageOpener" class="w3-bar-item w3-button">AdminPage</a>
 								</h4>
 							</c:if>
+							<h4><a  id='id_a_myPageOpener' class='w3-bar-item w3-button'>MyPage</a></h4>
 							
 						</div>
 						<div id="id_div_notLoggedIn_sidebar" style="display:none;">
@@ -163,7 +167,7 @@
 	<!-- 아카식 네비바-->
 		<div class="main-navibar w3-bar <%=MainConst.THEME_COLOR_MAIN%>"><!-- 상단바 -->
 			<a href="#" class="w3-bar-item" style="text-decoration: none;">
-				<h3>Akashic Records Mk.50</h3>
+				<h3>Akashic Records Mk.52</h3>
 			</a>
 			
 			<div class="chk-side-on m_mgr_account">
@@ -260,6 +264,9 @@
 			<jsp:include page="mgr_account/login.jsp"></jsp:include>
 		<!-- popPannel_register -->
 			<jsp:include page="mgr_account/register.jsp"></jsp:include>
+		<!-- popPannel_register -->
+			<jsp:include page="mgr_account/myPage.jsp"></jsp:include>
+			
 		<!-- popPannel_pwChecker -->
 			<jsp:include page="subSection/pwChecker.jsp"></jsp:include>
 		<!-- popPannel_pwChecker -->
