@@ -199,6 +199,13 @@ function registerAjax(email , password ,nickname, profImg){
 				alert("성공적으로 가입되었습니다")
 				panel_fadeOut("id_div_registerPanel")
 				bluroff_Tag("id_div_mainContent")
+				//
+				$("#id_img_regThumb").attr("src", "");
+				$("#id_input_regImgId").val("-1");
+				$("#reg_email").val("");
+				$("#reg_password").val("");
+				$("#reg_passwordCheck").val("");
+				$("#reg_nickname").val("");
 			}
 			else{//실패한 경우
 				alert("회원가입 실패")
@@ -230,6 +237,14 @@ function updatorAjax(pw1, pw2, pw3, nickname, profImg){
 				alert("성공적으로 수정되었습니다");
 				panel_fadeOut("id_div_myPagePanel");
 				bluroff_Tag("id_div_mainContent");
+				//
+				$("#id_img_myPageThumb").attr("src", "");
+				$("#id_input_myPageImgId").val("-1");
+				$("#myPage_email").val("");
+				$("#myPage_prevPassword").val("");
+				$("#myPage_newPassword").val("");
+				$("#myPage_newPasswordCheck").val("");
+				$("#myPage_nickname").val("");
 			}
 			else{//실패한 경우
 				alert("회원수정 실패");

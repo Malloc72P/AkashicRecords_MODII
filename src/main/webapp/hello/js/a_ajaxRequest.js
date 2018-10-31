@@ -645,7 +645,6 @@ function myPage_AJAX(user_password, openThisPanel, id_div_pwCheckPanel){
 				$("#id_img_myPageThumb").attr("src", jsonRes.img_url);
 				$("#myPage_email").val(jsonRes.email);
 				$("#myPage_nickname").val(jsonRes.nickname);
-				$("#id_input_myPageImgId").val(jsonRes.validator);
 				
 				panelOpener(openThisPanel, "id_div_mainContent");
 			}
