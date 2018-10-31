@@ -127,19 +127,19 @@
 		    height: 48px;
 		}
 		.adminProfileImg{
-		    width: 48px;
-		    height: 48px;
+		    width: 56px;
+		    height: 56px;
 		    border-radius: 50%;
-	        top: -12px;
-		    left: 6px;
+		    top: -26px;
+		    left: 3px;
 		    position: relative;
 		}
 		.userProfileImg{
-		    width: 48px;
-		    height: 48px;
+		    width: 56px;
+		    height: 56px;
 		    border-radius: 50%;
-	        top: -87px;
-		    left: -5px;
+		    top: -88px;
+		    left: -9px;
 		    position: relative;
 		}
 		.userName{
