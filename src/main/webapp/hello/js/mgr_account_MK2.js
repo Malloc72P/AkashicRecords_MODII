@@ -237,6 +237,14 @@ function updatorAjax(pw1, pw2, pw3, nickname, profImg){
 				alert("성공적으로 수정되었습니다");
 				panel_fadeOut("id_div_myPagePanel");
 				bluroff_Tag("id_div_mainContent");
+				//
+				$("#id_img_myPageThumb").attr("src", "");
+				$("#id_input_myPageImgId").val("-1");
+				$("#myPage_email").val("");
+				$("#myPage_prevPassword").val("");
+				$("#myPage_newPassword").val("");
+				$("#myPage_newPasswordCheck").val("");
+				$("#myPage_nickname").val("");
 			}
 			else{//실패한 경우
 				alert("회원수정 실패");

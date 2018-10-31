@@ -278,9 +278,9 @@ public class Impl_UserDAO extends SqlSessionDaoSupport implements UserDAO {
 		int upChecker3 = 0;
 		
 		upChecker1 = getSqlSession().update("updateAkaUser", userMetaData);
-		upChecker2 = getSqlSession().update("updateAkaUser", userMetaData);
-		upChecker3 = getSqlSession().update("updateAkaUser", userMetaData);
-		
+		upChecker2 = getSqlSession().update("updateAkaUserAdmin", userMetaData);
+		upChecker3 = getSqlSession().update("updateAkaUserLogin", userMetaData);
+				
 		if( (upChecker1 * upChecker2 * upChecker3) != 0 ) {
 			return true;
 		}
