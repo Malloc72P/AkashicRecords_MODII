@@ -1,6 +1,7 @@
 package com.controller.mgrAccount;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +24,13 @@ public class LoginProcController {
 
 	@RequestMapping("/hello/loginProc.do")
 	public ModelAndView requestProcessor( HttpServletRequest request
+										 ,HttpServletResponse response
 										 ,@RequestParam(value="email" , defaultValue="") String user_email
             							 ,@RequestParam(value="password" , defaultValue="") String user_password) {
 		System.out.println("_____________________________________________");
 		System.out.println("loginProcController.requestProcessor >>> 매서드 호출됨");
+		
+		response.setHeader("Access-Control-Allow-Origin","*");
 		
 		ModelAndView mav = new ModelAndView("mgr_account/loginProc");
 		

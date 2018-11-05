@@ -18,6 +18,7 @@
   <!-- 컨트롤러 빈 생성 -->
 	  <!-- MgrAccount -->
 		<bean  class="com.controller.main.MainController" />
+		<bean  class="com.controller.main.MainControllerProc" />
 		<bean  class="com.controller.mgrAccount.LoginProcController" />
 		<bean  class="com.controller.mgrAccount.RegisterProcController" />
 		<bean  class="com.controller.mgrAccount.LogoutProcController" />
