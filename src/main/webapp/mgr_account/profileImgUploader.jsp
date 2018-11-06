@@ -133,12 +133,14 @@
 					    success(result) {
 					    	resultJSON = JSON.parse(result);
  					    	console.log("resultJSON",resultJSON);
- 					    	if(opener.Reg_setProfileImg){
+ 					    	/* if(opener.Reg_setProfileImg){
  					    		opener.Reg_setProfileImg(resultJSON.img_url, resultJSON.img_id);	
  					    	}
  					    	if(opener.myPage_setProfileImg){
  					    		opener.myPage_setProfileImg(resultJSON.img_url, resultJSON.img_id);
- 					    	}
+ 					    	} */
+ 					    	
+ 					    	opener.postMessage(resultJSON,"*");
 					      	self.close();
 					    },
 					    error() {
