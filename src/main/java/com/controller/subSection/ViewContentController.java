@@ -2,6 +2,7 @@ package com.controller.subSection;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +23,14 @@ public class ViewContentController {
 	private SeriesDAO seriesDao;
 	
 	@RequestMapping("/hello/viewContent.do")
-	public ModelAndView requestProcessor(HttpServletRequest request) {
+	public ModelAndView requestProcessor(
+											HttpServletRequest 		request
+											,HttpServletResponse 	response
+										) {
 		System.out.println("____________________________________________________");
 		System.out.println("ViewContentController.requestProcessor >>> 메서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/viewContent");
+		response.setHeader("Access-Control-Allow-Origin","*");
 		
 		int post_id = Integer.parseInt( request.getParameter("post_id") );
 		

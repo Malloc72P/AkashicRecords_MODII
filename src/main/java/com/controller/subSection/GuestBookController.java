@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import com.aka_guestbook.domain.GB_Guest_MsgCommand;
 import com.aka_image.dao.ImageDAO;
 import com.aka_post.domain.StartAndEnd;
 import com.aka_user.dao.UserDAO;
+import com.util.FileUtil;
 
 @Controller
 public class GuestBookController {
@@ -33,10 +37,14 @@ public class GuestBookController {
 	
 	
 	@RequestMapping("/hello/guestBook.do")
-	public ModelAndView requestProcessor( @RequestParam(value="pageNum", defaultValue="1") int currentPage ) {
+	public ModelAndView requestProcessor( 	@RequestParam(value="pageNum", defaultValue="1") int currentPage
+											,HttpServletResponse	response
+											,HttpServletRequest		request
+										) {
 		System.out.println("_____________________________________________________");
 		System.out.println("GuestBookController.requestProcessor >>> 메서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/guestBook");
+		response.setHeader("Access-Control-Allow-Origin","*");
 		
 		
 		int pageSize 	=	10;
@@ -84,7 +92,7 @@ public class GuestBookController {
 				System.out.println("img_id : "+img_id);
 				String imgPath = imgDao.getImgUrlById( img_id );
 				System.out.println("imgPath : "+imgPath);
-				guestProfImgMap.put( guestEmail, imgPath);
+				guestProfImgMap.put( guestEmail,  FileUtil.makeImgUrl(request, imgPath) );
 			}
 			
 			System.out.println("|||||||||||||"); 
@@ -102,7 +110,7 @@ public class GuestBookController {
 					System.out.println("img_id : "+img_id);
 					String imgPath = imgDao.getImgUrlById( img_id );
 					System.out.println("imgPath : "+imgPath);
-					adminProfImgMap.put( adminEmail, imgPath );
+					adminProfImgMap.put( adminEmail, FileUtil.makeImgUrl(request, imgPath) );
 				}
 			}
 			System.out.println("######");

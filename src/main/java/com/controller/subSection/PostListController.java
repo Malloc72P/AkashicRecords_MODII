@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,12 @@ public class PostListController {
 	private ImageDAO imgDAO;
 	
 	@RequestMapping("/hello/postList.do")
-	public ModelAndView requestProcessor( HttpServletRequest request ) {
+	public ModelAndView requestProcessor( 
+											HttpServletRequest 		request
+											,HttpServletResponse 	response
+											) {
 		ModelAndView mav = new ModelAndView("subSection/postList");
+		response.setHeader("Access-Control-Allow-Origin","*");
 		List<SeriesCommand> seriesList = dao.getSeriesList();
 		
 		HashMap<Integer, String> imgMap = new HashMap<Integer, String>();
@@ -43,7 +48,7 @@ public class PostListController {
 			String imgPath	=	imgDAO.getImgUrlById(item.getImg_id());
 			//String imgUrl	=	FileUtil.makeImgUrl(request, imgPath);
 			//System.out.println("testing : "+ imgUrl);
-			imgMap.put(item.getImg_id(), imgPath);
+			imgMap.put(item.getImg_id(), FileUtil.makeImgUrl(request, imgPath));
 			System.out.println("______________________________");
 		}
 		

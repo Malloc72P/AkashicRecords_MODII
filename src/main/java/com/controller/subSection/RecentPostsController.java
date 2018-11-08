@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aka_image.dao.ImageDAO;
 import com.aka_post.dao.PostDAO;
 import com.aka_post.domain.PostCommand;
+import com.util.FileUtil;
 
 @Controller
 public class RecentPostsController {
@@ -25,15 +29,20 @@ public class RecentPostsController {
 	private ImageDAO imgDao;
 	
 	@RequestMapping("/hello/recentPosts.do")
-	public ModelAndView requestProcessor(
+	public ModelAndView requestProcessor(	
+											HttpServletRequest request,
+											HttpServletResponse response,
 											@RequestParam(value="pageNum", defaultValue="1") int currentPage ) {
 		System.out.println("________________________________________________________");
 		System.out.println("RecentPostsProcController.requestProcessor >>> 매서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/recentPosts");
+		response.setHeader("Access-Control-Allow-Origin","*");
+		
 		int pageSize = 5;
 		int blockSize = 5;
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
 		
 		System.out.println("RecentPostsProcController.requestProcessor >>> currentPage : "+currentPage);
 		
@@ -55,7 +64,7 @@ public class RecentPostsController {
 		if (count > 0) {// 화면에 보여줄 레코드가 한개라도 존재한다면
 			articleList = dao.getPosts(startCount, endCount);// 10개씩 (endRow X)
 			for(int i = 0 ; i < articleList.size() ; i++) {
-				thumbnailMap.put( articleList.get(i).getImg_id(), imgDao.getImgUrlById(articleList.get(i).getImg_id()) );
+				thumbnailMap.put( articleList.get(i).getImg_id(), FileUtil.makeImgUrl(request, imgDao.getImgUrlById(articleList.get(i).getImg_id())) );
 			}
 		}
 		else {

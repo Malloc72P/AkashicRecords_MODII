@@ -1,6 +1,7 @@
 package com.controller.mgrAccount;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aka_user.dao.UserDAO;
 import com.aka_user.domain.UserMetadataCommand;
+import com.util.SessionMapMgr;
 
 @Controller
 public class MyPageProcController {
@@ -24,6 +26,8 @@ public class MyPageProcController {
 
 	@RequestMapping("/hello/myPageProc.do")
 	public ModelAndView requestProcessor( HttpServletRequest request
+										 ,HttpServletResponse response
+										 ,@RequestParam(value="ssnId", defaultValue="") String ssnId
             							 ,@RequestParam(value="pw1" ,defaultValue=""  ) String pw1
             							 ,@RequestParam(value="pw2" ,defaultValue=""  ) String pw2
             							 ,@RequestParam(value="pw3" ,defaultValue=""  ) String pw3
@@ -31,10 +35,20 @@ public class MyPageProcController {
 										 ,@RequestParam(value="profImg"   ,defaultValue="-1") int img_id){
 		System.out.println("_____________________________________________");
 		System.out.println("RegisterProcController.requestProcessor >>> 매서드 호출됨");
+		response.setHeader("Access-Control-Allow-Origin","*");
 		ModelAndView mav = new ModelAndView("mgr_account/myPageProc");
 		boolean updateChecker = false;
 		String	errorCode		=	"noData";
-		HttpSession session = request.getSession();
+		//######
+		HttpSession session = null;
+		if( !ssnId.equals("") ) {
+			session	=	SessionMapMgr.getInstance().getSessionMap().get(ssnId);
+		}else {
+			mav.addObject("updateChecker",false);
+			mav.addObject("errorCode","invalidApproach");
+			return mav;
+		}
+		//######		
 		String user_email = "";
 		
 		

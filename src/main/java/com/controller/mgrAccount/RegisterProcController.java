@@ -1,6 +1,7 @@
 package com.controller.mgrAccount;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class RegisterProcController {
 
 	@RequestMapping("/hello/registerProc.do")
 	public ModelAndView requestProcessor( HttpServletRequest request
+										 ,HttpServletResponse response
 										 ,@RequestParam(value="email"    ,defaultValue=""  ) String user_email
             							 ,@RequestParam(value="password" ,defaultValue=""  ) String user_password
 										 ,@RequestParam(value="nickname" ,defaultValue=""  ) String user_nickname
@@ -35,7 +37,7 @@ public class RegisterProcController {
 		System.out.println("RegisterProcController.requestProcessor >>> user_password    : "+user_password);
 		System.out.println("RegisterProcController.requestProcessor >>> user_nickname : "+user_nickname);
 		System.out.println("RegisterProcController.requestProcessor >>> img_id : "+img_id);
-		
+		response.setHeader("Access-Control-Allow-Origin","*");
 		UserCommand newUser = new UserCommand();
 		newUser.setUser_email(user_email);
 		newUser.setUser_password(user_password);

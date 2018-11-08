@@ -1,6 +1,8 @@
 package com.controller.mgrAccount;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aka_user.dao.UserDAO;
 import com.aka_user.domain.UserCommand;
+
+import	com.util.SessionMapMgr;
 
 @Controller
 public class LoginProcController {
@@ -23,12 +27,32 @@ public class LoginProcController {
 
 	@RequestMapping("/hello/loginProc.do")
 	public ModelAndView requestProcessor( HttpServletRequest request
+										 ,HttpServletResponse response
 										 ,@RequestParam(value="email" , defaultValue="") String user_email
             							 ,@RequestParam(value="password" , defaultValue="") String user_password) {
 		System.out.println("_____________________________________________");
 		System.out.println("loginProcController.requestProcessor >>> 매서드 호출됨");
 		
+		response.setHeader("Access-Control-Allow-Origin","*");
+		
 		ModelAndView mav = new ModelAndView("mgr_account/loginProc");
+		
+		HttpSession	session		=	request.getSession();
+		String		sessionId	=	session.getId();
+		
+		System.out.println("######################################################");	 
+		System.out.println("sessionId : "+sessionId);
+		SessionMapMgr	sessionMgr	=	SessionMapMgr.getInstance();
+		sessionMgr.getSessionMap().put(sessionId, session);
+		
+		HttpSession newSession = sessionMgr.getSessionMap().get(sessionId);
+		System.out.println("newSession : "+newSession.getId());
+		
+		System.out.println("######################################################");
+		
+		
+		System.out.println("request ip : "+request.getRemoteAddr());
+		System.out.println("sessionId : "+sessionId);
 		
 		System.out.println("loginProcController.requestProcessor >>> user_email : "+user_email);
 		System.out.println("loginProcController.requestProcessor >>> user_password : "+user_password);
@@ -54,6 +78,7 @@ public class LoginProcController {
 		//######
 		mav.addObject("loginChecker",	loginChecker);
 		mav.addObject("user_email",		user_email);
+		mav.addObject("ssnId",newSession.getId());
 		//######
 		System.out.println("user_email		: "+user_email);
 		System.out.println("loginChecker	: "+loginChecker);

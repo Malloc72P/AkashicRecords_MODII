@@ -7,5 +7,6 @@
 {
 	"loginChecker":"${ loginChecker }",
 	"email":"${ user_email }",
-	"adminCheck":"${superChecker}"
+	"adminCheck":"${superChecker}",
+	"ssnId":"${ssnId}"
 }
