@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,15 @@ public class ImageUploadProcController {
 	
 	@RequestMapping("/hello/imageUploadProc.do")
 	public ModelAndView requestProcessor(
-											HttpServletRequest request,
+											HttpServletRequest 	request,
+											HttpServletResponse response,
 											@RequestParam("file") MultipartFile uploadedFile
 										) {
 		System.out.println("________________________________________________________");
 		System.out.println("ImageUploadProcController.requestProcessor >>> 메서드 호출됨");
 		
 		ModelAndView mav = new ModelAndView("subSection/imageUploadProc");
-//		System.out.println("ImageUploadProcController.requestProcessor >>> uploadedFile.getName() : "+uploadedFile.getName());
-//		System.out.println("ImageUploadProcController.requestProcessor >>> uploadedFile.getOriginalFilename() : "+uploadedFile.getOriginalFilename());
+		response.setHeader("Access-Control-Allow-Origin","*");
 		
 		ServletContext application = request.getServletContext();
 		
