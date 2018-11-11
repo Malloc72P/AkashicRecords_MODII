@@ -44,6 +44,8 @@
 		<bean class="com.controller.subSection.ImageUploadProcController" />
 		<bean class="com.controller.subSection.ViewContentController" />
 		<bean class="com.controller.subSection.WriteSeriesProcController" />
+		<bean class="com.controller.subSection.WritePostController" />
+		<bean class="com.controller.subSection.WriteSeriesController" />
 		
 		
 <!-- (4) viewResolver(tiles를 위해서 필요)-->
