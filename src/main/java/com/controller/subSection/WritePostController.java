@@ -26,10 +26,11 @@ public class WritePostController {
 										)
 	{
 		System.out.println("________________________________________________________");
-		System.out.println("WritePostProcController.requestProcessor >>> 매서드 호출됨");
+		System.out.println("WritePostController.requestProcessor >>> 매서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/writePostProc");
-		
 		response.setHeader("Access-Control-Allow-Origin","*");
+		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+		
 		HttpSession	session	=	null;
 		if( !ssnId.equals("") ) {
 			//ssnID를 받은 경우
@@ -53,6 +54,7 @@ public class WritePostController {
 					//이 조건문까지 진입해야만 session이 체크되었다는 의미임.
 					mav.addObject("insertChecker","validSession");
 					System.out.println("validSession");
+					System.out.println("________________________________________________________");
 					return mav;
 				}
 			}

@@ -45,21 +45,42 @@ public class WritePostProcController {
 	@Autowired
 	private UserDAO	userDao;
 	
-	@RequestMapping("/hello/writePostProc.do")
+	
+	@RequestMapping(value="/hello/writePostProc.do")
 	public ModelAndView requestProcessor(
 										 HttpServletRequest 			request,
-										 HttpServletResponse			response,
-										 @RequestParam("ssnId")			String ssnId,
-			                             @RequestParam("post_title")   	String post_title    ,
-										 @RequestParam("post_content") 	String post_content,
-										 @RequestParam("series_id")    	int    series_id 
+										 HttpServletResponse			response
 										)
 	{
 		System.out.println("________________________________________________________");
 		System.out.println("WritePostProcController.requestProcessor >>> 매서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/writePostProc");
+
+//		if( post_title.equals("") || post_content.equals("") ) {
+//			mav.addObject("insertChecker","noArgument");
+//			return mav;
+//		}
+//		 @RequestParam("ssnId")			String ssnId,
+//        @RequestParam("post_title")   	String post_title    ,
+//		 @RequestParam("post_content") 	String post_content,
+//		 @RequestParam("series_id")    	int    series_id 
+		String 	ssnId 			=	request.getParameter("ssnId");
+        String 	post_title   	=	request.getParameter("post_title");
+		String 	post_content 	=	request.getParameter("post_content");
+		String 	str_series_id 	=	request.getParameter("series_id");
+		int		series_id		=	-1;
+		System.out.println("prev param check");
+		System.out.println("WritePostProcController.requestProcessor >>> ssnId		  : "+ssnId);
+		System.out.println("WritePostProcController.requestProcessor >>> post_title   : "+post_title);
+		System.out.println("WritePostProcController.requestProcessor >>> post_content : "+post_content);
+		System.out.println("WritePostProcController.requestProcessor >>> series_id    : "+series_id);
 		
-		response.setHeader("Access-Control-Allow-Origin","*");
+		if(str_series_id != null) {
+			if(!str_series_id.equals("")) {
+				series_id	=	Integer.parseInt(str_series_id);
+			}
+		}
+		
 		HttpSession	session	=	null;
 		if( !ssnId.equals("") ) {
 			session	=	SessionMapMgr.getInstance().getSessionMap().get(ssnId);
@@ -79,11 +100,7 @@ public class WritePostProcController {
 			mav.addObject("insertChecker","invalidSession");
 			return mav;
 		}
-		if( post_title.equals("") || post_content.equals("") ) {
-			mav.addObject("insertChecker","noArgument");
-			return mav;
-		}
-		
+		System.out.println("last param check");
 		System.out.println("WritePostProcController.requestProcessor >>> ssnId		  : "+ssnId);
 		System.out.println("WritePostProcController.requestProcessor >>> post_title   : "+post_title);
 		System.out.println("WritePostProcController.requestProcessor >>> post_content : "+post_content);
@@ -139,8 +156,7 @@ public class WritePostProcController {
 			ServletContext application = request.getServletContext();
 			
 			String absol_path			=	application.getRealPath("").replace("\\", "/");
-			//String img_Dir_path			=	absol_path+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
-			String img_Dir_path			=	absol_path+"/"+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
+			String img_Dir_path			=	absol_path+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
 			String post_thumbnail_name	=	imgDao.getImgNameById(post_thumbnail_id);
 			
 			
