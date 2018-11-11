@@ -132,7 +132,8 @@
 			
 			function insertImage(img_url, img_name, img_id)
 			{
-				opener.TinyMceInsert('<p><img class="post_viewImg" style="max-width:700px;" src="'+img_url+'" alt="'+img_name+'" title="aka_imgID_'+img_id+'"></p>');
+				opener.postMessage('<p><img class="post_viewImg" style="max-width:700px;" src="'+img_url+'" alt="'+img_name+'" title="aka_imgID_'+img_id+'"></p>',"*");
+				/* opener.TinyMceInsert('<p><img class="post_viewImg" style="max-width:700px;" src="'+img_url+'" alt="'+img_name+'" title="aka_imgID_'+img_id+'"></p>'); */
 			}
 			function eventBinder_insertImgIntotheTinyMce(id_div_insertImgIntoTinyMce){
 				$("#"+id_div_insertImgIntoTinyMce).click(function(){

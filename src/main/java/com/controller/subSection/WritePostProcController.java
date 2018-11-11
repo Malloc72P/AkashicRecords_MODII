@@ -6,6 +6,8 @@ import java.util.StringTokenizer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,7 +24,9 @@ import com.aka_post.dao.PostDAO;
 import com.aka_post.domain.PostCommand;
 import com.aka_series.dao.SeriesDAO;
 import com.aka_series.domain.SeriesCommand;
+import com.aka_user.dao.UserDAO;
 import com.util.FileUtil;
+import com.util.SessionMapMgr;
 
 import constSet.MainConst;
 
@@ -38,17 +42,49 @@ public class WritePostProcController {
 	@Autowired
 	private SeriesDAO seriesDao;
 	
+	@Autowired
+	private UserDAO	userDao;
+	
 	@RequestMapping("/hello/writePostProc.do")
 	public ModelAndView requestProcessor(
-										 HttpServletRequest request,
-			                             @RequestParam("post_title")   String post_title    ,
-										 @RequestParam("post_content") String post_content,
-										 @RequestParam("series_id")    int    series_id 
+										 HttpServletRequest 			request,
+										 HttpServletResponse			response,
+										 @RequestParam("ssnId")			String ssnId,
+			                             @RequestParam("post_title")   	String post_title    ,
+										 @RequestParam("post_content") 	String post_content,
+										 @RequestParam("series_id")    	int    series_id 
 										)
 	{
 		System.out.println("________________________________________________________");
 		System.out.println("WritePostProcController.requestProcessor >>> 매서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/writePostProc");
+		
+		response.setHeader("Access-Control-Allow-Origin","*");
+		HttpSession	session	=	null;
+		if( !ssnId.equals("") ) {
+			session	=	SessionMapMgr.getInstance().getSessionMap().get(ssnId);
+			if( session == null ) {
+				mav.addObject("insertChecker","invalidSession");
+				return mav;
+			}
+			else {
+				if( !userDao.checkSuperUser( (String)session.getAttribute("email") ) ) {
+					mav.addObject("insertChecker","lowAuthorize");
+					return mav;	
+				}
+			}
+			
+		}
+		else {
+			mav.addObject("insertChecker","invalidSession");
+			return mav;
+		}
+		if( post_title.equals("") || post_content.equals("") ) {
+			mav.addObject("insertChecker","noArgument");
+			return mav;
+		}
+		
+		System.out.println("WritePostProcController.requestProcessor >>> ssnId		  : "+ssnId);
 		System.out.println("WritePostProcController.requestProcessor >>> post_title   : "+post_title);
 		System.out.println("WritePostProcController.requestProcessor >>> post_content : "+post_content);
 		System.out.println("WritePostProcController.requestProcessor >>> series_id    : "+series_id);
@@ -168,7 +204,7 @@ public class WritePostProcController {
 		post.setPost_content(post_content);
 		post.setPost_summary(post_summary);
 		post.setPost_viewcount(0);
-		post.setUser_email((String)request.getSession().getAttribute("email"));
+		post.setUser_email((String)session.getAttribute("email"));
 		post.setSeries_id(series_id);
 		post.setPost_img_list(post_img_list);
 		post.setImg_id(post_thumbnail_id); 
