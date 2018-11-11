@@ -3,6 +3,6 @@
  *******************************************************************/
 var AKASHIC = new Object()
 
-AKASHIC.URL = "http://localhost:8090"
+AKASHIC.URL = "127.0.0.1:7070"
 AKASHIC.PROJECT = "/AkashicRecords"
 
