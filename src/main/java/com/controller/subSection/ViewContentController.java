@@ -33,18 +33,27 @@ public class ViewContentController {
 		response.setHeader("Access-Control-Allow-Origin","*");
 		
 		int post_id = Integer.parseInt( request.getParameter("post_id") );
-		
-		dao.viewCountIncrementer( post_id );
-		
-		int series_id = dao.getSeriesIdByPostId(post_id);
-		
-		seriesDao.updateSeriesViewcount( series_id );
-		
 		PostCommand post 	= 	dao.getPostById(request.getParameter("post_id"));
+		
+		if(post == null) {
+			mav.addObject("errorChecker","noPost");
+			return mav;
+		}
+		else if( post.getUser_email() == null ) {
+			mav.addObject("errorChecker","noPost");
+			return mav;
+		}
+		else if( post.getUser_email().equals("") ) {
+			mav.addObject("errorChecker","noPost");
+			return mav;
+		}
+		
 		String 		writer	=	dao.getUserNicknameByPostEmail(post.getUser_email());
 		String		series	=	dao.getSeriesTitleByPostSeriesId(post.getSeries_id());
 		
-		
+		dao.viewCountIncrementer( post_id );
+		int series_id = dao.getSeriesIdByPostId(post_id);
+		seriesDao.updateSeriesViewcount( series_id );
 		
 		System.out.println("writer : "+writer);
 		System.out.println("series : "+series);

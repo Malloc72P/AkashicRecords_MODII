@@ -10,6 +10,7 @@
 		[
 			<c:forEach var="series" items="${ seriesList }" varStatus="status">
 				{
+					"seriesId"			:	"${ series.getSeries_id() }",
 					"title"				:	"${ series.getSeries_Title() }",
 					"postCount"			:	"${ series.getSeries_postcount() }",
 					"viewCount"			:	"${ series.getSeries_viewcount() }",
