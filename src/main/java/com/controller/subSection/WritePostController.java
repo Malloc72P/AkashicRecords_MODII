@@ -28,8 +28,6 @@ public class WritePostController {
 		System.out.println("________________________________________________________");
 		System.out.println("WritePostController.requestProcessor >>> 매서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/writePostProc");
-		response.setHeader("Access-Control-Allow-Origin","*");
-		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
 		
 		HttpSession	session	=	null;
 		if( !ssnId.equals("") ) {

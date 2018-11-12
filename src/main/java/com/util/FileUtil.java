@@ -31,6 +31,7 @@ public class FileUtil {
 		return rename(filename,newName);
 	}
 	//실제로 새로운 파일명을 변경하는 역할(확장자 구분->변경된이름만 구해서)
+	//ex) testkiamaaaaaa.txt(뒤에서 검색)->1234aDSDDA.TXT
 	public static String rename(String filename,String newName) throws Exception{
 		if(filename==null) return null; 
 		//확장자 구하기
@@ -57,10 +58,8 @@ public class FileUtil {
 		if(file.exists())  file.delete();//파일이 이경로에 존재한다면 삭제시켜라
 	}
 	public static String makeImgUrl(HttpServletRequest request, String imgUrl) {
-	    //absol_path+"/"+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
 		String serverAddr = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 		String fileRealUrl = serverAddr+request.getContextPath()+"/"+imgUrl;
-		System.out.println("fileUtil.makeImgUrl >>> fileRealUrl : "+fileRealUrl);
 		return fileRealUrl;
 	}
 	public static ImageCommand makeThumbnail(String filePath, String fileName, String fileExt) throws Exception {
@@ -111,7 +110,6 @@ public class FileUtil {
 	    thumbImgData.setImg_size( String.format("%.2f", thumbFile.length()/(1024.0)) );
 	    thumbImgData.setImg_ref_type("POST_THUMB");
 	    thumbImgData.setImg_url( MainConst.IMG_ROOT_PATH + MainConst.IMG_POST_PATH+thumbFile.getName() );
-
 	    
 	    return thumbImgData;
 	}
