@@ -46,12 +46,20 @@
          <param-value>UTF-8</param-value>
       </init-param>
    </filter>
+   <filter>
+	    <filter-name>cors</filter-name>
+	    <filter-class>com.util.SimpleCORSFilter</filter-class>
+	</filter>
    
    <!-- 어떻게 요청했을때 한글처리할 것인가를 지정 태그정보 -->
    <filter-mapping>
       <filter-name>encodingFilter</filter-name>
       <url-pattern>/*</url-pattern>
    </filter-mapping>
+   <filter-mapping>
+	    <filter-name>cors</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
    
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

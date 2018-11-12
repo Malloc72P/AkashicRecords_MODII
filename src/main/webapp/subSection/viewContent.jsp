@@ -10,4 +10,6 @@ ${post.getPost_content()}
 	<input type="hidden" id="post_viewcount" value="${ post.getPost_viewcount() }">
 	<input type="hidden" id="post_writer" value="${ writer }">
 	<input type="hidden" id="post_series" value="${ series }">
+	<input type="hidden" id="errorChecker" value="${ errorChecker }">
+	
 </form>

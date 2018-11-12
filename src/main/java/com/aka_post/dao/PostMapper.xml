@@ -79,6 +79,11 @@
 		WHERE	POST_ID = #{post_id}
 	</select>
 	
+	<delete id="deletePostById" parameterType="int">
+		DELETE	FROM	AKA_POST
+		WHERE	POST_ID	=	#{post_id}
+	</delete>
+	
 </mapper>
 
 

@@ -46,6 +46,7 @@
 		<bean class="com.controller.subSection.WriteSeriesProcController" />
 		<bean class="com.controller.subSection.WritePostController" />
 		<bean class="com.controller.subSection.WriteSeriesController" />
+		<bean class="com.controller.subSection.DeleteContentController" />
 		
 		
 <!-- (4) viewResolver(tiles를 위해서 필요)-->

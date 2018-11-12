@@ -14,4 +14,5 @@ public interface PostDAO {
 	public String 		getSeriesTitleByPostSeriesId(int post_seriesId);
 	public boolean		viewCountIncrementer(int post_id);
 	public int			getSeriesIdByPostId(int post_id);
+	public boolean		deletePostById(String post_id);
 }

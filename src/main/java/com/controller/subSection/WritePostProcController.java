@@ -59,7 +59,6 @@ public class WritePostProcController {
 		System.out.println("WritePostProcController.requestProcessor >>> 매서드 호출됨");
 		ModelAndView mav = new ModelAndView("subSection/writePostProc");
 		
-		response.setHeader("Access-Control-Allow-Origin","*");
 		HttpSession	session	=	null;
 		if( !ssnId.equals("") ) {
 			session	=	SessionMapMgr.getInstance().getSessionMap().get(ssnId);

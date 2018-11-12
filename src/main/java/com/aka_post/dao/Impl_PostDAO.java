@@ -87,6 +87,16 @@ public class Impl_PostDAO extends SqlSessionDaoSupport implements PostDAO {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("getSeriesIdByPostId", post_id);
 	}
+
+	@Override
+	public boolean deletePostById(String post_id) {
+		// TODO Auto-generated method stub
+		int deleteChecker	=	getSqlSession().delete("deletePostById", post_id);
+		if( deleteChecker != 0 ) {
+			return true;
+		}
+		else return false;
+	}
 	
 	
 	
