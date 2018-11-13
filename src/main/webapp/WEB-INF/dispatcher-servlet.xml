@@ -47,6 +47,9 @@
 		<bean class="com.controller.subSection.WritePostController" />
 		<bean class="com.controller.subSection.WriteSeriesController" />
 		<bean class="com.controller.subSection.DeleteContentController" />
+		<bean class="com.controller.subSection.DeletePostListController" />
+		<bean class="com.controller.subSection.DeleteGbMsgController" />
+		<bean class="com.controller.subSection.DeleteGbReplyController" />
 		
 		
 <!-- (4) viewResolver(tiles를 위해서 필요)-->

@@ -12,6 +12,12 @@
 		FROM	AKA_SERIES
 	</select>
 	
+	<select id="getSeriesById" parameterType="int"> 
+		SELECT	*
+		FROM	AKA_SERIES
+		WHERE	SERIES_ID	=	#{series_id}
+	</select>
+	
 	<insert id="insertAkaSeries" parameterType="String">
 		INSERT	INTO AKA_SERIES( SERIES_ID, SERIES_TITLE, SERIES_REGDATE )
 		VALUES	( SEQFACTORY_AKA_SERIES.nextval, #{series_title}, SYSDATE )
@@ -35,7 +41,12 @@
 		SET		SERIES_VIEWCOUNT	=	SERIES_VIEWCOUNT + 1
 		WHERE	SERIES_ID	=	#{series_id}
 	</update>
-
+	
+	<delete id="deleteSeriesById" parameterType="int">
+		DELETE	FROM	AKA_SERIES
+		WHERE	SERIES_ID	=	#{ series_id }
+	</delete>
+	
 </mapper>
 
 

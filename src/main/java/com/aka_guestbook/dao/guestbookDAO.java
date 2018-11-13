@@ -20,4 +20,9 @@ public interface guestbookDAO {
 	
 	public int getGuestMsgCount();
 	
+	public boolean	deleteMsgById( int gb_id );
+	public boolean	deleteReplyById( int gb_id );
+	
+	public boolean	resetReplyStatus(int gb_id);
+	
 }

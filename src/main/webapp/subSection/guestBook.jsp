@@ -20,6 +20,7 @@
 									
 									<c:if test="${ guestMsg.getGb_from_admin_id() != -1 }">
 										,"user_replyData"	:	{
+											"admin_msgId"		:	"${ guestMsg.getGb_from_admin_id() }",
 											"admin_content"		:	"${ guestReplyMap.get( guestMsg.getGb_id() ).getGb_content() }",
 											"admin_writerEmail"	:	"${ guestReplyMap.get( guestMsg.getGb_id() ).getGb_writer_email() }",
 											"admin_imgUrl"		:	"${ adminProfImgMap.get( guestReplyMap.get( guestMsg.getGb_id() ).getGb_writer_email() ) } ",

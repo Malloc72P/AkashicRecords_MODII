@@ -70,6 +70,39 @@ public class Impl_guestbookDAO extends SqlSessionDaoSupport implements guestbook
 		// TODO Auto-generated method stub
 		return (Integer)getSqlSession().selectOne("getGuestMsgCount");
 	}
+
+	@Override
+	public boolean deleteMsgById(int gb_id) {
+		// TODO Auto-generated method stub
+		int deleteChecker = getSqlSession().delete("deleteMsgById", gb_id);
+		
+		if(deleteChecker != 0) {
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public boolean deleteReplyById(int gb_id) {
+		// TODO Auto-generated method stub
+		int deleteChecker = getSqlSession().delete("deleteReplyById", gb_id);
+		
+		if(deleteChecker != 0) {
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public boolean resetReplyStatus(int gb_id) {
+		// TODO Auto-generated method stub
+		int updateChecker = getSqlSession().delete("resetReplyStatus", gb_id);
+		
+		if(updateChecker != 0) {
+			return true;
+		}
+		else return false;
+	}
 	
 	
 
