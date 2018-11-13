@@ -8,5 +8,6 @@
 	"loginChecker":"${ loginChecker }",
 	"email":"${ user_email }",
 	"adminCheck":"${superChecker}",
-	"ssnId":"${ssnId}"
+	"ssnId":"${ssnId}",
+	"imgUrl":"${imgUrl}"
 }
