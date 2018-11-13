@@ -25,4 +25,7 @@ public interface guestbookDAO {
 	
 	public boolean	resetReplyStatus(int gb_id);
 	
+	public boolean	deleteMsgByWriterEmail(String gb_writer_email);
+	public boolean	deleteReplyByWriterEmail(String gb_writer_email);
+	
 }

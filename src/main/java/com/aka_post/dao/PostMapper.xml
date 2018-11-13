@@ -87,6 +87,11 @@
 		DELETE  FROM AKA_POST
 		WHERE  SERIES_ID    =   #{series_id} 
 	</delete>
+	<delete id="deletePostByWriterEmail"  parameterType="String">
+		DELETE
+		FROM    AKA_POST
+		WHERE   USER_EMAIL  =   #{user_email}
+	</delete>
 	
 </mapper>
 

@@ -35,14 +35,26 @@ public class adminPageController {
 		HttpSession session = null;
 		if( !ssnId.equals("") ) {
 			session	=	SessionMapMgr.getInstance().getSessionMap().get(ssnId);
+			if( session == null ) {
+				mav.addObject("adminChecker","invalidSession");
+				return mav;
+			}
+			else {
+				if( !dao.checkSuperUser( (String)session.getAttribute("email") ) ) {
+					mav.addObject("adminChecker","lowAuthorize");
+					return mav;	
+				}
+			}
+			
 		}
 		else {
-			mav.addObject( "validator",	 false );
-			mav.addObject( "activation", false );
+			mav.addObject("adminChecker","invalidSession");
 			return mav;
 		}
-		response.setHeader("Access-Control-Allow-Origin","*");
-		
+		if( password.equals("") ) {
+			mav.addObject("adminChecker","noArgument");
+			return mav;
+		}
 		
 		//name_input_submitPWCHK
 		System.out.println("password : "+password);

@@ -107,6 +107,16 @@ public class Impl_PostDAO extends SqlSessionDaoSupport implements PostDAO {
 		}
 		else return false;
 	}
+
+	@Override
+	public boolean deletePostByWriterEmail(String user_email) {
+		// TODO Auto-generated method stub
+		int deleteChecker	=	getSqlSession().delete("deletePostByWriterEmail", user_email);
+		if(deleteChecker != 0) {
+			return true;
+		}
+		else return false;
+	}
 	
 	
 	

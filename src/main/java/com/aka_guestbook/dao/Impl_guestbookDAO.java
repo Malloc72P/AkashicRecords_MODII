@@ -103,6 +103,28 @@ public class Impl_guestbookDAO extends SqlSessionDaoSupport implements guestbook
 		}
 		else return false;
 	}
+
+	@Override
+	public boolean deleteMsgByWriterEmail(String gb_writer_email) {
+		// TODO Auto-generated method stub
+		int deleteChecker = getSqlSession().delete("deleteMsgByWriterEmail", gb_writer_email);
+		
+		if(deleteChecker != 0) {
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public boolean deleteReplyByWriterEmail(String gb_writer_email) {
+		// TODO Auto-generated method stub
+		int deleteChecker = getSqlSession().delete("deleteReplyByWriterEmail", gb_writer_email);
+		
+		if(deleteChecker != 0) {
+			return true;
+		}
+		else return false;
+	}
 	
 	
 

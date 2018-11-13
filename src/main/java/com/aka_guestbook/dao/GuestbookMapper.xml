@@ -74,6 +74,17 @@
 		WHERE	GB_ID	=	#{gb_id}
 	</update>
 	
+	<delete id="deleteMsgByWriterEmail" parameterType="String">
+		DELETE
+		FROM    GB_GUEST_MSG
+		WHERE   GB_WRITER_EMAIL =   #{gb_writer_email}
+	</delete>
+	<delete id="deleteReplyByWriterEmail" parameterType="String">
+		DELETE
+		FROM    GB_ADMIN_MSG
+		WHERE   GB_WRITER_EMAIL =   #{gb_writer_email}
+	</delete>
+	
 
 	
 	

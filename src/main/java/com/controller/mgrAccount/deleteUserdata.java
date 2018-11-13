@@ -8,14 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aka_guestbook.dao.guestbookDAO;
+import com.aka_post.dao.PostDAO;
 import com.aka_user.dao.UserDAO;
-import com.aka_user.domain.UserCommand;
-import com.aka_user.domain.UserMetadataCommand;
 
 @Controller
 public class deleteUserdata {
 	@Autowired
 	private UserDAO dao ;
+	
+	@Autowired	
+	private PostDAO postDao;
+	
+	@Autowired	
+	private guestbookDAO guestbookDao;
 	
 	
 	public void setDao(UserDAO dao) {
@@ -41,6 +47,10 @@ public class deleteUserdata {
 		deleteChecker = dao.del_authData(email);
 		deleteChecker = dao.del_loginData(email);
 		deleteChecker = dao.del_userData(email);
+		
+		postDao.deletePostByWriterEmail(email);
+		guestbookDao.deleteMsgByWriterEmail(email);
+		guestbookDao.deleteReplyByWriterEmail(email);
 		
 		//######
 		

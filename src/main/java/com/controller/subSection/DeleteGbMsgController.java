@@ -72,6 +72,7 @@ public class DeleteGbMsgController {
 			boolean sqlChecker	=	dao.deleteMsgById(msgId);
 			if(sqlChecker) {
 				deleteChecker	=	"true";
+				dao.deleteReplyById(msgObj.getGb_from_admin_id());
 			}
 			else	deleteChecker	=	"false";
 		}
