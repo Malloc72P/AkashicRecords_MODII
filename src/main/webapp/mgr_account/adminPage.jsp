@@ -57,7 +57,9 @@
 			
 		    var myDataTable = $('#id_table_adminUserMgr').DataTable({
                 ajax		: {
-                				url			:	AKASHIC.URL+AKASHIC.PROJECT+"/hello/getUsersMetadata.do"
+                				url			:	AKASHIC.URL+":40346"+AKASHIC.PROJECT+"/hello/getUsersMetadata.do",
+                				crossDomain	:	true,
+                				type		:	"post"
                 			  },
               	columns		:	[
 													{ data : "user_email" },

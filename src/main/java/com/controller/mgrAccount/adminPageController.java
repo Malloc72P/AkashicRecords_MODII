@@ -31,6 +31,9 @@ public class adminPageController {
 		System.out.println("______________________________________________");
 		System.out.println("adminPageController.requestProcessor >>> 메서드 호출됨"); 
 		ModelAndView mav = new ModelAndView("mgr_account/adminPage");
+		response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setHeader("Access-Control-Allow-Origin", "*"); 
 		
 		HttpSession session = null;
 		if( !ssnId.equals("") ) {
