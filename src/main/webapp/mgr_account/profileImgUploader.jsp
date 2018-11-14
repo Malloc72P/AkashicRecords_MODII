@@ -91,14 +91,14 @@
 			//$image.cropper
 			//$().cropper('method', argument1, , argument2, ..., argumentN);
 			inputImage.onchange = function(){
-				alert("inputImage.onchange...!");
+				//alert("inputImage.onchange...!");
 		        var files = inputImage.files;
 		        var file  = files[0];
 		        var uploadedImageURL = URL.createObjectURL(file);
 		        $("#id_img_imageTest").attr("src",uploadedImageURL);
 		        
 		        $("#id_img_imageTest").cropper("destroy");
-		        alert($("#id_img_imageTest").attr("src"));
+		        //alert($("#id_img_imageTest").attr("src"));
 		        $image.cropper(options);
 		        inputImage.value = null;
 			} 

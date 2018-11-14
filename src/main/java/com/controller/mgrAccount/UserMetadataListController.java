@@ -3,6 +3,7 @@ package com.controller.mgrAccount;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,13 @@ public class UserMetadataListController {
 	
 
 	@RequestMapping("/hello/getUsersMetadata.do")
-	public ModelAndView requestProcessor( HttpServletRequest request ) {
+	public ModelAndView requestProcessor( 
+											HttpServletRequest request,
+											HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("mgr_account/userMetadataList");
-		
+		response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setHeader("Access-Control-Allow-Origin", "*"); 
 		List<UserMetadataCommand> metadatas = dao.getUsersMetadata();
 		
 		System.out.println("_____________________________________"); 

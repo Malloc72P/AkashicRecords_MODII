@@ -31,18 +31,33 @@ public class adminPageController {
 		System.out.println("______________________________________________");
 		System.out.println("adminPageController.requestProcessor >>> 메서드 호출됨"); 
 		ModelAndView mav = new ModelAndView("mgr_account/adminPage");
+		response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setHeader("Access-Control-Allow-Origin", "*"); 
 		
 		HttpSession session = null;
 		if( !ssnId.equals("") ) {
 			session	=	SessionMapMgr.getInstance().getSessionMap().get(ssnId);
+			if( session == null ) {
+				mav.addObject("adminChecker","invalidSession");
+				return mav;
+			}
+			else {
+				if( !dao.checkSuperUser( (String)session.getAttribute("email") ) ) {
+					mav.addObject("adminChecker","lowAuthorize");
+					return mav;	
+				}
+			}
+			
 		}
 		else {
-			mav.addObject( "validator",	 false );
-			mav.addObject( "activation", false );
+			mav.addObject("adminChecker","invalidSession");
 			return mav;
 		}
-		response.setHeader("Access-Control-Allow-Origin","*");
-		
+		if( password.equals("") ) {
+			mav.addObject("adminChecker","noArgument");
+			return mav;
+		}
 		
 		//name_input_submitPWCHK
 		System.out.println("password : "+password);

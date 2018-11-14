@@ -12,13 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aka_guestbook.dao.guestbookDAO;
 import com.aka_guestbook.domain.GB_Guest_MsgCommand;
+import com.aka_user.dao.UserDAO;
 import com.util.SessionMapMgr;
 
 @Controller
 public class GuestbookProcController {
 	
 	@Autowired
-	guestbookDAO dao;
+	private UserDAO userDao;
+	
+	@Autowired
+	private guestbookDAO dao;
 	
 	@RequestMapping("/hello/guestBookProc.do")
 	public ModelAndView requestProcessor(	@RequestParam("gbMsg") String gbMsg,
@@ -31,13 +35,19 @@ public class GuestbookProcController {
 		ModelAndView	mav 				= new ModelAndView("subSection/guestBookProc");
 		HttpSession 	session 			= null;
 		
-		response.setHeader("Access-Control-Allow-Origin","*");
 		
 		if( !ssnId.equals("") ) {
 			session	=	SessionMapMgr.getInstance().getSessionMap().get(ssnId);
 			if( session == null ) {
 				mav.addObject("insertChecker","sessionInvalid");
 				return mav;
+			}
+			else {
+				String validation = userDao.getUserMetaDataByEmail( (String)session.getAttribute("email") ).getValidation();
+				if(!validation.equals("true")) {
+					mav.addObject("insertChecker","notValidAccount");
+					return mav;
+				}
 			}
 			
 		}else {

@@ -52,5 +52,22 @@ public class Impl_SeriesDAO extends SqlSessionDaoSupport implements SeriesDAO{
 		}
 		else return false;
 	}
+
+	@Override
+	public SeriesCommand getSeriesById(int series_id) {
+		// TODO Auto-generated method stub
+		
+		return getSqlSession().selectOne("getSeriesById",series_id);
+	}
+
+	@Override
+	public boolean deleteSeriesById(int series_id) {
+		// TODO Auto-generated method stub
+		int deleteResult = getSqlSession().update("deleteSeriesById", series_id);
+		if(deleteResult != 0) {
+			return true;
+		}
+		else return false;
+	}
 	
 }

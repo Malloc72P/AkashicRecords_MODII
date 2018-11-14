@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aka_image.dao.ImageDAO;
 import com.aka_user.dao.UserDAO;
 import com.aka_user.domain.UserCommand;
-
+import com.aka_user.domain.UserMetadataCommand;
+import com.util.FileUtil;
 import	com.util.SessionMapMgr;
 
 @Controller
@@ -20,6 +22,8 @@ public class LoginProcController {
 	@Autowired
 	private UserDAO dao ;
 	
+	@Autowired
+	private ImageDAO imgDao;
 	
 	public void setDao(UserDAO dao) {
 		this.dao = dao;
@@ -58,12 +62,15 @@ public class LoginProcController {
 		System.out.println("loginProcController.requestProcessor >>> user_password : "+user_password);
 		
 		System.out.println("loginProcController.requestProcessor >>> dao접근 전");
-		UserCommand userdata = dao.getUserDataByEmail(user_email);
+		UserMetadataCommand userdata = dao.getUserMetaDataByEmail(user_email);
 		System.out.println("loginProcController.requestProcessor >>> dao접근 후");
 		System.out.println("loginProcController.requestProcessor >>> dao.getEmail : "+userdata.getUser_email());
 		
+		
+		
 		boolean loginChecker 	= 	false;
 		boolean superChecker	=	false;
+		String	imgUrl			=	"";
 		if(userdata.getUser_password().equals(user_password)) {
 			System.out.println("loginProcController.requestProcessor >>> 패스워드 일치");
 			loginChecker = true;
@@ -71,14 +78,16 @@ public class LoginProcController {
 			request.getSession().setAttribute("email"       , user_email);
 			System.out.println("loginProcController.requestProcessor >>> 세션 저장 성공");
 			
-			superChecker = dao.checkSuperUser(user_email);
+			superChecker 	= 	dao.checkSuperUser(user_email);
+			imgUrl			=	FileUtil.makeImgUrl(request, imgDao.getImgUrlById( userdata.getImg_id() ));
 			
 		}
 		
 		//######
 		mav.addObject("loginChecker",	loginChecker);
 		mav.addObject("user_email",		user_email);
-		mav.addObject("ssnId",newSession.getId());
+		mav.addObject("ssnId",			newSession.getId());
+		mav.addObject("imgUrl",			imgUrl);
 		//######
 		System.out.println("user_email		: "+user_email);
 		System.out.println("loginChecker	: "+loginChecker);

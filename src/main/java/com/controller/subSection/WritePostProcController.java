@@ -138,7 +138,8 @@ public class WritePostProcController {
 			ServletContext application = request.getServletContext();
 			
 			String absol_path			=	application.getRealPath("").replace("\\", "/");
-			String img_Dir_path			=	absol_path+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
+			//String img_Dir_path			=	absol_path+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
+			String img_Dir_path			=	absol_path+"/"+MainConst.IMG_ROOT_PATH+MainConst.IMG_POST_PATH;
 			String post_thumbnail_name	=	imgDao.getImgNameById(post_thumbnail_id);
 			
 			
