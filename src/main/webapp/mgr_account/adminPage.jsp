@@ -127,7 +127,7 @@
 				$.ajax( 
 						{
 							method : "post",
-							url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/updateUserData.do",
+							url    : AKASHIC.URL+":40346"+AKASHIC.PROJECT+"/hello/updateUserData.do",
 							data   : { 
 										"email"			:	email,
 										"imgid"			:	imgid,
@@ -156,7 +156,7 @@
 				$.ajax( 
 						{
 							method : "post",
-							url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/deleteUserdata.do",
+							url    : AKASHIC.URL+":40346"+AKASHIC.PROJECT+"/hello/deleteUserdata.do",
 							data   : { 
 										"email"	:	email
 							         },
@@ -195,7 +195,7 @@
 			$.ajax(
 				{ 
 					method : "post",
-					url    : AKASHIC.URL+AKASHIC.PROJECT+"/hello/adminPage.do",
+					url    : AKASHIC.URL+":40346"+AKASHIC.PROJECT+"/hello/adminPage.do",
 					cache  : false
 				}
 			)
